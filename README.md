@@ -18,7 +18,7 @@
   
 <p align="center">
   
-[![Black Merchant](https://github.com/Toxicant1.png?lenght=500width=500)](https://github.com/Toxicant1)
+[![Black Merchant](https://github.com/Toxicant1.png?lenght=5000width=5000)](https://github.com/Toxicant1)
 </p>
 <p align="center">
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=d1fa02&center=true&vCenter=true&multiline=false&lines=𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙" alt="">
