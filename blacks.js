@@ -744,7 +744,7 @@ client.sendMessage(m.chat, {
                         contextInfo: {
                             externalAdReply: {
                                 showAdAttribution: true,
-                                title: `𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`,
+                                title: `𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓`,
                                 body: `${runtime(process.uptime())}`,
                                 thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
                                 sourceUrl: 'https://wa.me/254741819582?text=Hello👋+black+Nihostie+Bot+Mkuu+😔',
