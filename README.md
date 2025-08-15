@@ -3,7 +3,7 @@
   <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
 </p>
 <div align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Black+Ops+One&size=50&pause=1000&color=1BAFBAFF&center=true&width=910&height=100&lines=HI+THIS+IS+BLACK-MD;A+MULTI+DEVICE+WHATSAPP+BOT;SCRIPTED+BY+BLACKIE+TECH;STAR+AND+FORK+OUR+REPO" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Black+Ops+One&size=50&pause=1000&color=1BAFBAFF&center=true&width=910&height=100&lines=HI+THIS+IS+BLACK-MD;A+MULTI+DEVICE+WHATSAPP+BOT;SCRIPTED+BY+MERCHANT;STAR+AND+FORK+REPO" alt="Typing SVG" /></a>
   </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
   
 <p align="center">
   
-[![Black Merchant](https://github.com/Toxicant1.png?lenght=50width=50)](https://github.com/Toxicant1)
+[![Black Merchant](https://github.com/Toxicant1.png?lenght=500width=500)](https://github.com/Toxicant1)
 </p>
 <p align="center">
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=d1fa02&center=true&vCenter=true&multiline=false&lines=𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙" alt="">
