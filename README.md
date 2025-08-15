@@ -41,7 +41,7 @@
 
 <p align="center">
 
-<a href="https://api.whatsapp.com/send?phone=254741819582&text=Hello+black"><img src="https://img.shields.io/badge/Contact Merchant -25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
+<a href="https://api.whatsapp.com/send?phone=254741819582&text=Hello+👋+Merchant"><img src="https://img.shields.io/badge/Contact Merchant -25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
 
 
 ***This bot is created with the help of NodeJS and uses [Baileys](https://github.com/whiskeysockets/Baileys)***
