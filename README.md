@@ -89,24 +89,41 @@
   <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
 </p>
 
-## 🎨 CREDITS
-<h1 align="center">CREDITS TO 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱 FOR THE BASE</h1>
+<!-- Glowing Footer -->
+<p align="center">
+  <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
+</p>
+
+## 🎨 **CREDITS**
+<p align="center">
+  <span style="font-family:Fraktur, serif; font-size:28px; font-weight:bold;">
+    CREDITS TO 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱 FOR THE BASE
+  </span>
+</p>
 
 <!-- Glowing Footer -->
 <p align="center">
   <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
 </p>
 
-## 📄 LICENSE
-[MIT License](https://github.com/Toxicant1/black-super-bot/LICENSE)  
+## 📄 **LICENSE**
+<p align="center">
+  <span style="font-family:Fraktur, serif; font-size:26px; font-weight:bold;">
+    MIT License
+  </span>
+</p>
 
-Copyright (c) 2025 𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗  
+<p align="center">
+  Copyright (c) 2025 𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗
+</p>
 
-**Owner:** 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱  
-**Owner Number:** +254741819582  
-**Bot Name:** 𝔅𝔏𝔄ℂ𝔎 𝔐𝔈ℝℂℍ𝔄ℕ𝔗  
-**Banner:** `./Media/Blackmachant.jpg`  
-**GitHub:** [Toxicant1](https://github.com/Toxicant1)
+<p align="center">
+  <strong>Owner:</strong> 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱 <br>
+  <strong>Owner Number:</strong> +254741819582 <br>
+  <strong>Bot Name:</strong> 𝔅𝔏𝔄ℂ𝔎 𝔐𝔈ℝℂℍ𝔄ℕ𝔗 <br>
+  <strong>Banner:</strong> `./Media/Blackmachant.jpg` <br>
+  <strong>GitHub:</strong> <a href="https://github.com/Toxicant1">Toxicant1</a>
+</p>
 
 <!-- Glowing Footer -->
 <p align="center">
