@@ -6,7 +6,7 @@
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Anton&size=60&pause=1000&color=1BAFBAFF&center=true&width=910&height=120&lines=HI+THIS+IS+BLACK+MERCHANT;A+MULTI+DEVICE+WHATSAPP+BOT;SCRIPTED+BY+MERCHANT;STAR+AND+FORK+OUR+REPO" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Anton&size=60&pause=1000&color=1BAFBAFF&center=true&width=910&height=120&lines=HI+THIS+IS+MERCHANT;A+MULTI+DEVICE+WHATSAPP+BOT;SCRIPTED+BY+MERCHANT;STAR+AND+FORK+OUR+REPO" alt="Typing SVG" />
   </a>
 </div>
 
@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗-blue.svg?style=for-the-badge&logo=github"></a>
+  <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱-blue.svg?style=for-the-badge&logo=github"></a>
 </p>
 
 <p align="center">
@@ -37,7 +37,7 @@
 
 ## 📞 CONTACT ME
 <p align="center">
-<a href="https://api.whatsapp.com/send?phone=254741819582&text=Hello+Black+Merchant"><img src="https://img.shields.io/badge/Contact-𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
+<a href="https://api.whatsapp.com/send?phone=254741819582&text=Hello+Merchant"><img src="https://img.shields.io/badge/Contact-𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
 </p>
 
 <p align="center">
@@ -74,7 +74,7 @@
 
 ## 1️⃣ Fork the Vault
 <p align="center">
-<a href="https://github.com/Toxicant1/black-super-bot/fork"><img src="https://img.shields.io/badge/Fork%20Create-purple?style=for-the-badge&logo=github" alt="FORK REPO" width="160"></a>
+<a href="https://github.com/Toxicant1/black-super-bot/fork"><img src="https://img.shields.io/badge/Fork-Create-purple?style=for-the-badge&logo=github" alt="FORK REPO" width="160"></a>
 </p>
 
 ## 2️⃣ Pair the Secrets
