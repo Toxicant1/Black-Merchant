@@ -98,13 +98,16 @@ startRaven()
 
   if (autobio === 'TRUE') {
     setInterval(() => {
-      const date = new Date();
-      const bioText = `𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 👑 | "𝐈 𝐝𝐨𝐧'𝐭 𝐟𝐨𝐥𝐥𝐨𝐰 𝐭𝐡𝐞 𝐫𝐮𝐥𝐞𝐬. 𝐈 𝐦𝐚𝐤𝐞 𝐭𝐡𝐞𝐦." | 📅 The Law is a promise. ⌚ Awaiting your command. | 👻 On the grind. ${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })}`;
-      client.updateProfileStatus(bioText);
-    }, 10 * 1000);
-  }
+        const date = new Date();
 
-const statusEmojis = ['🎩', '💰', '💎', '👑', '♟️', '✨', '🔥', '🔮', '🖤'];
+        // Unified Gothic font, Merchant/Gangsta vibe, emojis integrated
+        const bioText = `🖤 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 👑 | 𝐈 𝐝𝐨𝐧'𝐭 𝐟𝐨𝐥𝐥𝐨𝐰 𝐫𝐮𝐥𝐞𝐬 ⚡ | 𝐇𝐮𝐬𝐭𝐥𝐢𝐧𝐠 𝐢𝐧 𝐭𝐡𝐞 𝐬𝐡𝐚𝐝𝐨𝐰 🌑 | 𝐏𝐫𝐨𝐦𝐢𝐬𝐞 𝐢𝐬 𝐥𝐚𝐰 📅 | 𝐀𝐰𝐚𝐢𝐭𝐢𝐧𝐠 𝐲𝐨𝐮𝐫 𝐜𝐚𝐥𝐥 ⏰ | 𝐎𝐧 𝐭𝐡𝐞 𝐠𝐫𝐢𝐧𝐝 👻 | 🕶️ ${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })}`;
+
+        client.updateProfileStatus(bioText);
+    }, 10 * 1000);
+}
+
+const statusEmojis = ['🎩', '💰', '💎', '👑', '♟️', '✨', '🔥', '😹', '🖤'];
 
   client.ev.on("messages.upsert", async (chatUpdate) => {
     try {
