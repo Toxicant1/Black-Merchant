@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  [![Merchant](https://github.com/Toxicant1.png?lenght=50width=50)](https://github.com/Toxicant1)
+  **Banner:** `./Media/Blackmachant.jpg`
 </p>
 
 <p align="center">
