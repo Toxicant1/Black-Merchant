@@ -40,7 +40,9 @@
 <a href="https://api.whatsapp.com/send?phone=254741819582&text=Hello+Black+Merchant"><img src="https://img.shields.io/badge/Contact-𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
 </p>
 
-***This bot is created with NodeJS and uses [Baileys](https://github.com/whiskeysockets/Baileys)***
+<p align="center">
+  <em>💻 Crafted with NodeJS & whispered secrets of [Baileys](https://github.com/whiskeysockets/Baileys)</em>
+</p>
 
 <!-- Glowing Footer -->
 <p align="center">
@@ -48,7 +50,8 @@
 </p>
 
 ## ⚠️ DISCLAIMER
-- Modifying the bot structure is at your own risk. Technical support may not be offered for errors caused by edits.
+- 🔮 This bot is **not just code**. Tread carefully. Curiosity may reveal hidden functions.  
+- 🕵️‍♂️ Modifying the structure might break the flow of secrets. Proceed at your own risk.  
 
 <!-- Glowing Footer -->
 <p align="center">
@@ -56,9 +59,11 @@
 </p>
 
 ## ✨ FEATURES
-- Multi-device WhatsApp bot with group management.
-- Media commands & ChatGPT integration.
-- AI features may use external APIs, so occasional downtime is possible.
+- 🖤 Multi-device WhatsApp bot with **group dominance**  
+- 🎭 Media commands & **AI (GPT-5 style) intrigue**  
+- 🤐 Hidden tricks, mysterious responses, subtle Easter eggs  
+- ⚡ Modern GPT-5 emoji-powered chat for flair & personality  
+- ⏱️ External APIs for AI features—sometimes silence is golden  
 
 <!-- Glowing Footer -->
 <p align="center">
@@ -67,26 +72,23 @@
 
 # 🚀 SET-UP
 
-## 1️⃣ Fork this repo
+## 1️⃣ Fork the Vault
 <p align="center">
 <a href="https://github.com/Toxicant1/black-super-bot/fork"><img src="https://img.shields.io/badge/Fork%20Create-purple?style=for-the-badge&logo=github" alt="FORK REPO" width="160"></a>
 </p>
 
-## 2️⃣ Pair Session
+## 2️⃣ Pair the Secrets
 <p align="center">
 <a href="https://blacks-pair.onrender.com"><img height="37" title="Pair Session" src="https://img.shields.io/badge/Session-green?style=for-the-badge&logo=render"></a>
 </p>
 
-## 3️⃣ Deploy on Heroku
+## 3️⃣ Deploy the Shadow
 <p align="center">
 <a href="https://blacks-progressive-platform.vercel.app/"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy on Heroku"></a>
 </p>
 
-- Fill in the required variables on your hosting platform for the bot to work.
-
-<!-- Glowing Footer -->
 <p align="center">
-  <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
+  <em>💡 Fill in the hidden keys. Only then the whispers of the bot will be heard...</em>
 </p>
 
 <!-- Glowing Footer -->
@@ -96,9 +98,13 @@
 
 ## 🎨 **CREDITS**
 <p align="center">
-  <span style="font-family:Fraktur, serif; font-size:28px; font-weight:bold;">
-    CREDITS TO 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱 FOR THE BASE
+  <span style="font-family:Fraktur, serif; font-size:30px; font-weight:normal;">
+    ⚜️ Crafted by 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱—master of hidden trades ⚜️
   </span>
+</p>
+
+<p align="center">
+  <em>💎 Secrets, strategy, and whispers in the code 💎</em>
 </p>
 
 <!-- Glowing Footer -->
@@ -108,21 +114,25 @@
 
 ## 📄 **LICENSE**
 <p align="center">
-  <span style="font-family:Fraktur, serif; font-size:26px; font-weight:bold;">
-    MIT License
+  <span style="font-family:Fraktur, serif; font-size:28px; font-weight:normal;">
+    🛡 MIT License 🛡
   </span>
 </p>
 
 <p align="center">
-  Copyright (c) 2025 𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗
+  © 2025 𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗 🖤
 </p>
 
 <p align="center">
-  <strong>Owner:</strong> 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱 <br>
-  <strong>Owner Number:</strong> +254741819582 <br>
-  <strong>Bot Name:</strong> 𝔅𝔏𝔄ℂ𝔎 𝔐𝔈ℝℂℍ𝔄ℕ𝔗 <br>
-  <strong>Banner:</strong> `./Media/Blackmachant.jpg` <br>
-  <strong>GitHub:</strong> <a href="https://github.com/Toxicant1">Toxicant1</a>
+  <strong>Owner:</strong> <span style="font-family:Fraktur, serif; font-size:26px;">𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱</span> 💼 <br>
+  <strong>Owner Number:</strong> +254741819582 📞 <br>
+  <strong>Bot Name:</strong> <span style="font-family:Fraktur, serif; font-size:26px;">𝔅𝔏𝔄ℂ𝔎 𝔐𝔈ℝℂℍ𝔄ℕ𝔗</span> 🤖 <br>
+  <strong>Banner:</strong> `./Media/Blackmachant.jpg` 🖼 <br>
+  <strong>GitHub:</strong> <a href="https://github.com/Toxicant1">Toxicant1</a> 🔗
+</p>
+
+<p align="center">
+  <em>⚡ Power, mystery, and whispers hidden in the code ⚡</em>
 </p>
 
 <!-- Glowing Footer -->
