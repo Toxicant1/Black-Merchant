@@ -6,7 +6,7 @@
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fraktur+Gothic&size=50&pause=1000&color=1BAFBAFF&center=true&width=910&height=100&lines=HI+THIS+IS+BLACK+MERCHANT;A+MULTI+DEVICE+WHATSAPP+BOT;SCRIPTED+BY+MERCHANT;STAR+AND+FORK+OUR+REPO" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fraktur+Bold&size=50&pause=1000&color=1BAFBAFF&center=true&width=910&height=100&lines=HI+THIS+IS+BLACK+MERCHANT;A+MULTI+DEVICE+WHATSAPP+BOT;SCRIPTED+BY+MERCHANT;STAR+AND+FORK+OUR+REPO" alt="Typing SVG" />
   </a>
 </div>
 
