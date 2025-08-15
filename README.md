@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  **Banner:** `./Media/Blackmachant.jpg`
+  `./Media/Blackmachant.jpg`
 </p>
 
 <p align="center">
