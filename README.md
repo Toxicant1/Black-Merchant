@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  `./Media/Blackmachant.jpg`
+  <img src="./Media/Blackmachant.jpg" alt="Banner" width="400">
 </p>
 
 <p align="center">
@@ -90,7 +90,7 @@
 </p>
 
 ## 🎨 CREDITS
-<h1 align="center">CREDITS TO MERCHANT FOR THE BASE</h1>
+<h1 align="center">CREDITS TO 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱 FOR THE BASE</h1>
 
 <!-- Glowing Footer -->
 <p align="center">
@@ -99,10 +99,16 @@
 
 ## 📄 LICENSE
 [MIT License](https://github.com/Toxicant1/black-super-bot/LICENSE)  
+
 Copyright (c) 2025 𝔅𝔏𝔄ℂ𝔎𝔐𝔈ℝℂℍ𝔄ℕ𝔗  
 
 **Owner:** 𝔐𝔢𝔯𝔠𝔥𝔞𝔫𝔱  
 **Owner Number:** +254741819582  
 **Bot Name:** 𝔅𝔏𝔄ℂ𝔎 𝔐𝔈ℝℂℍ𝔄ℕ𝔗  
 **Banner:** `./Media/Blackmachant.jpg`  
-**Github:** [Toxicant1](https://github.com/Toxicant1)
+**GitHub:** [Toxicant1](https://github.com/Toxicant1)
+
+<!-- Glowing Footer -->
+<p align="center">
+  <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
+</p>
