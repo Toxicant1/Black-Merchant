@@ -102,12 +102,12 @@ Linking/Pairing:
   ## credits    
 <p align="center">
   <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
-</p> 
-  <h1 align="center">𝐂𝐑𝐄𝐃𝐈𝐓𝐒 𝐓𝐎 𝐍𝐈𝐂𝐊 𝐇𝐔𝐍𝐓𝐄𝐑 𝐅𝐎𝐑 𝐓𝐇𝐄 𝐁𝐀𝐒𝐄</h1>
-  </a>
-  <p align="center">
-  <img src="https://i.imgur.com/dBaSKWF.gif" height="40" width="100%">
+<p>
 </p>
+<div align="center">
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Black+Ops+One&size=50&pause=1000&color=1BAFBAFF&center=true&width=910&height=100&lines=CREDITED+TO+MERCHANT" alt="Typing SVG" /></a>
+</p>
+</div>
 
 
 
