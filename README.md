@@ -28,9 +28,9 @@
 </p>
 <p align="center">
 <a href="https://github.com/Toxicant1?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/Toxicant1?label=Followers&style=social"></a>
-<a href="https://github.com/Blackie254/black-super-bot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Blackie254/black-super-bot?&style=social"></a>
-<a href="https://github.com/Blackie254/black-super-bot/network/members"><img title="Fork" src="https://img.shields.io/github/forks/Blackie254/black-super-bot?style=social"></a>
-<a href="https://github.com/Blackie254/black-super-bot/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/Blackie254/black-super-bot?label=Watching&style=social"></a>
+<a href="https://github.com/Toxicant1/Black-merchant/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Toxicant1/Black-merchant?&style=social"></a>
+<a href="https://github.com/Toxicant1/Black-merchant/network/members"><img title="Fork" src="https://img.shields.io/github/forks/Toxicant1/Black-merchant?style=social"></a>
+<a href="https://github.com/Toxicant1/Black-merchant/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/Toxicant1/Black-merchant?label=Watching&style=social"></a>
 </p>
  
 <p align="center">
@@ -70,7 +70,7 @@ Our AI features use random APIs to run, so sometimes they may be down.
 
 ## ` Fork this repo`
 <p align="centre">
-<a href="https://github.com/Blackie254/black-super-bot/fork"><img src="https://img.shields.io/badge/Fork%20Create-purple?style=for-the-badge&logo=github" alt="FORK RAVEN-BOT" width="160"></a>
+<a href="https://github.com/Toxicant1/black-super-bot/fork"><img src="https://img.shields.io/badge/Fork%20Create-purple?style=for-the-badge&logo=github" alt="FORK RAVEN-BOT" width="160"></a>
 <p/>
   
 Linking/Pairing:
@@ -114,7 +114,7 @@ Linking/Pairing:
 
 ## License
 
-[MIT License]((https://github.com/Blackie254/black-super-bot)/LICENSE)
+[MIT License]((https://github.com/Toxicant1/Black-merchant)/LICENSE)
 
 Copyright (c) 2025 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙  
 
