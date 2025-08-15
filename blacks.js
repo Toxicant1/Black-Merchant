@@ -496,79 +496,224 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
 //========================================================================================================================//
 if (cmd) {
     switch (command) {
-        case "menu":
+        case "menu": {
             await mp3d();
 
-            let cap = `𝗛𝗲𝘆 𝘁𝗵𝗲𝗿𝗲😊, ${getGreeting()}\n\n╔═━════━【𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓】━════━╗
-║         𝐁𝐈𝐍𝐀𝐑𝐘 𝐁𝐋𝐎𝐎𝐃𝐋𝐈𝐍𝐄         
-╟───────────────────────╢
-║ ✦ 𝗨𝘀𝗲𝗿: ${m.pushName}
-║ ✦ 𝗣𝗿𝗲𝗳𝗶𝘅 : ${prefix}
-║ ✦ 𝗠𝗼𝗱𝗲: ${mode}
-║ ✦ 𝗦𝗽𝗲𝗲𝗱: ${Rspeed.toFixed(4)} 𝗠𝘀
-║ ✦ 𝗧𝗶𝗺𝗲: ${getCurrentTimeInNairobi()} on ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}
-║ ✦ 𝗔𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲 𝗥𝗔𝗠 : 32𝗚𝗕 𝗼𝗳 64𝗚𝗕 
-╚═━════【🔒 𝗦𝗘𝗖𝗨𝗥𝗘】════━═╝
-... (all the menu sections remain the same, updated internally to Black Merchant) ...
-╚════════════════════════╝
+            const cap = `🖤 𝗕𝗟𝗔𝗖𝗞 𝗠𝗘𝗥𝗖𝗛𝗔𝗡𝗧 🖤
 
-╔════════════════════════╗
-║   𝗠𝗔𝗗𝗘 𝗕𝗬 𝗧𝗛𝗘 𝗞𝗜𝗡𝗚'𝗦 𝗧𝗘𝗖𝗛
-║   𝗠𝗔𝗗𝗘 𝗕𝗬 𝗠𝗘𝗥𝗖𝗛𝗔𝗡𝗧 𝗠𝗖𝗗𝗢𝗡𝗔𝗟𝗗
-╚════════════════════════╝`;
+Hey ${m.pushName} 😊, hello!
 
-            if (menu === 'VIDEO') {
-                client.sendMessage(m.chat, {
-                    video: fs.readFileSync('./Media/blacky.mp4'),
-                    caption: cap,
-                    gifPlayback: true
-                }, { quoted: m });
-            } else if (menu === 'TEXT') {
-                client.sendMessage(from, { text: cap }, { quoted: m });
-            } else if (menu === 'IMAGE') {
-                const fs = require('fs');
-                const { execSync } = require('child_process');
-                const path = require('path');
+╔═━════━【𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓】━════━╗
+║ 🧑‍💻 User: ${m.pushName}
+║ ⚡ Prefix: ${prefix}
+║ 🔰 Mode: ${mode}
+║ ⏱ Speed: ${Rspeed.toFixed(4)} ms
+║ 🕒 Time: ${new Date().toLocaleTimeString('en-GB', { timeZone: 'Africa/Nairobi' })}
+║ 📅 Date: ${new Date().toLocaleDateString('en-GB', { timeZone: 'Africa/Nairobi', weekday: 'long' })}
+║ 💾 RAM: 32GB of 64GB
+╚═━════【🔐 SECURE】════━═╝
 
-                const inputImage = path.join(__dirname, 'Media', 'Menu.jpg');
-                const logoImage = path.join(__dirname, 'Media', 'logo.png'); // optional
-                const outputImage = path.join(__dirname, 'Media', 'Menu_temp.jpg');
+╔═══════════════════════╗
+║        DOWNLOAD MODULES (18)   
+╠═══════════════════════╣
+║ 🎬 video
+║ 🎬 ytmp4
+║ 📱 fbdl
+║ 🎬 movie
+║ 🎵 ytmp3
+║ 🎥 tiktok
+║ 🎵 song
+║ 🎧 play
+║ 📹 ytss
+║ 🐦 twitter
+║ 📌 pinterest
+║ 🎶 song2
+║ 🎤 play2
+║ 🎼 lyrics
+║ 📸 insta
+╚═══════════════════════╝
 
-                // Add Gothic text and footer to menu image
-                execSync(`magick convert "${inputImage}" \
-                    -gravity North -fill white -pointsize 50 -font Gothic \
-                    -annotate +0+50 "𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓" \
-                    -gravity South -fill yellow -pointsize 40 \
-                    -annotate +0+50 "Owner: Merchant | wa.me/254741819582" \
-                    "${outputImage}"`);
+╔═══════════════════════╗
+║        EDIT MODULES (13)        
+╠═══════════════════════╣
+║ 🖼 sticker
+║ 📷 photo
+║ 🔄 retrieve
+║ 🎬 vv2
+║ 🎚 mix
+║ 🐦 tweet
+║ 🎭 smeme
+║ 🎥 mp4
+║ 🎬 vv
+║ 📸 screenshot
+║ ✂ take
+║ ✍ quotely
+╚═══════════════════════╝
 
-                // Overlay logo if exists
-                if (fs.existsSync(logoImage)) {
-                    execSync(`magick composite -gravity SouthEast "${logoImage}" "${outputImage}" "${outputImage}"`);
-                }
+╔═══════════════════════╗
+║       GROUP MANAGEMENT (25)
+╠═══════════════════════╣
+║ ✅ approve
+║ ⬆ promote
+║ 🗑 delete
+║ 🤡 faker
+║ 🔒 close
+║ ⏰ closetime
+║ 🔕 disp-off
+║ 🔔 disp-7
+║ 🖼 icon
+║ ✏ subject
+║ 🚪 leave
+║ @ tagall
+║ 🔄 revoke
+║ 🔊 unmute
+║ ❌ reject
+║ ⬇ demote
+║ 🚪 remove
+║ 🌍 foreigners
+║ 🔓 open
+║ ⏳ opentime
+║ 🔔 disp-1
+║ 🔔 disp-90
+║ 📋 gcprofile
+║ 📝 desc
+║ ➕ add
+║ 👻 hidetag
+║ 🔇 mute
+╚═══════════════════════╝
 
-                client.sendMessage(m.chat, {
-                    image: fs.readFileSync(outputImage),
-                    caption: cap,
-                    fileLength: 9999999999
-                }, { quoted: m });
-            } else if (menu === 'LINK') {
-                client.sendMessage(m.chat, {
-                    text: cap,
-                    contextInfo: {
-                        externalAdReply: {
-                            showAdAttribution: true,
-                            title: `𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓`,
-                            body: `${runtime(process.uptime())}`,
-                            thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
-                            sourceUrl: 'https://wa.me/254782698659?text=Hello👋+black+Nihostie+Bot+Mkuu+😔',
-                            mediaType: 1,
-                            renderLargerThumbnail: true
-                        }
-                    }
-                }, { quoted: m });
-            }
-        break;
+╔═══════════════════════╗
+║         AI MODULES (9)        
+╠═══════════════════════╣
+║ 🤖 ai
+║ 👁 vision
+║ 💎 gemini
+║ 🗣 gpt
+║ 🗣 gpt3
+║ 🧠 ai2
+║ 📖 define
+║ 🔍 google
+║ 🗣 gpt2
+║ 🗣 gpt4
+╚═══════════════════════╝
+
+╔═══════════════════════╗
+║       OWNER COMMANDS (17)
+╠═══════════════════════╣
+║ 🔄 restart
+║ 📢 cast
+║ ➕ join
+║ ♻ redeploy
+║ ⚙ setvar
+║ 🖼 fullpp
+║ ✅ unblock
+║ ☠ kill2
+║ 👑 admin
+║ 📢 broadcast
+║ 📊 getvar
+║ 🔄 update
+║ 🤖 botpp
+║ ⛔ block
+║ ☠ kill
+║ 💾 save
+║ >> 
+╚═══════════════════════╝
+
+╔═══════════════════════╗
+║ FOOTBALL & SPORTS (6)
+╠═══════════════════════╣
+║ ⚽ epl
+║ 🇮🇹 serie-a
+║ 🇫🇷 ligue-1
+║ 🇪🇸 laliga
+║ 🇩🇪 bundesliga
+║ 📅 fixtures
+╚═══════════════════════╝
+
+╔═══════════════════════╗
+║ TOOLS & UTILITIES (20+)
+╠═══════════════════════╣
+║ 💻 carbon
+║ 🖥 compile-c
+║ 🖥 c++
+║ 🖥 python
+║ 🔒 encrypt
+║ 🌦 weather
+║ 📥 gitclone
+║ 🖼 removebg
+║ 🔊 tts
+║ ℹ fact
+║ 💬 quotes
+║ 🖥 js
+║ 🔍 inspect
+║ 📜 eval
+║ 📊 github
+║ 💡 advice
+║ 🎨 remin
+║ 🌐 trt
+║ 😺 catfact
+║ 💘 pickupline
+╚═══════════════════════╝
+
+╔═══════════════════════╗
+║ LOGO & TEXT DESIGN (27)
+╠═══════════════════════╣
+║ 💻 hacker
+║ 🖥 hacker2
+║ 🎨 graffiti
+║ 😺 cat
+║ 🏖 sand
+║ 🏆 gold
+║ ⚔ arena
+║ 🐉 dragonball
+║ 🍥 naruto
+║ 👶 child
+║ 🍃 leaves
+║ 🎖 1917
+║ ✒ typography
+║ 🟣 purple
+║ 🌈 neon
+║ 🎄 noel
+║ 🔩 metallic
+║ 😈 devil
+║ ✨ impressive
+║ ❄ snow
+║ 💧 water
+║ ⚡ thunder
+║ 🧊 ice
+║ 📟 matrix
+║ ⚪ silver
+║ 💡 light
+╚═══════════════════════╝
+
+╔═══════════════════════╗
+║      MISCELLANEOUS (13)
+╠═══════════════════════╣
+║ 📜 bible
+║ 📖 quran
+║ 👫 pair
+║ 💳 credits
+║ 📤 upload
+║ 📎 attp
+║ 🔗 url
+║ 🖼 image
+║ 💻 system
+║ 🤖 blacky
+║ 😅 jokes
+║ ♑ gpass
+╚═══════════════════════╝
+
+╔═══════════════════════╗
+║        MADE BY MERCHANT
+╚═══════════════════════╝`;
+
+            client.sendMessage(m.chat, {
+                image: fs.readFileSync('./Media/Menu.jpg'),
+                caption: cap
+            }, { quoted: m });
+
+            break;
+        }
     }
 }
 
