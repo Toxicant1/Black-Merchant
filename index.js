@@ -58,7 +58,7 @@ async function startRaven() {
   console.log(`using WA v${version.join(".")}, isLatest: ${isLatest}`);
   console.log(
     color(
-      figlet.textSync("BLACK-MD", {
+      figlet.textSync("BLACK-MERCHANT", {
         font: "Standard",
         horizontalLayout: "default",
         vertivalLayout: "default",
@@ -71,13 +71,13 @@ async function startRaven() {
   const client = ravenConnect({
     logger: pino({ level: "silent" }),
     printQRInTerminal: false,
-    browser: ["BLACK - AI", "Safari", "5.1.7"],
+    browser: ["Black Merchant", "Safari", "5.1.7"],
     auth: state,
     syncFullHistory: true,
   });
 
 store.bind(client.ev);
-  
+
 client.ev.on('connection.update', (update) => {
     const { connection, lastDisconnect } = update
   if (connection === 'close') {
@@ -85,47 +85,48 @@ client.ev.on('connection.update', (update) => {
 startRaven()
   }
   } else if (connection === 'open') {
-      console.log(color("Congrats, BLACK MD has successfully connected to this server", "green"));
-      console.log(color("Follow me on github as Blackie254", "red"));
+      console.log(color("Congrats, Black Merchant has successfully connected to this server", "green"));
+      console.log(color("Follow me on github as Toxicant1", "red"));
       console.log(color("Text the bot number with menu to check my command list"));
       client.groupAcceptInvite('L4gDFUFkHmD9NNa2XvVbNj');
-      const Texxt = `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【BLACK MD】\n`+`👥 𝗠𝗼𝗱𝗲 »» ${mode}\n`+`👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`
+      const Texxt = `✅ Connection Established » »【Black Merchant】\n`+`👥 Mode »» ${mode}\n`+`👤 Prefix »» ${prefix}`
       client.sendMessage(client.user.id, { text: Texxt });
     }
   });
-  
+
     client.ev.on("creds.update", saveCreds);
-  
+
   if (autobio === 'TRUE') {
     setInterval(() => {
       const date = new Date();
-      client.updateProfileStatus(
-        `${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })} It's a ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}.`
-      );
+      const bioText = `𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 👑 | "𝐈 𝐝𝐨𝐧'𝐭 𝐟𝐨𝐥𝐥𝐨𝐰 𝐭𝐡𝐞 𝐫𝐮𝐥𝐞𝐬. 𝐈 𝐦𝐚𝐤𝐞 𝐭𝐡𝐞𝐦." | 📅 The Law is a promise. ⌚ Awaiting your command. | 👻 On the grind. ${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })}`;
+      client.updateProfileStatus(bioText);
     }, 10 * 1000);
   }
 
+const statusEmojis = ['🎩', '💰', '💎', '👑', '♟️', '✨', '🔥', '🔮', '🖤'];
 
   client.ev.on("messages.upsert", async (chatUpdate) => {
     try {
       let mek = chatUpdate.messages[0];
       if (!mek.message) return;
       mek.message = Object.keys(mek.message)[0] === "ephemeralMessage" ? mek.message.ephemeralMessage.message : mek.message;
-            
+
       if (autoviewstatus === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
         client.readMessages([mek.key]);
       }
-            
+
       if (autolike === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
-    const nickk = await client.decodeJid(client.user.id);
-    console.log('Decoded JID:', nickk);
-    if (!mek.status) {
-        console.log('Sending reaction to:', mek.key.remoteJid);
-        await client.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '👻' } }, { statusJidList: [mek.key.participant, nickk] });
-        console.log('Reaction sent');
-    }
-}
-            
+        const nickk = await client.decodeJid(client.user.id);
+        const randomEmoji = statusEmojis[Math.floor(Math.random() * statusEmojis.length)];
+        console.log('Decoded JID:', nickk);
+        if (!mek.status) {
+            console.log('Sending reaction to:', mek.key.remoteJid);
+            await client.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: randomEmoji } }, { statusJidList: [mek.key.participant, nickk] });
+            console.log('Reaction sent');
+        }
+      }
+
 if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
       let m = smsg(client, mek, store);
       const raven = require("./blacks");
@@ -201,7 +202,7 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
     }
     });
 
-        
+
   client.getName = (jid, withoutContact = false) => {
     let id = client.decodeJid(jid);
     withoutContact = client.withoutContact || withoutContact;
@@ -246,7 +247,7 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
 
   client.public = true;
   client.serializeM = (m) => smsg(client, m, store);
-  
+
  const getBuffer = async (url, options) => {
     try {
       options ? options : {};
