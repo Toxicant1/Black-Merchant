@@ -416,19 +416,29 @@ await client.sendMessage(from, {text: lod[i], edit: key });
 }
           }
 //========================================================================================================================//          
-          const getGreeting = () => {
-            const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
+          // Dynamic greeting with Gangsta / Merchant / ChatGPT vibe
+const getGreeting = () => {
+    const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
+    let greeting = '';
 
-            if (currentHour >= 5 && currentHour < 12) {
-                return '𝗚𝗼𝗼𝗱 𝗠𝗼𝗿𝗻𝗶𝗻𝗴 🌅';
-            } else if (currentHour >= 12 && currentHour < 16) {
-                return '𝗚𝗼𝗼𝗱 𝗔𝗳𝘁𝗲𝗿𝗻𝗼𝗼𝗻 ☀️';
-            } else if (currentHour >= 16 && currentHour < 20) {
-                return '𝗚𝗼𝗼𝗱 𝗘𝘃𝗲𝗻𝗶𝗻𝗴 🌇';
-            } else {
-                return '𝗚𝗼𝗼𝗱 𝗡𝗶𝗴𝗵𝘁 😴';
-            }
-        };
+    if (currentHour >= 5 && currentHour < 12) {
+        greeting = '💥 Yo yo! Rise up, boss! Morning grind time 🌅💸';
+    } else if (currentHour >= 12 && currentHour < 16) {
+        greeting = '⚡ Yo! Afternoon vibes, stack them coins ☀️🤑';
+    } else if (currentHour >= 16 && currentHour < 20) {
+        greeting = '🌇 Evening hustle, keep it smooth and sharp 😎💼';
+    } else {
+        greeting = '🌙 Night mode activated… rest, plot, dominate 😴🖤';
+    }
+
+    return greeting;
+};
+
+// Example usage in Rhyme Thomas Baelish system
+const rhymeGreeting = getGreeting();
+console.log('🔥 Rhyme Thomas Baelish Vibe: ', rhymeGreeting);
+
+// You can now feed `rhymeGreeting` wherever the Gangsta / Merchant vibe is needed
 //========================================================================================================================//
 //========================================================================================================================//
         const getCurrentTimeInNairobi = () => {
