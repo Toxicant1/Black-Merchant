@@ -674,23 +674,23 @@ if (cmd) {
   switch (command) {
 
     case "menu":
-      // your menu code here
+      // your dark-styled menu code here
       break;
 
     case "advice":
-      reply(advice());
+      reply("☠️ Dark wisdom whispers:\n\n" + advice());
       console.log(advice());
       break;
 
     case "owner":
       client.sendContact(from, maindev2, m);
+      reply("⚡ The Black Merchant rules in shadows. 📖");
       break;
 
     // add other cases here
 
     default:
-      // optional fallback
-      reply("⚠️ Command not recognized, bro. Try 'menu' 🙏");
+      reply("⚔️ Unknown command... Shadows don’t recognize this move. Try *menu* 🕶️");
       break;
   }
 }
