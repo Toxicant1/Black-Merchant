@@ -285,18 +285,35 @@ contextInfo: {
 
 //========================================================================================================================//
 const Grace = mek.key.remoteJid;
-if (wapresence === 'online') { 
-             client.sendPresenceUpdate('available', Grace);
 
-} else if (wapresence === 'typing') { 
-             client.sendPresenceUpdate('composing', Grace);
-
-      }        else if (wapresence === 'recording') { 
-             client.sendPresenceUpdate('recording', Grace);
-
-    } else {
-             client.sendPresenceUpdate('unavailable', Grace);
+// Function to map custom codes to WhatsApp presence + hacker vibe
+function mapCodeToWAStatus(code) {
+    switch(code.toLowerCase()) {
+        case 'online': 
+            return {status: 'Available… ✅', wa: 'available'};
+        case 'typing': 
+            return {status: 'Typing… ✍️', wa: 'composing'};
+        case 'recording': 
+            return {status: 'Recording… 🎤', wa: 'recording'};
+        case 'hack': 
+            return {status: 'Hacking… 💻', wa: 'composing'};
+        case 'ghost': 
+            return {status: 'Ghosting… 👻', wa: 'available'};
+        case 'stealth': 
+            return {status: 'Stealthing… 🕵️‍♂️', wa: 'unavailable'};
+        case 'crack': 
+            return {status: 'Cracking… 💀', wa: 'composing'};
+        default: 
+            return {status: 'Invisible… 👁', wa: 'unavailable'};
     }
+}
+
+// Send presence update dynamically
+const mapped = mapCodeToWAStatus(wapresence);
+client.sendPresenceUpdate(mapped.wa, Grace);
+
+// Optional: log status for debug / fun
+console.log('📡 Current Status:', mapped.status);
 //========================================================================================================================//    
 if (cmd && mode === 'PRIVATE' && !itsMe && !Owner && m.sender !== dev) {
 return;
