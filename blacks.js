@@ -719,41 +719,51 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
 ──────────────`;
 
       // Send menu by type with punk audio
-      if (menu === 'VIDEO') {
-        await client.sendMessage(m.chat, {
-          video: fs.readFileSync('./Media/ponk.mp3'), // audio in small letters
-          caption: cap,
-          gifPlayback: true
-        }, { quoted: m });
+  // Send menu by type with punk audio
+if (menu === 'VIDEO') {
+    await client.sendMessage(m.chat, {
+        video: fs.readFileSync('./Media/blacky.mp4'), // original video
+        caption: cap,
+        gifPlayback: true
+    }, { quoted: m });
 
-      } else if (menu === 'TEXT') {
-        await client.sendMessage(from, { text: cap }, { quoted: m });
+} else if (menu === 'AUDIO') { // <-- new type for punk music
+    await client.sendMessage(m.chat, {
+        audio: fs.readFileSync('./Media/ponk.mp3'),
+        mimetype: 'audio/mpeg',
+        ptt: false, // set to true if you want it as voice note
+        caption: '🎵 Playing punk vibes…'
+    }, { quoted: m });
 
-      } else if (menu === 'IMAGE') {
-        await client.sendMessage(m.chat, {
-          image: { url: './Media/Menu.jpg' },
-          caption: cap,
-          fileLength: "9999999999"
-        }, { quoted: m });
+} else if (menu === 'TEXT') {
+    await client.sendMessage(from, { text: cap }, { quoted: m });
 
-      } else if (menu === 'LINK') {
-        await client.sendMessage(m.chat, {
-          text: cap,
-          contextInfo: {
+} else if (menu === 'IMAGE') {
+    await client.sendMessage(m.chat, {
+        image: { url: './Media/Menu.jpg' },
+        caption: cap,
+        fileLength: "9999999999"
+    }, { quoted: m });
+
+} else if (menu === 'LINK') {
+    await client.sendMessage(m.chat, {
+        text: cap,
+        contextInfo: {
             externalAdReply: {
-              showAdAttribution: true,
-              title: `𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓`,
-              body: `${runtime(process.uptime())}`,
-              thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
-              sourceUrl: 'https://wa.me/254741819582?text=Hello👋+Black+Merchant+Bot+Mkuu+😔',
-              mediaType: 1,
-              renderLargerThumbnail: true
+                showAdAttribution: true,
+                title: `𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓`,
+                body: `${runtime(process.uptime())}`,
+                thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
+                sourceUrl: 'https://wa.me/254741819582?text=Hello👋+Black+Merchant+Bot+Mkuu+😔',
+                mediaType: 1,
+                renderLargerThumbnail: true
             }
-          }
-        }, { quoted: m });
-      }
-      break;
-    }
+        }
+    }, { quoted: m });
+}
+
+break; // <-- added break at the end
+}
 //========================================================================================================================//
 //========================================================================================================================//
 if (cmd) {
