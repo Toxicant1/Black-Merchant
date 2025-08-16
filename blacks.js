@@ -719,24 +719,16 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
 ──────────────`;
 
       // Send menu by type with punk audio
-  // Send menu by type with punk audio
 if (menu === 'VIDEO') {
+    // Previously using `video` for mp3 — fixed to `audio`
     await client.sendMessage(m.chat, {
-        video: fs.readFileSync('./Media/blacky.mp4'), // original video
-        caption: cap,
-        gifPlayback: true
-    }, { quoted: m });
-
-} else if (menu === 'AUDIO') { // <-- new type for punk music
-    await client.sendMessage(m.chat, {
-        audio: fs.readFileSync('./Media/ponk.mp3'),
-        mimetype: 'audio/mpeg',
-        ptt: false, // set to true if you want it as voice note
-        caption: '🎵 Playing punk vibes…'
+        audio: fs.readFileSync('./Media/ponk.mp3'), // correct audio key
+        mimetype: 'audio/mpeg',                     // required for WhatsApp to recognize
+        caption: cap
     }, { quoted: m });
 
 } else if (menu === 'TEXT') {
-    await client.sendMessage(from, { text: cap }, { quoted: m });
+    await client.sendMessage(m.chat, { text: cap }, { quoted: m });
 
 } else if (menu === 'IMAGE') {
     await client.sendMessage(m.chat, {
@@ -761,8 +753,7 @@ if (menu === 'VIDEO') {
         }
     }, { quoted: m });
 }
-
-break; // <-- added break at the end
+break;
 }
 //========================================================================================================================//
 //========================================================================================================================//
@@ -3908,25 +3899,41 @@ break;
 //========================================================================================================================//
 //========================================================================================================================//                      
 //========================================================================================================================//                      
-case 'sc': case 'script': case 'repo':
+case 'sc': 
+case 'script': 
+case 'repo': {
 
- client.sendMessage(m.chat, { image: { url: `https://files.catbox.moe/5grvn3.jpg` }, caption: 
-` 𝙃𝙀𝙇𝙇𝙊👋 *${pushname}*,
-╔══≪ ✦ ≫══════════≪ ✦ ≫══╗
-          𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐕3
- The Ultimate WhatsApp Bot
-╚══≪ ✦ ≫══════════≪ ✦ ≫══╝\n\n🔷 𝐆𝐢𝐭𝐇𝐮𝐛 𝐑𝐞𝐩𝐨:
-   ↳ https://github.com/Toxicant1/black-super-bot
-   ★ Don't forget to Fork & Star!.\n\n 🔶 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐏𝐚𝐢𝐫𝐢𝐧𝐠:
+  const caption = `
+╔═━❖【 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝐕3 】❖━═╗
+          ⚡ Ultimate WhatsApp Bot ⚡
+╚═━❖═══════════════════❖━═╝
+
+🔹 𝐆𝐢𝐭𝐇𝐮𝐛 Repository:
+   ↳ https://github.com/Toxicant1/Black-Merchant.git
+   ⭐ Fork it. Star it. Respect the craft.
+
+🔹 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 Pairing:
    ↳ https://blacks-pair.onrender.com
-   ★ Save your Session-ID!\n\n.⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
-   ✓ Complete all variables
-   ✓ Keep API keys secure
-   ✓ Deploy properly\n\n╔══≪ ✦ ≫═══════════════≪ ✦ ≫══╗
-  Made with ❤️ by Blacky Dev
-╚══≪ ✦ ≫═══════════════≪ ✦ ≫══╝\n\n𝗠𝗮𝗱𝗲 𝗼𝗻 𝗲𝗮𝗿𝘁𝗵 𝗯𝘆 𝗛𝘂𝗺𝗮𝗻𝘀🔥!`},{quoted : m });
+   🔐 Keep your Session-ID secure.
 
-   break;
+⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
+   ✓ Fill all environment variables
+   ✓ Keep API keys secret
+   ✓ Deploy clean, avoid errors
+
+╔═━❖【 𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆 𝗠𝗲𝗿𝗰𝗵𝗮𝗻𝘁 𝗗𝗲𝘃 】❖━═╗
+💀 Built with skill & precision
+🌑 Crafted on Earth by Humans 🔥
+╚═━❖═══════════════════❖━═╝
+`;
+
+  await client.sendMessage(m.chat, { 
+      image: { url: 'https://files.catbox.moe/5grvn3.jpg' }, 
+      caption: caption 
+  }, { quoted: m });
+
+  break;
+}
 
 //========================================================================================================================//
                       case 'closetime':
@@ -4722,7 +4729,7 @@ case "block": {
  if (!Owner) throw NotOwner; 
  if (!m.quoted) throw `𝗧𝗮𝗴 𝘀𝗼𝗺𝗲𝗼𝗻𝗲!`  
  let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-         if (users == "254114283550@s.whatsapp.net") return m.reply("𝗜 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗹𝗼𝗰𝗸 𝗺𝘆 𝗢𝘄𝗻𝗲𝗿 😡");
+         if (users == "254741819582@s.whatsapp.net") return m.reply("𝗜 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗹𝗼𝗰𝗸 𝗺𝘆 𝗢𝘄𝗻𝗲𝗿 😡");
                   if (users  == client.decodeJid(client.user.id)) throw '𝗜 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗹𝗼𝗰𝗸 𝗺𝘆𝘀𝗲𝗹𝗳 𝗶𝗱𝗶𝗼𝘁 😡';
  await client.updateBlockStatus(users, 'block'); 
  m.reply (`𝗕𝗹𝗼𝗰𝗸𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆!`); 
