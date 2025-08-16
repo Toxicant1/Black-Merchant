@@ -706,14 +706,18 @@ if (cmd) {
       console.log(advice());
       break;
 
+    case "owner":
+      client.sendContact(from, maindev2, m);
+      break;
+
     // add other cases here
+
+    default:
+      // optional fallback
+      reply("⚠️ Command not recognized, bro. Try 'menu' 🙏");
+      break;
   }
 }
-//========================================================================================================================//                      
-
-case "owner":
-client.sendContact(from, maindev2, m)
-break;
 
 //========================================================================================================================//
                       case "lyrics2": 
