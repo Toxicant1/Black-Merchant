@@ -509,133 +509,202 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
     if (cmd) {
   switch (command) {
     case "menu": {
-      let cap = `𝗛𝗲𝘆 𝘁𝗵𝗲𝗿𝗲😊, ${getGreeting()}
-
-╔═══━──────━═══╗
-      𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙  
-     『 𝕾𝖊𝖈𝖚𝖗𝖊 • 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚜︎ 』
-╚═══━──────━═══╝
-
-✦ User: ${m.pushName}  
-✦ Prefix: ${prefix}  
-✦ Mode: ${mode}  
-✦ Speed: ${Rspeed.toFixed(4)} ms  
-✦ Time: ${getCurrentTimeInNairobi()} | ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}  
-✦ RAM: 32GB / 64GB  
+      let cap = `╭─◇─────────────◇─╮
+│ 🎮 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 🎮
+│
+│ ⏰ Time: ${getCurrentTimeInNairobi()}  
+│ 📅 Day: ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}
+│ 👤 User: ${m.pushName}
+│ 🔖 Prefix: ${prefix}
+│ 🎮 Mode: ${mode}
+│ ⚡ Speed: ${Rspeed.toFixed(4)} ms
+│ 💻 RAM: 32GB / 64GB
+╰─◇─────────────◇─╯
 
 ════════════════════════
       𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚔︎
 ════════════════════════
 
-╔═━──── DOWNLOAD ────━═╗
-🎬 video   🎬 ytmp4  
-📱 fbdl    🎬 movie  
-🎵 ytmp3   🎥 tiktok  
-🎵 song    🎧 play  
-📹 yts     🐦 twitter  
-📌 pinterest 🎶 song2  
-🎤 play2   🎼 lyrics  
-📸 insta  
-╚═━──────────────━═╝
+╭─ DOWNLOAD ─╮
+│ 🎬 video
+│ 🎬 ytmp4
+│ 📱 fbdl
+│ 🎬 movie
+│ 🎵 ytmp3
+│ 🎥 tiktok
+│ 🎵 song
+│ 🎧 play
+│ 📹 yts
+│ 🐦 twitter
+│ 📌 pinterest
+│ 🎶 song2
+│ 🎤 play2
+│ 🎼 lyrics
+│ 📸 insta
+╰────────────╯
 
-╔═━──── EDIT ────━═╗
-🖼 sticker  📷 photo  
-🔄 retrieve 🎬 vv2  
-🎚 mix      🐦 tweet  
-🎭 smeme    🎥 mp4  
-🎬 vv       📸 screenshot  
-✂ take     ✍ quotely  
-╚═━──────────━═╝
+╭─ EDIT ─╮
+│ 🖼 sticker
+│ 📷 photo
+│ 🔄 retrieve
+│ 🎬 vv2
+│ 🎚 mix
+│ 🐦 tweet
+│ 🎭 smeme
+│ 🎥 mp4
+│ 🎬 vv
+│ 📸 screenshot
+│ ✂ take
+│ ✍ quotely
+╰────────╯
 
-╔═━──── GROUP ────━═╗
-✅ approve   ⬆ promote  
-🗑 delete    🤡 faker  
-🔒 close     ⏰ closetime  
-🔕 disp-off  🔔 disp-7  
-🖼 icon      ✏ subject  
-🚪 leave     @ tagall  
-🔄 revoke    🔊 unmute  
-❌ reject    ⬇ demote  
-🚪 remove    🌍 foreigners  
-🔓 open      ⏳ opentime  
-🔔 disp-1    🔔 disp-90  
-📋 gcprofile 📝 desc  
-➕ add       👻 hidetag  
-🔇 mute  
-╚═━──────────────━═╝
+╭─ GROUP ─╮
+│ ✅ approve
+│ ⬆ promote
+│ 🗑 delete
+│ 🤡 faker
+│ 🔒 close
+│ ⏰ closetime
+│ 🔕 disp-off
+│ 🔔 disp-7
+│ 🖼 icon
+│ ✏ subject
+│ 🚪 leave
+│ @ tagall
+│ 🔄 revoke
+│ 🔊 unmute
+│ ❌ reject
+│ ⬇ demote
+│ 🚪 remove
+│ 🌍 foreigners
+│ 🔓 open
+│ ⏳ opentime
+│ 🔔 disp-1
+│ 🔔 disp-90
+│ 📋 gcprofile
+│ 📝 desc
+│ ➕ add
+│ 👻 hidetag
+│ 🔇 mute
+╰──────────╯
 
-╔═━──── AI ────━═╗
-🤖 ai      👁 vision  
-💎 gemini  🗣 gpt  
-🗣 gpt3    🧠 ai2  
-📖 define  🔍 google  
-🗣 gpt2    🗣 gpt4  
-╚═━────────━═╝
+╭─ AI ─╮
+│ 🤖 ai
+│ 👁 vision
+│ 💎 gemini
+│ 🗣 gpt
+│ 🗣 gpt3
+│ 🧠 ai2
+│ 📖 define
+│ 🔍 google
+│ 🗣 gpt2
+│ 🗣 gpt4
+╰──────╯
 
-╔═━──── OWNER ────━═╗
-🔄 restart  📢 cast  
-➕ join     ♻ redeploy  
-⚙ setvar   🖼 fullpp  
-✅ unblock  ☠ kill2  
-👑 admin    📢 broadcast  
-📊 getvar   🔄 update  
-🤖 botpp    ⛔ block  
-☠ kill     💾 save  
-╚═━──────────━═╝
+╭─ OWNER ─╮
+│ 🔄 restart
+│ 📢 cast
+│ ➕ join
+│ ♻ redeploy
+│ ⚙ setvar
+│ 🖼 fullpp
+│ ✅ unblock
+│ ☠ kill2
+│ 👑 admin
+│ 📢 broadcast
+│ 📊 getvar
+│ 🔄 update
+│ 🤖 botpp
+│ ⛔ block
+│ ☠ kill
+│ 💾 save
+╰────────╯
 
-╔═━──── FOOTBALL ────━═╗
-⚽ epl      🇮🇹 serie-a  
-🇫🇷 ligue-1 🇪🇸 laliga  
-🇩🇪 bundesliga 📅 fixtures  
-╚═━─────────────━═╝
+╭─ FOOTBALL ─╮
+│ ⚽ epl
+│ 🇮🇹 serie-a
+│ 🇫🇷 ligue-1
+│ 🇪🇸 laliga
+│ 🇩🇪 bundesliga
+│ 📅 fixtures
+╰────────────╯
 
-╔═━──── TOOLS ────━═╗
-💻 carbon   🖥 compile-c  
-🖥 c++      🖥 python  
-🔒 encrypt  🌦 weather  
-📥 gitclone 🖼 removebg  
-🔊 tts      ℹ fact  
-💬 quotes   🖥 js  
-🔍 inspect  📜 eval  
-📊 github   💡 advice  
-🎨 remin    🌐 trt  
-😺 catfact  💘 pickupline  
-╚═━─────────────━═╝
+╭─ TOOLS ─╮
+│ 💻 carbon
+│ 🖥 compile-c
+│ 🖥 c++
+│ 🖥 python
+│ 🔒 encrypt
+│ 🌦 weather
+│ 📥 gitclone
+│ 🖼 removebg
+│ 🔊 tts
+│ ℹ fact
+│ 💬 quotes
+│ 🖥 js
+│ 🔍 inspect
+│ 📜 eval
+│ 📊 github
+│ 💡 advice
+│ 🎨 remin
+│ 🌐 trt
+│ 😺 catfact
+│ 💘 pickupline
+╰──────────╯
 
-╔═━──── LOGO ────━═╗
-💻 hacker   🖥 hacker2  
-🎨 graffiti 😺 cat  
-🏖 sand     🏆 gold  
-⚔ arena    🐉 dragonball  
-🍥 naruto   👶 child  
-🍃 leaves   🎖 1917  
-✒ typography 🟣 purple  
-🌈 neon     🎄 noel  
-🔩 metallic 😈 devil  
-✨ impressive ❄ snow  
-💧 water    ⚡ thunder  
-🧊 ice      📟 matrix  
-⚪ silver   💡 light  
-╚═━────────────━═╝
+╭─ LOGO ─╮
+│ 💻 hacker
+│ 🖥 hacker2
+│ 🎨 graffiti
+│ 😺 cat
+│ 🏖 sand
+│ 🏆 gold
+│ ⚔ arena
+│ 🐉 dragonball
+│ 🍥 naruto
+│ 👶 child
+│ 🍃 leaves
+│ 🎖 1917
+│ ✒ typography
+│ 🟣 purple
+│ 🌈 neon
+│ 🎄 noel
+│ 🔩 metallic
+│ 😈 devil
+│ ✨ impressive
+│ ❄ snow
+│ 💧 water
+│ ⚡ thunder
+│ 🧊 ice
+│ 📟 matrix
+│ ⚪ silver
+│ 💡 light
+╰─────────╯
 
-╔═━──── MISC ────━═╗
-📜 bible    📖 quran  
-👫 pair     💳 credits  
-📤 upload   📎 attp  
-🔗 url      🖼 image  
-💻 system   🤖 blacky  
-😅 jokes    ♑ gpass  
-╚═━──────────━═╝
+╭─ MISC ─╮
+│ 📜 bible
+│ 📖 quran
+│ 👫 pair
+│ 💳 credits
+│ 📤 upload
+│ 📎 attp
+│ 🔗 url
+│ 🖼 image
+│ 💻 system
+│ 🤖 blacky
+│ 😅 jokes
+│ ♑ gpass
+╰────────╯
 
 ──────────────
 🖤 *“Even in darkness, steel shines.”*  
 ✒ Made by 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙
 ──────────────`;
 
-      // Send menu by type
+      // Send menu by type with punk audio
       if (menu === 'VIDEO') {
         await client.sendMessage(m.chat, {
-          video: fs.readFileSync('./Media/blacky.mp4'),
+          video: fs.readFileSync('./Media/ponk.mp3'), // audio in small letters
           caption: cap,
           gifPlayback: true
         }, { quoted: m });
