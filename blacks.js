@@ -696,270 +696,213 @@ if (cmd) {
 }
 
 //========================================================================================================================//
-                      case "lyrics2": 
- try { 
- if (!text) return reply("Provide a song name!"); 
- const searches = await Client.songs.search(text); 
- const firstSong = searches[0]; 
- //await client.sendMessage(from, {text: firstSong}); 
- const lyrics = await firstSong.lyrics(); 
- await client.sendMessage(from, { text: lyrics}, { quoted: m }); 
- } catch (error) { 
-             reply(`I did not find any lyrics for ${text}. Try searching a different song.`); 
-             console.log(error); 
-         }
-        break;
+// ⚔️ Black Merchant Command Handler ⚔️
+//========================================================================================================================//
 
-//========================================================================================================================//              
-        case "play2": {
- const yts = require("yt-search");
+if (cmd) {
+  switch (command) {
 
-    try {
-        if (!text) return m.reply("What song do you want to download?");
+    //==================================================================================//
+    case "lyrics2": {
+      try {
+        if (!text) return reply("🎶 Drop the song name, bro...");
+
+        const searches = await Client.songs.search(text);
+        const firstSong = searches[0];
+        const lyrics = await firstSong.lyrics();
+
+        await client.sendMessage(from, { text: lyrics }, { quoted: m });
+
+      } catch (error) {
+        reply(`⚠️ No lyrics found for *${text}* — maybe whisper a different track.`);
+        console.log(error);
+      }
+      break;
+    }
+    //==================================================================================//
+    case "play2": {
+      const yts = require("yt-search");
+      try {
+        if (!text) return m.reply("🎧 What song do you want, brother?");
 
         const { videos } = await yts(text);
-        if (!videos || videos.length === 0) {
-            return m.reply("No songs found!");
-        }
+        if (!videos || videos.length === 0) return m.reply("❌ Song not found!");
 
         const urlYt = videos[0].url;
-
         try {
-            let data = await fetchJson(`https://api.dreaded.site/api/ytdl/audio?url=${urlYt}`);
+          let data = await fetchJson(`https://api.dreaded.site/api/ytdl/audio?url=${urlYt}`);
+          const { title, url: audioUrl } = data.result;
 
-            const { title, format, url: audioUrl } = data.result;
+          await client.sendMessage(m.chat, {
+            document: { url: audioUrl },
+            mimetype: "audio/mpeg",
+            caption: "⚫ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚫",
+            fileName: `${title}.mp3`,
+          }, { quoted: m });
 
-            await client.sendMessage(
-                m.chat,
-                {
-                    document: { url: audioUrl },
-                    mimetype: "audio/mpeg",
-                    caption: "𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐁𝐎𝐓",
-                    fileName: `${title}.mp3`,
-                },
-                { quoted: m }
-            );
         } catch (error) {
-            console.error("API request failed:", error.message);
-            m.reply("Download failed: Unable to retrieve audio.");
+          console.error("API fail:", error.message);
+          m.reply("Download failed ❌");
         }
-    } catch (error) {
-        m.reply("Download failed\n" + error.message);
+      } catch (error) {
+        m.reply("⚠️ Error: " + error.message);
+      }
+      break;
     }
-};
-        break;
-//========================================================================================================================//
-        case "bible":
-                      {
-        if (!text) {
-            return reply(`Please provide a Bible reference.\n\nExample: bible John 3:16`);
-        }
-        const reference = text;
+    //==================================================================================//
+    case "bible": {
+      if (!text) return reply("📖 Example: *bible John 3:16*");
 
-try {
-        const apiUrl = `https://bible-api.com/${encodeURIComponent(reference)}`;
+      try {
+        const apiUrl = `https://bible-api.com/${encodeURIComponent(text)}`;
         const response = await axios.get(apiUrl);
 
         if (response.status === 200 && response.data.text) {
-            const { reference: ref, text, translation_name } = response.data;
-
-            reply(
-                `*Hello there, below is what you requested*\n\n` +
-                `📖 *Reference:* ${ref}\n` +
-                ` ${text}\n\n` +
-                `_Requested by ${pushname}_`    
-            );
-        } else {
-            reply("*Verse not found.* Please check the reference and try again.");
-        }
-    } catch (error) {
+          const { reference: ref, text, translation_name } = response.data;
+          reply(
+            `✝️ *Verse Requested*\n\n` +
+            `📖 *Reference:* ${ref}\n` +
+            `${text}\n\n` +
+            `_Requested by ${pushname}_`
+          );
+        } else reply("⚠️ Verse not found.");
+      } catch (error) {
         console.error(error);
-        reply("*An error occurred while fetching the Bible verse.* Please try again.");
+        reply("⚠️ Error fetching Bible verse.");
+      }
+      break;
     }
-};              
-break;
+    //==================================================================================//
+    case "quran": {
+      if (!text) return reply("📿 Example: *quran 2:255*");
 
-//========================================================================================================================//
-case 'quran': {
-  if (!text) {
-    return reply(`Please provide Surah and Ayah\n*Example:* quran 2:255`);
-  }
+      const input = text.split(":");
+      if (input.length !== 2) return reply("⚠️ Use format Surah:Ayah (2:255)");
 
-  const input = text.split(":");
-  if (input.length !== 2) {
-    return reply("Incorrect format. Use: Surah:Ayah (e.g. 2:255)");
-  }
+      const [surah, ayah] = input;
+      try {
+        const res = await axios.get(`https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/editions/quran-uthmani,en.asad`);
+        const arabic = res.data.data[0].text;
+        const english = res.data.data[1].text;
+        const surahInfo = res.data.data[0].surah;
 
-  const [surah, ayah] = input;
-  try {
-    const res = await axios.get(`https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/editions/quran-uthmani,en.asad`);
-    const arabic = res.data.data[0].text;
-    const english = res.data.data[1].text;
-    const surahInfo = res.data.data[0].surah;
+        const msg = `🕋 *Holy Qur'an Verse*\n\n` +
+          `*Surah:* ${surahInfo.englishName} (${surahInfo.name})\n` +
+          `*Ayah:* ${ayah}\n\n` +
+          `*Arabic:* ${arabic}\n\n` +
+          `*English:* ${english}\n\n` +
+          `_Requested by ${pushname}_`;
 
-    const msg = `*Holy Qur'an Verse*\n\n` +
-      `*Surah:* ${surahInfo.englishName} (${surahInfo.name})\n` +
-      `*Ayah:* ${ayah}\n\n` +
-      `*Arabic:* ${arabic}\n\n` +
-      `*English:* ${english}\n\n` +
-      `_Requested by ${pushname}_`;
-
-    client.sendMessage(m.chat, { text: msg }, { quoted: m });
-  } catch (e) {
-    console.log(e);
-    reply("Could not find the verse. Please check the Surah and Ayah.");
-  }
- }
-  break;
-//========================================================================================================================//
-  case "play": {                      
- if (!text) {
-      return client.sendMessage(from, { text: 'Please provide a song name.' }, { quoted: m });
+        client.sendMessage(m.chat, { text: msg }, { quoted: m });
+      } catch (e) {
+        console.log(e);
+        reply("⚠️ Could not find the verse.");
+      }
+      break;
     }
+    //==================================================================================//
+    case "play": {
+      if (!text) return client.sendMessage(from, { text: "🎵 Provide a song name." }, { quoted: m });
 
-try {
-     const search = await yts(text);
-     const video = search.videos[0];
+      try {
+        const search = await yts(text);
+        const video = search.videos[0];
+        if (!video) return client.sendMessage(from, { text: "❌ No results found." }, { quoted: m });
 
-        if (!video) {
-          return client.sendMessage(from, {
-            text: 'No results found for your query.'
-          }, { quoted: m });
-        }
+        m.reply("⏳ Hold up... your track is loading, bro.");
 
-m.reply("_Please wait your download is in progress_");
-
-        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, '');
+        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, "");
         const fileName = `${safeTitle}.mp3`;
         const apiURL = `${BASE_URL}/dipto/ytDl3?link=${encodeURIComponent(video.videoId)}&format=mp3`;
 
-        const response = await axios.get(apiURL);
-        const data = response.data;
+        const { data } = await axios.get(apiURL);
+        if (!data.downloadLink) return client.sendMessage(from, { text: "❌ Failed to retrieve link." }, { quoted: m });
 
-        if (!data.downloadLink) {
-          return client.sendMessage(from, {
-            text: 'Failed to retrieve the MP3 download link.'
-          }, { quoted: m });
-        } 
-
-
-await client.sendMessage(from, {
+        await client.sendMessage(from, {
           audio: { url: data.downloadLink },
-          mimetype: 'audio/mpeg',
+          mimetype: "audio/mpeg",
           fileName
         }, { quoted: m });
 
       } catch (err) {
-        console.error('[PLAY] Error:', err);
-        await client.sendMessage(from, {
-          text: 'An error occurred while processing your request.'
-        }, { quoted: m });
-}
-}
-break;
-//========================================================================================================================//
+        console.error("[PLAY] Error:", err);
+        await client.sendMessage(from, { text: "⚠️ Something went wrong." }, { quoted: m });
+      }
+      break;
+    }
+    //==================================================================================//
+    case "pair":
+    case "rent": {
+      if (!q) return await reply("📲 Example: *pair 2547XXXX*");
 
-//========================================================================================================================//        
-case "pair": case "rent": {
-if (!q) return await reply("𝐡𝐨𝐥𝐥𝐚 𝐩𝐥𝐞𝐚𝐬𝐞 𝐩𝐫𝐨𝐯𝐢𝐝𝐞 𝐚 𝐯𝐚𝐥𝐢𝐝 𝐰𝐡𝐚𝐭𝐬𝐚𝐩𝐩 𝐧𝐮𝐦𝐛𝐞𝐫 𝐦𝐦𝐡... 𝐄𝐱𝐚𝐦𝐩𝐥𝐞- pair 25411428XXX");
+      try {
+        const numbers = q.split(",").map(v => v.replace(/[^0-9]/g, "")).filter(v => v.length > 5 && v.length < 20);
+        if (numbers.length === 0) return m.reply("❌ Invalid number!");
 
-        try {        
-const numbers = q.split(',') .map((v) => v.replace(/[^0-9]/g, '')) 
-            .filter((v) => v.length > 5 && v.length < 20); 
+        for (const number of numbers) {
+          const whatsappID = number + "@s.whatsapp.net";
+          const result = await client.onWhatsApp(whatsappID);
 
-   if (numbers.length === 0) {
-            return m.reply("Invalid number❌️ Please use the  correct format!");
+          if (!result[0]?.exists) return m.reply("❌ That number is not on WhatsApp.");
+
+          m.reply("⏳ Wait... Black Merchant is cooking your code ⚔️");
+
+          let { data } = await axios(`https://blacks-pair.onrender.com/code?number=${number}`);
+          let code = data.code;
+
+          await sleep(3000);
+          await m.reply(`🔑 ${code}`);
         }
-
-for (const number of numbers) {
-            const whatsappID = number + '@s.whatsapp.net';
-    const result = await client.onWhatsApp(whatsappID); 
-
-            if (!result[0]?.exists) {
-                return m.reply(`That number is not registered on WhatsApp❗️`);
-            }
-
-m.reply("𝐰𝐚𝐢𝐭 𝐚 𝐦𝐨𝐦𝐞𝐧𝐭 𝐟𝐨𝐫 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝐩𝐚𝐢𝐫 𝐜𝐨𝐝𝐞")
-
-        let { data } = await axios(`https://blacks-pair.onrender.com/code?number=${number}`);
-        let code = data.code;
-
-const Code = ` ${code}`
-await sleep(3000);
-
- await m.reply(Code);
-        }
-    } catch (error) {
+      } catch (error) {
         console.error(error);
-        await reply("An error occurred. Please try again later.");
+        await reply("⚠️ Error. Try again later.");
+      }
+      break;
     }
-};
-break;              
-//========================================================================================================================//                      
-//========================================================================================================================//
-              case "song2": {
-const yts = require("yt-search");
-const fetch = require("node-fetch"); 
+    //==================================================================================//
+    case "song2": {
+      const yts = require("yt-search");
+      const fetch = require("node-fetch");
 
-  try {
+      try {
+        if (!text) return m.reply("🎶 Tell me the song, bro.");
 
-    if (!text) {
-      return m.reply("What song you want to download.");
+        let search = await yts(text);
+        if (!search.all.length) return sendReply(client, m, "❌ No results.");
+
+        let link = search.all[0].url;
+        const apiUrl = `https://keith-api.vercel.app/download/dlmp3?url=${link}`;
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+
+        if (data.status && data.result) {
+          const audioData = data.result;
+
+          await client.sendMessage(m.chat, {
+            document: { url: audioData.downloadUrl },
+            mimetype: "audio/mp3",
+            caption: "⚫ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚫",
+            fileName: `${audioData.title.replace(/[^a-zA-Z0-9 ]/g, "")}.mp3`,
+          }, { quoted: m });
+
+          await client.sendMessage(m.chat, {
+            audio: { url: audioData.downloadUrl },
+            mimetype: "audio/mp4",
+          }, { quoted: m });
+
+        } else reply("⚠️ Failed to fetch song.");
+      } catch (error) {
+        reply("⚠️ Error while processing song.");
+      }
+      break;
     }
+    //==================================================================================//
 
-    let search = await yts(text);
-    if (!search.all.length) {
-      return sendReply(client, m, "No results found for your query.");
-    }
-    let link = search.all[0].url; 
-
-    const apiUrl = `https://keith-api.vercel.app/download/dlmp3?url=${link}`;
-
-    let response = await fetch(apiUrl);
-    let data = await response.json();
-
-
-    if (data.status && data.result) {
-      const audioData = {
-        title: data.result.title,
-        downloadUrl: data.result.downloadUrl,
-        thumbnail: search.all[0].thumbnail,
-        format: data.result.format,
-        quality: data.result.quality,
-      };
-
-await client.sendMessage(
-        m.chat,
-        {
-          document: { url: audioData.downloadUrl },
-          mimetype: "audio/mp3",
-          caption: "𝐁𝐋𝐀𝐂𝐊𝐌𝐀𝐂𝐇𝐀𝐍𝐓 𝐁𝐎𝐓",
-          fileName: `${audioData.title.replace(/[^a-zA-Z0-9 ]/g, "")}.mp3`,
-        },
-        { quoted: m }
-      );
-
-await client.sendMessage(
-        m.chat,
-        {
-          audio: { url: audioData.downloadUrl },
-          mimetype: "audio/mp4",
-        },
-        { quoted: m }
-      );
-
-      return;
-    } else {
-
-      return reply("Unable to fetch the song. Please try again later.");
-    }
-  } catch (error) {
-
-    return reply(`An error occurred: `);
+    default:
+      reply("⚠️ Command not recognized, brother. Type *menu* to see the arsenal. ⚔️");
+      break;
   }
 }
-        break;
-
 //========================================================================================================================//                      
 //========================================================================================================================//                      
 //========================================================================================================================//
