@@ -645,7 +645,7 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
 
       } else if (menu === 'IMAGE') {
         await client.sendMessage(m.chat, {
-          image: { url: './Media/menu.jpg' },
+          image: { url: './Media/Menu.jpg' },
           caption: cap,
           fileLength: "9999999999"
         }, { quoted: m });
