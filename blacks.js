@@ -1042,44 +1042,45 @@ await client.sendMessage(from, {
   break;
 
 //========================================================================================================================//                      
-case 'video2': { 
-    if (!text) reply("What video you want to download?");
-
- try { 
-    let search = await yts(text);
-    if (!search.all.length) reply("No results found for your query.");
-    let link = search.all[0].url; 
-    const apiUrl = `https://apis-keith.vercel.app/download/dlmp4?url=${link}`;
-    let response = await fetch(apiUrl);
-    let data = await response.json();
-
-    if (data.status && data.result) {
-      const videoData = {
-        title: data.result.title,
-        downloadUrl: data.result.downloadUrl,
-        thumbnail: search.all[0].thumbnail,
-        format: data.result.format,
-        quality: data.result.quality,
-      };
-
- await client.sendMessage(
-        m.chat,
-        {
-          video: { url: videoData.downloadUrl },
-          mimetype: "video/mp4",
-          caption: "𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗 𝗕𝗬 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙",
-        },
-        { quoted: m }
-      );
-      return;
-    } else {
-      return reply("Unable to fetch the video. Please try again later.");
+case "video": {                      
+    if (!text) {
+        return client.sendMessage(from, { text: '⚠️ Please provide a song name.' }, { quoted: m });
     }
-  } catch (error) {
-    return reply(`An error occurred: ${error.message}`);
-  }
-};
-  break;
+
+    try {
+        const search = await yts(text);
+        const video = search.videos[0];
+
+        if (!video) {
+            return client.sendMessage(from, { text: '❌ No results found for your query.' }, { quoted: m });
+        }
+
+        await client.sendMessage(from, { text: '_Please wait, your download is in progress...⏳_' }, { quoted: m });
+
+        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, '');
+        const fileName = `${safeTitle}.mp4`;
+        const apiURL = `${BASE_URL}/dipto/ytDl3?link=${encodeURIComponent(video.videoId)}&format=mp4`;
+
+        const response = await axios.get(apiURL);
+        const data = response.data;
+
+        if (!data.downloadLink) {
+            return client.sendMessage(from, { text: '❌ Failed to retrieve the MP4 download link.' }, { quoted: m });
+        }
+
+        await client.sendMessage(from, {
+            video: { url: data.downloadLink },
+            mimetype: 'video/mp4',
+            fileName
+        }, { quoted: m });
+
+    } catch (err) {
+        console.error('[VIDEO] Error:', err);
+        await client.sendMessage(from, { text: '❌ An error occurred while processing your request.' }, { quoted: m });
+    }
+
+    break;
+}
 //========================================================================================================================//                      
               case "update": case "redeploy": {
                       const axios = require('axios');
