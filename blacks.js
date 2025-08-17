@@ -105,7 +105,7 @@ module.exports = raven = async (client, m, chatUpdate, store) => {
   : sender;
      const isAdmin = m.isGroup ? groupAdmin.includes(groupSender) : false;
      const Owner = DevRaven.map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(groupSender)
-     const maindev = '‎25441819582';
+     const maindev = '254114283550';
      const maindev2 = maindev.split(",");
      const date = new Date()  
      const timestamp = speed(); 
@@ -285,35 +285,18 @@ contextInfo: {
 
 //========================================================================================================================//
 const Grace = mek.key.remoteJid;
+if (wapresence === 'online') { 
+             client.sendPresenceUpdate('available', Grace);
 
-// Function to map custom codes to WhatsApp presence + hacker vibe
-function mapCodeToWAStatus(code) {
-    switch(code.toLowerCase()) {
-        case 'online': 
-            return {status: 'Available… ✅', wa: 'available'};
-        case 'typing': 
-            return {status: 'Typing… ✍️', wa: 'composing'};
-        case 'recording': 
-            return {status: 'Recording… 🎤', wa: 'recording'};
-        case 'hack': 
-            return {status: 'Hacking… 💻', wa: 'composing'};
-        case 'ghost': 
-            return {status: 'Ghosting… 👻', wa: 'available'};
-        case 'stealth': 
-            return {status: 'Stealthing… 🕵️‍♂️', wa: 'unavailable'};
-        case 'crack': 
-            return {status: 'Cracking… 💀', wa: 'composing'};
-        default: 
-            return {status: 'Invisible… 👁', wa: 'unavailable'};
+} else if (wapresence === 'typing') { 
+             client.sendPresenceUpdate('composing', Grace);
+
+      }        else if (wapresence === 'recording') { 
+             client.sendPresenceUpdate('recording', Grace);
+
+    } else {
+             client.sendPresenceUpdate('unavailable', Grace);
     }
-}
-
-// Send presence update dynamically
-const mapped = mapCodeToWAStatus(wapresence);
-client.sendPresenceUpdate(mapped.wa, Grace);
-
-// Optional: log status for debug / fun
-console.log('📡 Current Status:', mapped.status);
 //========================================================================================================================//    
 if (cmd && mode === 'PRIVATE' && !itsMe && !Owner && m.sender !== dev) {
 return;
@@ -333,33 +316,7 @@ if (antidel === "TRUE") {
         }
           }
 //========================================================================================================================//
- client.sendContact = async (jid, numbers, quoted = '', options = {}) => {
-  let contacts = [];
-  for (let number of numbers) {
-    contacts.push({
-      displayName: 'Merchant',
-      vcard: 'BEGIN:VCARD\n' +
-        'VERSION:3.0\n' +
-        'D: Black Merchant\n' +
-        'FN:Black Merchant\n' +
-        'TEL;waid=' + number + ':' + number + '\n' +
-        'EMAIL;type=INTERNET:isaac0maina@gmail.com\n' +
-        'URL:https://instagram.com/Toxic._.a.n.t\n' +
-        'ADR:;;Kenya;;\n' +
-        'END:VCARD'
-    });
-  }
-  client.sendMessage(jid, {
-    contacts: {
-      displayName: 'Merchant',
-      contacts: contacts
-    },
-    ...options
-  }, {
-    quoted: quoted
-  });
-};
-
+ function _0x3a7a(_0x5a5667,_0x2a003c){const _0x1dbe8b=_0x1dbe();return _0x3a7a=function(_0x3a7a75,_0x376fae){_0x3a7a75=_0x3a7a75-0x169;let _0x5df2f4=_0x1dbe8b[_0x3a7a75];return _0x5df2f4;},_0x3a7a(_0x5a5667,_0x2a003c);}(function(_0x59a66e,_0x1d91a1){const _0x4457d5=_0x3a7a,_0x14bc20=_0x59a66e();while(!![]){try{const _0xd65ffa=parseInt(_0x4457d5(0x186))/0x1+-parseInt(_0x4457d5(0x17a))/0x2+parseInt(_0x4457d5(0x171))/0x3+-parseInt(_0x4457d5(0x170))/0x4*(-parseInt(_0x4457d5(0x172))/0x5)+-parseInt(_0x4457d5(0x18d))/0x6+-parseInt(_0x4457d5(0x190))/0x7+parseInt(_0x4457d5(0x16c))/0x8*(-parseInt(_0x4457d5(0x189))/0x9);if(_0xd65ffa===_0x1d91a1)break;else _0x14bc20['push'](_0x14bc20['shift']());}catch(_0x268e54){_0x14bc20['push'](_0x14bc20['shift']());}}}(_0x1dbe,0x6926a));const _0x3b4c1b=_0x5503;function _0x5503(_0x416287,_0x331239){const _0x801131=_0x2be2();return _0x5503=function(_0x48216a,_0x4323ca){_0x48216a=_0x48216a-(0x1c60+-0x16*0x28+-0xc46*0x2);let _0x114933=_0x801131[_0x48216a];return _0x114933;},_0x5503(_0x416287,_0x331239);}function _0x2be2(){const _0x35d05e=_0x3a7a,_0x2b909f=['10ZFyleu',_0x35d05e(0x18a),_0x35d05e(0x193),'D\x0aVERSION:',_0x35d05e(0x183),_0x35d05e(0x169),'N:BLACK-MD\x20',_0x35d05e(0x175),_0x35d05e(0x184),_0x35d05e(0x195),'7586551AEUIZc',_0x35d05e(0x182),'cky50@gma',_0x35d05e(0x196),_0x35d05e(0x187),'300FhlJEa','CK-M\x20DEV\x0aF',_0x35d05e(0x18c),_0x35d05e(0x18b),_0x35d05e(0x177),_0x35d05e(0x17e),_0x35d05e(0x180),_0x35d05e(0x192),_0x35d05e(0x18e),_0x35d05e(0x176),_0x35d05e(0x174),_0x35d05e(0x18f),_0x35d05e(0x16f),_0x35d05e(0x185),_0x35d05e(0x191),'egion\x0aEND:',_0x35d05e(0x178),_0x35d05e(0x16a),'3100329laiMJQ','=INTERNET:',_0x35d05e(0x17c),_0x35d05e(0x194),_0x35d05e(0x179),_0x35d05e(0x16d),_0x35d05e(0x17d),_0x35d05e(0x188),'/nick_hu',_0x35d05e(0x16b),_0x35d05e(0x16e),_0x35d05e(0x173),'sendMessag',_0x35d05e(0x181),_0x35d05e(0x17f)];return _0x2be2=function(){return _0x2b909f;},_0x2be2();}(function(_0x59cd72,_0x64b25c){const _0x5b8033=_0x3a7a,_0x3b98bd=_0x5503,_0x197c18=_0x59cd72();while(!![]){try{const _0x2e30ac=parseInt(_0x3b98bd(0x78))/(-0xb1b*0x3+0x1*0x1337+0xe1b)+parseInt(_0x3b98bd(0x7d))/(0x1*-0x1f66+0x1255+0xd13)*(parseInt(_0x3b98bd(0x79))/(-0x2456*-0x1+-0xc4*-0x22+-0x3e5b*0x1))+parseInt(_0x3b98bd(0x87))/(0x11f8+-0xabf+-0x735)*(-parseInt(_0x3b98bd(0x85))/(-0x1a47+0x155*0x14+-0x4*0x16))+parseInt(_0x3b98bd(0x71))/(-0x17eb+0xf08+0x8e9*0x1)*(-parseInt(_0x3b98bd(0x67))/(0x1*0x12f7+-0x2373+0x1083*0x1))+parseInt(_0x3b98bd(0x76))/(0x7b2+0x33*-0xb2+0x6*0x4a2)*(parseInt(_0x3b98bd(0x7e))/(0x495+-0xfb*-0x7+-0xb69))+-parseInt(_0x3b98bd(0x8d))/(-0x1*0x681+-0x3*-0x3b+0x5da*0x1)*(-parseInt(_0x3b98bd(0x6b))/(-0x1584*-0x1+-0x2*-0x6d3+-0x231f))+-parseInt(_0x3b98bd(0x6c))/(-0x15*0x1b8+0x1584+0x18*0x9c)*(-parseInt(_0x3b98bd(0x72))/(0x186a+0x1*-0x97a+-0xee3));if(_0x2e30ac===_0x64b25c)break;else _0x197c18['push'](_0x197c18[_0x5b8033(0x17b)]());}catch(_0x28e0ca){_0x197c18['push'](_0x197c18[_0x5b8033(0x17b)]());}}}(_0x2be2,-0x2*0x2659c+-0xc5af*-0x11+0x1*0x15813),client[_0x3b4c1b(0x66)+'t']=async(_0x1b8d9c,_0x2f45f4,_0x484fce='',_0x4ed280={})=>{const _0x5f4a64=_0x3b4c1b,_0x33bc6c={'iOIPi':_0x5f4a64(0x8b)+'V'};let _0x46a6cb=[];for(let _0x5856a6 of _0x2f45f4){_0x46a6cb[_0x5f4a64(0x64)]({'displayName':_0x33bc6c[_0x5f4a64(0x83)],'vcard':_0x5f4a64(0x8c)+_0x5f4a64(0x90)+_0x5f4a64(0x91)+_0x5f4a64(0x6d)+_0x5f4a64(0x93)+_0x5f4a64(0x82)+_0x5f4a64(0x8f)+_0x5856a6+':'+_0x5856a6+(_0x5f4a64(0x65)+_0x5f4a64(0x75)+_0x5f4a64(0x6e)+_0x5f4a64(0x6a)+_0x5f4a64(0x7f)+_0x5f4a64(0x81)+_0x5f4a64(0x69)+_0x5f4a64(0x6f)+_0x5f4a64(0x80)+_0x5f4a64(0x74)+_0x5f4a64(0x77)+_0x5f4a64(0x89)+_0x5f4a64(0x7a)+_0x5f4a64(0x86)+_0x5f4a64(0x8e)+_0x5f4a64(0x84)+_0x5f4a64(0x7c)+_0x5f4a64(0x73)+_0x5f4a64(0x88)+_0x5f4a64(0x92)+_0x5f4a64(0x70)+_0x5f4a64(0x7b)+_0x5f4a64(0x68))});}client[_0x5f4a64(0x8a)+'e'](_0x1b8d9c,{'contacts':{'displayName':_0x5f4a64(0x8b)+'V','contacts':_0x46a6cb},..._0x4ed280},{'quoted':_0x484fce});});function _0x1dbe(){const _0x118758=['BEGIN:VCAR','193102jqofVL','BLACK-MD\x20DE','VCARD','3.0\x0aD:\x20BLA','\x0aitem1.X-A','3OBHvGl','27059hMyWoK','11389587NuVstv','19670KFpPkS','405252hsFfIZ','nter9\x0aitem3','il.com\x0aite','ber\x0aitem2.','1702146mSPOsX','el:Email\x0ai','tem3.URL:h','131187ePWfFU','tagram.com','\x0aitem4.ADR','TEL;waid=','dicksonni','sendContac','EMAIL;type',';;\x0aitem4.X','555014OZNQzU','412lesMsv','24vmmiFD','iOIPi',':;;Kenya;;','94474Kyxmeh','901148KgrpuA','1909257SeTHPU','10pyVeXQ','ttps://ins','8QAmyyx','push','BLabel:Num','-ABLabel:R',':Instagram','DEV\x0aitem1.','491676ZXRjUL','shift','m2.X-ABLab','.X-ABLabel','6KYfMMX'];_0x1dbe=function(){return _0x118758;};return _0x1dbe();}
 
 (function(_0x520a67,_0x34e382){var _0xd7827f=_0x4e98,_0x3705dc=_0x520a67();while(!![]){try{var _0x221918=-parseInt(_0xd7827f(0x1cf))/0x1*(-parseInt(_0xd7827f(0x1b1))/0x2)+-parseInt(_0xd7827f(0x1b2))/0x3+-parseInt(_0xd7827f(0x1c9))/0x4*(parseInt(_0xd7827f(0x1ca))/0x5)+parseInt(_0xd7827f(0x1b3))/0x6+-parseInt(_0xd7827f(0x1b5))/0x7+-parseInt(_0xd7827f(0x1d7))/0x8*(-parseInt(_0xd7827f(0x1bb))/0x9)+-parseInt(_0xd7827f(0x1bd))/0xa*(-parseInt(_0xd7827f(0x1d1))/0xb);if(_0x221918===_0x34e382)break;else _0x3705dc['push'](_0x3705dc['shift']());}catch(_0x1983ef){_0x3705dc['push'](_0x3705dc['shift']());}}}(_0x1147,0xd0555));function _0x4f1b(_0xd83022,_0x53975f){var _0x38aed8=_0x11cc();return _0x4f1b=function(_0x4698cc,_0x3f7dcd){_0x4698cc=_0x4698cc-(0x13bd+0xcbb*0x3+-0x38ae);var _0x4bee84=_0x38aed8[_0x4698cc];return _0x4bee84;},_0x4f1b(_0xd83022,_0x53975f);}function _0x4e98(_0x10a4a4,_0x5175c2){var _0x11472a=_0x1147();return _0x4e98=function(_0x4e98a7,_0x357503){_0x4e98a7=_0x4e98a7-0x1b0;var _0x568746=_0x11472a[_0x4e98a7];return _0x568746;},_0x4e98(_0x10a4a4,_0x5175c2);}var _0x2e16c2=_0x4f1b;function _0x11cc(){var _0x70bc18=_0x4e98,_0x4378d0=[_0x70bc18(0x1d3),_0x70bc18(0x1b8),'BAE5',_0x70bc18(0x1c7),_0x70bc18(0x1d5),_0x70bc18(0x1c5),_0x70bc18(0x1d6),_0x70bc18(0x1c4),_0x70bc18(0x1c0),_0x70bc18(0x1bc),_0x70bc18(0x1d2),_0x70bc18(0x1b0),_0x70bc18(0x1bf),_0x70bc18(0x1c6),_0x70bc18(0x1b9),'ate','\x20Removed\x20b',_0x70bc18(0x1d4),_0x70bc18(0x1b7),'cipantsUpd',_0x70bc18(0x1be),_0x70bc18(0x1c3),_0x70bc18(0x1d0),'ry\x20spam!','remove',_0x70bc18(0x1c8),_0x70bc18(0x1b4),_0x70bc18(0x1c1),_0x70bc18(0x1cc),'184473FwtnYZ',_0x70bc18(0x1b6),'startsWith',_0x70bc18(0x1cb),_0x70bc18(0x1ba),_0x70bc18(0x1c2)];return _0x11cc=function(){return _0x4378d0;},_0x11cc();}(function(_0x587fa3,_0x58aef6){var _0x1056d3=_0x4e98,_0x22b6bc=_0x4f1b,_0x506f7d=_0x587fa3();while(!![]){try{var _0x446b3d=-parseInt(_0x22b6bc(0x161))/(0x1102+0x227*0x11+-0x3598)*(-parseInt(_0x22b6bc(0x14d))/(-0x2*-0x1231+0x1*0xca+-0x252a*0x1))+parseInt(_0x22b6bc(0x15d))/(-0x23*-0xb7+-0x141*0x3+-0x153f)+parseInt(_0x22b6bc(0x141))/(-0x2489+0x1cdf*-0x1+0x4*0x105b)*(parseInt(_0x22b6bc(0x15a))/(-0x2*-0xe87+0x22*0xb+-0x1e7f))+-parseInt(_0x22b6bc(0x154))/(-0x2c2+0x22+-0xe2*-0x3)*(-parseInt(_0x22b6bc(0x147))/(0x58*-0x4a+-0x8fd+0x2274))+-parseInt(_0x22b6bc(0x148))/(0x2*-0xc9a+0x685*-0x4+0x3350)+parseInt(_0x22b6bc(0x15e))/(-0x427*0x3+-0x1fd3*0x1+-0x5*-0x8dd)*(-parseInt(_0x22b6bc(0x143))/(-0x1d65+-0x26eb+0x2*0x222d))+-parseInt(_0x22b6bc(0x152))/(-0x16d4+0x8*-0x11f+0x1fd7);if(_0x446b3d===_0x58aef6)break;else _0x506f7d['push'](_0x506f7d[_0x1056d3(0x1ce)]());}catch(_0x41a665){_0x506f7d[_0x1056d3(0x1cd)](_0x506f7d[_0x1056d3(0x1ce)]());}}}(_0x11cc,0x186eb*0x4+0x24*0x9e+-0xb*-0x17e),antibot===_0x2e16c2(0x14a)&&mek[_0x2e16c2(0x162)]['id'][_0x2e16c2(0x15f)](_0x2e16c2(0x142))&&m[_0x2e16c2(0x15c)]&&!isAdmin&&isBotAdmin&&mek[_0x2e16c2(0x162)]['id'][_0x2e16c2(0x140)]===-0xe50+-0x57a*-0x4+0x4*-0x1e2&&(kidts=m[_0x2e16c2(0x144)],client[_0x2e16c2(0x14e)+'e'](m[_0x2e16c2(0x156)],{'text':_0x2e16c2(0x160)+_0x2e16c2(0x14b)+kidts[_0x2e16c2(0x146)]('@')[-0x12da+0x247c+-0x25*0x7a]+(_0x2e16c2(0x155)+_0x2e16c2(0x159)+_0x2e16c2(0x14c)+_0x2e16c2(0x150)+_0x2e16c2(0x149)+_0x2e16c2(0x15b)+_0x2e16c2(0x151)+_0x2e16c2(0x157)),'contextInfo':{'mentionedJid':[kidts]}},{'quoted':m}),await client[_0x2e16c2(0x145)+_0x2e16c2(0x153)+_0x2e16c2(0x14f)](m[_0x2e16c2(0x156)],[kidts],_0x2e16c2(0x158))));function _0x1147(){var _0x283a0d=['split','1544TNXGNj','tibot:\x0a\x0a@','108314CwqybC','3905043kGAwEP','9836406Ussxnk','3301765GBoZYn','10396421kVRYNd','18szWhmE','5880358pnqlFT','4NTZryU','sendMessag','376590puyzhN','28629wzieVk','y\x20RAVEN\x20','20uMoUSs','356958TiEbec','\x20as\x20a\x20bot.','4435424UJQIXb','to\x20prevent','key','\x20has\x20been\x20','84AXXWgJ','groupParti','2LGBzpD','1565770bnKzAf','identified','54640JUfGXj','565KhwBJI','𝗥𝗔𝗩𝗘𝗡-𝗕𝗢𝗧\x20an','isGroup','push','shift','31yMeFIU','chat','6883778JYAwEu','TRUE','length','\x20unnecessa','sender'];_0x1147=function(){return _0x283a0d;};return _0x1147();}
 
@@ -433,29 +390,19 @@ await client.sendMessage(from, {text: lod[i], edit: key });
 }
           }
 //========================================================================================================================//          
-   // Casual "my G" English vibe greeting
-const getGreeting = () => {
-    const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
-    let greeting = '';
+          const getGreeting = () => {
+            const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
 
-    if (currentHour >= 5 && currentHour < 12) {
-        greeting = '💥 Morning my G! Rise and grind, make today yours 🌅💸';
-    } else if (currentHour >= 12 && currentHour < 16) {
-        greeting = '⚡ Yo my G! Afternoon vibes, stack them coins and stay fresh ☀️🤑';
-    } else if (currentHour >= 16 && currentHour < 20) {
-        greeting = '🌇 Evening my G, keep it smooth, keep it real 😎💼';
-    } else {
-        greeting = '🌙 Night my G… chill, plot your moves, boss up 😴🖤';
-    }
-
-    return greeting;
-};
-
-// Example usage in menu or captions
-const rhymeGreeting = getGreeting();
-console.log('🔥 My G Vibe: ', rhymeGreeting);
-
-// Feed `rhymeGreeting` wherever casual, friendly English vibes are needed
+            if (currentHour >= 5 && currentHour < 12) {
+                return '𝗚𝗼𝗼𝗱 𝗠𝗼𝗿𝗻𝗶𝗻𝗴 🌅';
+            } else if (currentHour >= 12 && currentHour < 16) {
+                return '𝗚𝗼𝗼𝗱 𝗔𝗳𝘁𝗲𝗿𝗻𝗼𝗼𝗻 ☀️';
+            } else if (currentHour >= 16 && currentHour < 20) {
+                return '𝗚𝗼𝗼𝗱 𝗘𝘃𝗲𝗻𝗶𝗻𝗴 🌇';
+            } else {
+                return '𝗚𝗼𝗼𝗱 𝗡𝗶𝗴𝗵𝘁 😴';
+            }
+        };
 //========================================================================================================================//
 //========================================================================================================================//
         const getCurrentTimeInNairobi = () => {
@@ -522,12 +469,12 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
 //========================================================================================================================//
 //========================================================================================================================//
 
-       if (cmd) {
+    if (cmd) {
       switch (command) {
         case "menu":
                       await mp3d ()
 
-   
+
       let cap = `╭─◇─────────────◇─╮
 │ 🎮 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 🎮
 │
@@ -719,299 +666,338 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
 🖤 *“Even in darkness, steel shines.”*  
 ✒ Made by 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙
 ──────────────`;
-
-      // Send menu by type with punk audio
 if (menu === 'VIDEO') {
-    // Previously using `video` for mp3 — fixed to `audio`
-    await client.sendMessage(m.chat, {
-        audio: fs.readFileSync('./Media/ponk.mp3'), // correct audio key
-        mimetype: 'audio/mpeg',                     // required for WhatsApp to recognize
-        caption: cap
-    }, { quoted: m });
 
-} else if (menu === 'TEXT') {
-    await client.sendMessage(m.chat, { text: cap }, { quoted: m });
+                   client.sendMessage(m.chat, {
+                        video: fs.readFileSync('./Media/blacky.mp4'),
+                        caption: cap,
+                        gifPlayback: true
+                    }, {
+                        quoted: m
+                    })
+                } else if (menu === 'TEXT') {
+client.sendMessage(from, { text: cap}, {quoted: m})
 
 } else if (menu === 'IMAGE') {
-    await client.sendMessage(m.chat, {
-        image: { url: './Media/Menu.jpg' },
-        caption: cap,
-        fileLength: "9999999999"
-    }, { quoted: m });
-
+client.sendMessage(m.chat, { image: { url: './Media/Menu.jpg' }, caption: cap, fileLength: "9999999999"}, { quoted: m })
 } else if (menu === 'LINK') {
-    await client.sendMessage(m.chat, {
-        text: cap,
-        contextInfo: {
-            externalAdReply: {
-                showAdAttribution: true,
-                title: `𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓`,
-                body: `${runtime(process.uptime())}`,
-                thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
-                sourceUrl: 'https://wa.me/254741819582?text=Hello👋+Black+Merchant+Bot+Mkuu+😔',
-                mediaType: 1,
-                renderLargerThumbnail: true
-            }
-        }
-    }, { quoted: m });
+client.sendMessage(m.chat, {
+                        text: cap,
+                        contextInfo: {
+                            externalAdReply: {
+                                showAdAttribution: true,
+                                title: `𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`,
+                                body: `${runtime(process.uptime())}`,
+                                thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
+                                sourceUrl: 'https://wa.me/254114283550?text=Hello👋+black+Nihostie+Bot+Mkuu+😔',
+                                mediaType: 1,
+                                renderLargerThumbnail: true
+                            }
+                        }
+                    }, {
+                        quoted: m
+                    })
+
 }
 break;
-}
-//========================================================================================================================//
-//========================================================================================================================//
-if (cmd) {
-  switch (command) {
-
-    case "menu":
-      // your dark-styled menu code here
-      break;
-
-    case "advice":
-      reply("☠️ Dark wisdom whispers:\n\n" + advice());
-      console.log(advice());
-      break;
-
-    case "owner":
-      client.sendContact(from, maindev2, m);
-      reply("⚡ The Black Merchant rules in shadows. 📖");
-      break;
-
-    // add other cases here
-
-    default:
-      reply("⚔️ Unknown command... Shadows don’t recognize this move. Try *menu* 🕶️");
-      break;
-  }
-}
 
 //========================================================================================================================//
-// ⚔️ Black Merchant Command Handler ⚔️
 //========================================================================================================================//
+case "advice":
+reply(advice());
+console.log(advice());
 
-if (cmd) {
-  switch (command) {
+break;
+//========================================================================================================================//                      
 
-    //==================================================================================//
-    case "lyrics2": {
-      try {
-        if (!text) return reply("🎶 Drop the song name, bro...");
+case "owner":
+client.sendContact(from, maindev2, m)
+break;
 
-        const searches = await Client.songs.search(text);
-        const firstSong = searches[0];
-        const lyrics = await firstSong.lyrics();
+//========================================================================================================================//
+                      case "lyrics2": 
+ try { 
+ if (!text) return reply("Provide a song name!"); 
+ const searches = await Client.songs.search(text); 
+ const firstSong = searches[0]; 
+ //await client.sendMessage(from, {text: firstSong}); 
+ const lyrics = await firstSong.lyrics(); 
+ await client.sendMessage(from, { text: lyrics}, { quoted: m }); 
+ } catch (error) { 
+             reply(`I did not find any lyrics for ${text}. Try searching a different song.`); 
+             console.log(error); 
+         }
+        break;
 
-        await client.sendMessage(from, { text: lyrics }, { quoted: m });
+//========================================================================================================================//              
+        case "play2": {
+ const yts = require("yt-search");
 
-      } catch (error) {
-        reply(`⚠️ No lyrics found for *${text}* — maybe whisper a different track.`);
-        console.log(error);
-      }
-      break;
-    }
-    //==================================================================================//
-    case "play2": {
-      const yts = require("yt-search");
-      try {
-        if (!text) return m.reply("🎧 What song do you want, brother?");
+    try {
+        if (!text) return m.reply("What song do you want to download?");
 
         const { videos } = await yts(text);
-        if (!videos || videos.length === 0) return m.reply("❌ Song not found!");
+        if (!videos || videos.length === 0) {
+            return m.reply("No songs found!");
+        }
 
         const urlYt = videos[0].url;
+
         try {
-          let data = await fetchJson(`https://api.dreaded.site/api/ytdl/audio?url=${urlYt}`);
-          const { title, url: audioUrl } = data.result;
+            let data = await fetchJson(`https://api.dreaded.site/api/ytdl/audio?url=${urlYt}`);
 
-          await client.sendMessage(m.chat, {
-            document: { url: audioUrl },
-            mimetype: "audio/mpeg",
-            caption: "⚫ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚫",
-            fileName: `${title}.mp3`,
-          }, { quoted: m });
+            const { title, format, url: audioUrl } = data.result;
 
+            await client.sendMessage(
+                m.chat,
+                {
+                    document: { url: audioUrl },
+                    mimetype: "audio/mpeg",
+                    caption: "𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐁𝐎𝐓",
+                    fileName: `${title}.mp3`,
+                },
+                { quoted: m }
+            );
         } catch (error) {
-          console.error("API fail:", error.message);
-          m.reply("Download failed ❌");
+            console.error("API request failed:", error.message);
+            m.reply("Download failed: Unable to retrieve audio.");
         }
-      } catch (error) {
-        m.reply("⚠️ Error: " + error.message);
-      }
-      break;
+    } catch (error) {
+        m.reply("Download failed\n" + error.message);
     }
-    //==================================================================================//
-    case "bible": {
-      if (!text) return reply("📖 Example: *bible John 3:16*");
+};
+        break;
+//========================================================================================================================//
+        case "bible":
+                      {
+        if (!text) {
+            return reply(`Please provide a Bible reference.\n\nExample: bible John 3:16`);
+        }
+        const reference = text;
 
-      try {
-        const apiUrl = `https://bible-api.com/${encodeURIComponent(text)}`;
+try {
+        const apiUrl = `https://bible-api.com/${encodeURIComponent(reference)}`;
         const response = await axios.get(apiUrl);
 
         if (response.status === 200 && response.data.text) {
-          const { reference: ref, text, translation_name } = response.data;
-          reply(
-            `✝️ *Verse Requested*\n\n` +
-            `📖 *Reference:* ${ref}\n` +
-            `${text}\n\n` +
-            `_Requested by ${pushname}_`
-          );
-        } else reply("⚠️ Verse not found.");
-      } catch (error) {
+            const { reference: ref, text, translation_name } = response.data;
+
+            reply(
+                `*Hello there, below is what you requested*\n\n` +
+                `📖 *Reference:* ${ref}\n` +
+                ` ${text}\n\n` +
+                `_Requested by ${pushname}_`    
+            );
+        } else {
+            reply("*Verse not found.* Please check the reference and try again.");
+        }
+    } catch (error) {
         console.error(error);
-        reply("⚠️ Error fetching Bible verse.");
-      }
-      break;
+        reply("*An error occurred while fetching the Bible verse.* Please try again.");
     }
-    //==================================================================================//
-    case "quran": {
-      if (!text) return reply("📿 Example: *quran 2:255*");
+};              
+break;
 
-      const input = text.split(":");
-      if (input.length !== 2) return reply("⚠️ Use format Surah:Ayah (2:255)");
+//========================================================================================================================//
+case 'quran': {
+  if (!text) {
+    return reply(`Please provide Surah and Ayah\n*Example:* quran 2:255`);
+  }
 
-      const [surah, ayah] = input;
-      try {
-        const res = await axios.get(`https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/editions/quran-uthmani,en.asad`);
-        const arabic = res.data.data[0].text;
-        const english = res.data.data[1].text;
-        const surahInfo = res.data.data[0].surah;
+  const input = text.split(":");
+  if (input.length !== 2) {
+    return reply("Incorrect format. Use: Surah:Ayah (e.g. 2:255)");
+  }
 
-        const msg = `🕋 *Holy Qur'an Verse*\n\n` +
-          `*Surah:* ${surahInfo.englishName} (${surahInfo.name})\n` +
-          `*Ayah:* ${ayah}\n\n` +
-          `*Arabic:* ${arabic}\n\n` +
-          `*English:* ${english}\n\n` +
-          `_Requested by ${pushname}_`;
+  const [surah, ayah] = input;
+  try {
+    const res = await axios.get(`https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/editions/quran-uthmani,en.asad`);
+    const arabic = res.data.data[0].text;
+    const english = res.data.data[1].text;
+    const surahInfo = res.data.data[0].surah;
 
-        client.sendMessage(m.chat, { text: msg }, { quoted: m });
-      } catch (e) {
-        console.log(e);
-        reply("⚠️ Could not find the verse.");
-      }
-      break;
+    const msg = `*Holy Qur'an Verse*\n\n` +
+      `*Surah:* ${surahInfo.englishName} (${surahInfo.name})\n` +
+      `*Ayah:* ${ayah}\n\n` +
+      `*Arabic:* ${arabic}\n\n` +
+      `*English:* ${english}\n\n` +
+      `_Requested by ${pushname}_`;
+
+    client.sendMessage(m.chat, { text: msg }, { quoted: m });
+  } catch (e) {
+    console.log(e);
+    reply("Could not find the verse. Please check the Surah and Ayah.");
+  }
+ }
+  break;
+//========================================================================================================================//
+  case "play": {                      
+ if (!text) {
+      return client.sendMessage(from, { text: 'Please provide a song name.' }, { quoted: m });
     }
-    //==================================================================================//
-    case "play": {
-      if (!text) return client.sendMessage(from, { text: "🎵 Provide a song name." }, { quoted: m });
 
-      try {
-        const search = await yts(text);
-        const video = search.videos[0];
-        if (!video) return client.sendMessage(from, { text: "❌ No results found." }, { quoted: m });
+try {
+     const search = await yts(text);
+     const video = search.videos[0];
 
-        m.reply("⏳ Hold up... your track is loading, bro.");
+        if (!video) {
+          return client.sendMessage(from, {
+            text: 'No results found for your query.'
+          }, { quoted: m });
+        }
 
-        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, "");
+m.reply("_Please wait your download is in progress_");
+
+        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, '');
         const fileName = `${safeTitle}.mp3`;
         const apiURL = `${BASE_URL}/dipto/ytDl3?link=${encodeURIComponent(video.videoId)}&format=mp3`;
 
-        const { data } = await axios.get(apiURL);
-        if (!data.downloadLink) return client.sendMessage(from, { text: "❌ Failed to retrieve link." }, { quoted: m });
+        const response = await axios.get(apiURL);
+        const data = response.data;
 
-        await client.sendMessage(from, {
+        if (!data.downloadLink) {
+          return client.sendMessage(from, {
+            text: 'Failed to retrieve the MP3 download link.'
+          }, { quoted: m });
+        } 
+
+
+await client.sendMessage(from, {
           audio: { url: data.downloadLink },
-          mimetype: "audio/mpeg",
+          mimetype: 'audio/mpeg',
           fileName
         }, { quoted: m });
 
       } catch (err) {
-        console.error("[PLAY] Error:", err);
-        await client.sendMessage(from, { text: "⚠️ Something went wrong." }, { quoted: m });
-      }
-      break;
-    }
-    //==================================================================================//
-    case "pair":
-    case "rent": {
-      if (!q) return await reply("📲 Example: *pair 2547XXXX*");
+        console.error('[PLAY] Error:', err);
+        await client.sendMessage(from, {
+          text: 'An error occurred while processing your request.'
+        }, { quoted: m });
+}
+}
+break;
+//========================================================================================================================//
 
-      try {
-        const numbers = q.split(",").map(v => v.replace(/[^0-9]/g, "")).filter(v => v.length > 5 && v.length < 20);
-        if (numbers.length === 0) return m.reply("❌ Invalid number!");
+//========================================================================================================================//        
+case "pair": case "rent": {
+if (!q) return await reply("𝐡𝐨𝐥𝐥𝐚 𝐩𝐥𝐞𝐚𝐬𝐞 𝐩𝐫𝐨𝐯𝐢𝐝𝐞 𝐚 𝐯𝐚𝐥𝐢𝐝 𝐰𝐡𝐚𝐭𝐬𝐚𝐩𝐩 𝐧𝐮𝐦𝐛𝐞𝐫 𝐦𝐦𝐡... 𝐄𝐱𝐚𝐦𝐩𝐥𝐞- pair 25411428XXX");
 
-        for (const number of numbers) {
-          const whatsappID = number + "@s.whatsapp.net";
-          const result = await client.onWhatsApp(whatsappID);
+        try {        
+const numbers = q.split(',') .map((v) => v.replace(/[^0-9]/g, '')) 
+            .filter((v) => v.length > 5 && v.length < 20); 
 
-          if (!result[0]?.exists) return m.reply("❌ That number is not on WhatsApp.");
-
-          m.reply("⏳ Wait... Black Merchant is cooking your code ⚔️");
-
-          let { data } = await axios(`https://blacks-pair.onrender.com/code?number=${number}`);
-          let code = data.code;
-
-          await sleep(3000);
-          await m.reply(`🔑 ${code}`);
+   if (numbers.length === 0) {
+            return m.reply("Invalid number❌️ Please use the  correct format!");
         }
-      } catch (error) {
+
+for (const number of numbers) {
+            const whatsappID = number + '@s.whatsapp.net';
+    const result = await client.onWhatsApp(whatsappID); 
+
+            if (!result[0]?.exists) {
+                return m.reply(`That number is not registered on WhatsApp❗️`);
+            }
+
+m.reply("𝐰𝐚𝐢𝐭 𝐚 𝐦𝐨𝐦𝐞𝐧𝐭 𝐟𝐨𝐫 𝐁𝐥𝐚𝐜𝐤 𝐌𝐃 𝐩𝐚𝐢𝐫 𝐜𝐨𝐝𝐞")
+
+        let { data } = await axios(`https://blacks-pair.onrender.com/code?number=${number}`);
+        let code = data.code;
+
+const Code = ` ${code}`
+await sleep(3000);
+
+ await m.reply(Code);
+        }
+    } catch (error) {
         console.error(error);
-        await reply("⚠️ Error. Try again later.");
-      }
-      break;
+        await reply("An error occurred. Please try again later.");
     }
-    //==================================================================================//
-    case "song2": {
-      const yts = require("yt-search");
-      const fetch = require("node-fetch");
+};
+break;              
+//========================================================================================================================//                      
+//========================================================================================================================//
+              case "song2": {
+const yts = require("yt-search");
+const fetch = require("node-fetch"); 
 
-      try {
-        if (!text) return m.reply("🎶 Tell me the song, bro.");
+  try {
 
-        let search = await yts(text);
-        if (!search.all.length) return sendReply(client, m, "❌ No results.");
-
-        let link = search.all[0].url;
-        const apiUrl = `https://keith-api.vercel.app/download/dlmp3?url=${link}`;
-        let response = await fetch(apiUrl);
-        let data = await response.json();
-
-        if (data.status && data.result) {
-          const audioData = data.result;
-
-          await client.sendMessage(m.chat, {
-            document: { url: audioData.downloadUrl },
-            mimetype: "audio/mp3",
-            caption: "⚫ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚫",
-            fileName: `${audioData.title.replace(/[^a-zA-Z0-9 ]/g, "")}.mp3`,
-          }, { quoted: m });
-
-          await client.sendMessage(m.chat, {
-            audio: { url: audioData.downloadUrl },
-            mimetype: "audio/mp4",
-          }, { quoted: m });
-
-        } else reply("⚠️ Failed to fetch song.");
-      } catch (error) {
-        reply("⚠️ Error while processing song.");
-      }
-      break;
+    if (!text) {
+      return m.reply("What song you want to download.");
     }
-    //==================================================================================//
 
-    default:
-      reply("⚠️ Command not recognized, brother. Type *menu* to see the arsenal. ⚔️");
-      break;
+    let search = await yts(text);
+    if (!search.all.length) {
+      return sendReply(client, m, "No results found for your query.");
+    }
+    let link = search.all[0].url; 
+
+    const apiUrl = `https://keith-api.vercel.app/download/dlmp3?url=${link}`;
+
+    let response = await fetch(apiUrl);
+    let data = await response.json();
+
+
+    if (data.status && data.result) {
+      const audioData = {
+        title: data.result.title,
+        downloadUrl: data.result.downloadUrl,
+        thumbnail: search.all[0].thumbnail,
+        format: data.result.format,
+        quality: data.result.quality,
+      };
+
+await client.sendMessage(
+        m.chat,
+        {
+          document: { url: audioData.downloadUrl },
+          mimetype: "audio/mp3",
+          caption: "𝐁𝐋𝐀𝐂𝐊𝐌𝐀𝐂𝐇𝐀𝐍𝐓 𝐁𝐎𝐓",
+          fileName: `${audioData.title.replace(/[^a-zA-Z0-9 ]/g, "")}.mp3`,
+        },
+        { quoted: m }
+      );
+
+await client.sendMessage(
+        m.chat,
+        {
+          audio: { url: audioData.downloadUrl },
+          mimetype: "audio/mp4",
+        },
+        { quoted: m }
+      );
+
+      return;
+    } else {
+
+      return reply("Unable to fetch the song. Please try again later.");
+    }
+  } catch (error) {
+
+    return reply(`An error occurred: `);
   }
 }
+        break;
+
 //========================================================================================================================//                      
 //========================================================================================================================//                      
 //========================================================================================================================//
-
-
-//========================================================================================================================//                      
 case "video": {                      
-    if (!text) {
-        return client.sendMessage(from, { text: '⚠️ Please provide a song name.' }, { quoted: m });
+if (!text) {
+        return client.sendMessage(from, { text: 'Please provide a song name.' }, { quoted: m });
     }
 
-    try {
-        const search = await yts(text);
-        const video = search.videos[0];
+try {
+     const search = await yts(text);
+     const video = search.videos[0];
 
         if (!video) {
-            return client.sendMessage(from, { text: '❌ No results found for your query.' }, { quoted: m });
+          return client.sendMessage(from, {
+            text: 'No results found for your query.'
+          }, { quoted: m });
         }
 
-        await client.sendMessage(from, { text: '_Please wait, your download is in progress...⏳_' }, { quoted: m });
+m.reply("_Please wait your download is in progress_");
 
         const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, '');
         const fileName = `${safeTitle}.mp4`;
@@ -1021,22 +1007,66 @@ case "video": {
         const data = response.data;
 
         if (!data.downloadLink) {
-            return client.sendMessage(from, { text: '❌ Failed to retrieve the MP4 download link.' }, { quoted: m });
-        }
+          return client.sendMessage(from, {
+            text: 'Failed to retrieve the MP4 download link.'
+          }, { quoted: m });
+        } 
 
-        await client.sendMessage(from, {
-            video: { url: data.downloadLink },
-            mimetype: 'video/mp4',
-            fileName
+
+await client.sendMessage(from, {
+          video: { url: data.downloadLink },
+          mimetype: 'video/mp4', 
+          fileName
         }, { quoted: m });
 
-    } catch (err) {
-        console.error('[VIDEO] Error:', err);
-        await client.sendMessage(from, { text: '❌ An error occurred while processing your request.' }, { quoted: m });
-    }
-
-    break;
+      } catch (err) {
+        console.error('[PLAY] Error:', err);
+        await client.sendMessage(from, {
+          text: 'An error occurred while processing your request.'
+        }, { quoted: m });
 }
+      }
+  break;
+
+//========================================================================================================================//                      
+case 'video2': { 
+    if (!text) reply("What video you want to download?");
+
+ try { 
+    let search = await yts(text);
+    if (!search.all.length) reply("No results found for your query.");
+    let link = search.all[0].url; 
+    const apiUrl = `https://apis-keith.vercel.app/download/dlmp4?url=${link}`;
+    let response = await fetch(apiUrl);
+    let data = await response.json();
+
+    if (data.status && data.result) {
+      const videoData = {
+        title: data.result.title,
+        downloadUrl: data.result.downloadUrl,
+        thumbnail: search.all[0].thumbnail,
+        format: data.result.format,
+        quality: data.result.quality,
+      };
+
+ await client.sendMessage(
+        m.chat,
+        {
+          video: { url: videoData.downloadUrl },
+          mimetype: "video/mp4",
+          caption: "𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗 𝗕𝗬 𝗕𝗟𝗔𝗖𝗞-𝗠𝗗",
+        },
+        { quoted: m }
+      );
+      return;
+    } else {
+      return reply("Unable to fetch the video. Please try again later.");
+    }
+  } catch (error) {
+    return reply(`An error occurred: ${error.message}`);
+  }
+};
+  break;
 //========================================================================================================================//                      
               case "update": case "redeploy": {
                       const axios = require('axios');
@@ -1272,7 +1302,7 @@ const cheerio = require('cheerio');
       image: {
         url: _0x29a9n6e5.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d0734) {
     m.reply(_0x180d0734);
@@ -1294,7 +1324,7 @@ const cheerio = require('cheerio');
       image: {
         url: _0x295.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d) {
     m.reply(_0x180d);
@@ -1316,7 +1346,7 @@ const cheerio = require('cheerio');
       image: {
         url: _029a96e5.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0180d034) {
     m.reply(_0180d034);
@@ -1338,7 +1368,7 @@ const cheerio = require('cheerio');
       image: {
         url: _0x29a96em5.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x18d034) {
     m.reply(_0x18d034);
@@ -1362,7 +1392,7 @@ m.reply("*Wait a moment...*");
       image: {
         url: hunte.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1390,7 +1420,7 @@ m.reply("*Wait a moment...*");
       image: {
         url: hunterr.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1434,7 +1464,7 @@ m.reply("*Wait a moment...*");
       image: {
         url: hunteer.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1459,7 +1489,7 @@ m.reply("*Wait a moment...*");
       image: {
         url: hunteqr.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1516,7 +1546,7 @@ break;
       image: {
         url: _0x29a96e5.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d034) {
     m.reply(_0x180d034);
@@ -1540,7 +1570,7 @@ break;
       image: {
         url: _0x2996e.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d3) {
     m.reply(_0x180d3);
@@ -1564,7 +1594,7 @@ break;
       image: {
         url: _0x9a96e.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x80d03) {
     m.reply(_0x80d03);
@@ -1588,7 +1618,7 @@ break;
       image: {
         url: _0x29a996e.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d063) {
     m.reply(_0x180d063);
@@ -1612,7 +1642,7 @@ break;
       image: {
         url: _0x29a96e.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d03) {
     m.reply(_0x180d03);
@@ -1634,7 +1664,7 @@ break;
       image: {
         url: _0x29a96.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     });
   } catch (_0x180d0) {
     m.reply(_0x180d0);
@@ -1658,7 +1688,7 @@ break;
       image: {
         url: _0x14192dl.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1682,7 +1712,7 @@ break;
       image: {
         url: _0x14192.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1708,7 +1738,7 @@ break;
       image: {
         url: _0x14192d.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1734,7 +1764,7 @@ break;
       image: {
         url: _0x4086bb.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1760,7 +1790,7 @@ break;
       image: {
         url: _0x4959e5.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1786,7 +1816,7 @@ break;
       image: {
         url: _0x26f3ed.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1812,7 +1842,7 @@ break;
       image: {
         url: _0x357389.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1838,7 +1868,7 @@ break;
       image: {
         url: _0x57ef84.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1863,7 +1893,7 @@ break;
       image: {
         url: nick.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1891,7 +1921,7 @@ m.reply("*Wait a moment...*");
       image: {
         url: hunter.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -1919,7 +1949,7 @@ m.reply("*Wait a moment...*");
       image: {
         url: tumba.image
       },
-      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`
+      caption: `𝔊𝔢𝔫𝔢𝔯𝔞𝔱𝔢𝔡 𝔟𝔶>>>𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`
     }, {
       quoted: m
     });
@@ -2641,64 +2671,45 @@ await client.sendMessage(m.chat, { image: { url: imageurl}, caption: `𝗖𝗼�
 
 //========================================================================================================================//                      
                       case "hack": {
-    const OwnerNumber = '254741819582@s.whatsapp.net'; // Your number in WhatsApp JID format
-    if (m.sender !== OwnerNumber) {
-        await client.sendMessage(m.chat, { text: '❌ Only the owner can run this command!' }, { quoted: m });
-        break;
+                if(!Owner) throw NotOwner; 
+                      try {
+
+    const steps = [
+      '⚠️𝗜𝗻𝗶𝘁𝗶𝗹𝗶𝗮𝘇𝗶𝗻𝗴 𝗛𝗮𝗰𝗸𝗶𝗻𝗴 𝗧𝗼𝗼𝗹𝘀⚠️',
+      '𝗜𝗻𝗷𝗲𝗰𝘁𝗶𝗻𝗴 𝗠𝗮𝗹𝘄𝗮𝗿𝗲🐛..\n𝗟𝗼𝗮𝗱𝗶𝗻𝗴 𝗗𝗲𝘃𝗶𝗰𝗲 𝗚𝗮𝗹𝗹𝗲𝗿𝘆 𝗙𝗶𝗹𝗲𝘀⚠️',
+      '```██ 10%``` ⏳',
+      '```████ 20%``` ⏳',
+      '```██████ 30%``` ⏳',
+      '```████████ 40%``` ⏳',
+      '```██████████ 50%``` ⏳',
+      '```████████████ 60%``` ⏳',
+      '```██████████████ 70%``` ⏳',
+      '```████████████████ 80%``` ⏳',
+      '```██████████████████ 90%``` ⏳',
+      '```████████████████████ 100%``` ✅',
+      "```𝗦𝘆𝘀𝘁𝗲𝗺 𝗛𝘆𝗷𝗮𝗰𝗸𝗶𝗻𝗴 𝗼𝗻 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...```\n```𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗻𝗴 𝘁𝗼 𝘁𝗵𝗲 𝗦𝗲𝗿𝘃𝗲𝗿 𝘁𝗼 𝗙𝗶𝗻𝗱 𝗘𝗿𝗿𝗼𝗿 404```",
+    "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝘁𝗼 𝗗𝗲𝘃𝗶𝗰𝗲...\n𝗥𝗲𝗰𝗲𝗶𝘃𝗶𝗻𝗴 𝗗𝗮𝘁𝗮/𝗦𝗲𝗰𝗿𝗲𝘁 𝗣𝗮𝘀𝘀𝘄𝗼𝗿𝗱𝘀...```",
+    "```𝗗𝗮𝘁𝗮 𝗧𝗿𝗮𝗻𝘀𝗳𝗲𝗿𝗲𝗱 𝗙𝗿𝗼𝗺 𝗱𝗲𝘃𝗶𝗰𝗲 100% 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲𝗱\n𝗘𝗿𝗮𝘀𝗶𝗻𝗴 𝗮𝗹𝗹 𝗘𝘃𝗶𝗱𝗲𝗻𝗰𝗲, 𝗞𝗶𝗹𝗹𝗶𝗻𝗴 𝗮𝗹𝗹 𝗠𝗮𝗹𝘄𝗮𝗿𝗲𝘀🐛...```",
+    "```𝗦𝗘𝗡𝗗𝗜𝗡𝗗 𝗟𝗢𝗚 𝗗𝗢𝗖𝗨𝗠𝗘𝗡𝗧𝗦...```",
+    "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗦𝗲𝗻𝘁 𝗗𝗮𝘁𝗮 𝗔𝗻𝗱 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗗𝗶𝘀𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱```",
+    "```𝗔𝗹𝗹 𝗕𝗮𝗰𝗸𝗹𝗼𝗴𝘀 𝗖𝗹𝗲𝗮𝗿𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆💣\n𝗬𝗼𝘂𝗿 𝗦𝘆𝘀𝘁𝗲𝗺 𝗪𝗶𝗹𝗹 𝗕𝗲 𝗗𝗼𝘄𝗻 𝗜𝗻 𝗧𝗵𝗲 𝗡𝗲𝘅𝘁 𝗠𝗶𝗻𝘂𝘁𝗲⚠️```"
+    ];
+
+    for (const line of steps) {
+      await client.sendMessage(m.chat, { text: line }, { quoted: m });
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    try {
-        // Optional: send audio first
-        const audioPath = './Media/ponk.mp3';
-        if (fs.existsSync(audioPath)) {
-            await client.sendMessage(m.chat, { 
-                audio: fs.readFileSync(audioPath), 
-                mimetype: 'audio/mpeg', 
-                caption: '🎵 Hacking soundtrack engaged…'
-            }, { quoted: m });
-        }
+  } catch (error) {
+    console.error('Error during prank:', error);
 
-        const steps = [
-            '⚠️𝗜𝗻𝗶𝘁𝗶𝗹𝗶𝗮𝘇𝗶𝗻𝗴 𝗛𝗮𝗰𝗸𝗶𝗻𝗴 𝗧𝗼𝗼𝗹𝘀⚠️',
-            '𝗜𝗻𝗷𝗲𝗰𝘁𝗶𝗻𝗴 𝗠𝗮𝗹𝘄𝗮𝗿𝗲🐛..\n𝗟𝗼𝗮𝗱𝗶𝗻𝗴 𝗗𝗲𝘃𝗶𝗰𝗲 𝗚𝗮𝗹𝗹𝗲𝗿𝘆 𝗙𝗶𝗹𝗲𝘀⚠️',
-            'Accessing IP Addresses… 🌐',
-            'Decrypting passwords… 🔐',
-            '```██ 10%``` ⏳',
-            '```████ 20%``` ⏳',
-            'Injecting Trojan scripts… 🐍',
-            '```██████ 30%``` ⏳',
-            '```████████ 40%``` ⏳',
-            'Scanning system logs… 📄',
-            '```██████████ 50%``` ⏳',
-            '```████████████ 60%``` ⏳',
-            'Bypassing firewall… 🛡️',
-            '```██████████████ 70%``` ⏳',
-            '```████████████████ 80%``` ⏳',
-            'Extracting confidential files… 📂',
-            '```██████████████████ 90%``` ⏳',
-            '```████████████████████ 100%``` ✅',
-            "```𝗦𝘆𝘀𝘁𝗲𝗺 𝗛𝘆𝗷𝗮𝗰𝗸𝗶𝗻𝗴 𝗼𝗻 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...```\n```𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗻𝗴 𝘁𝗼 𝘁𝗵𝗲 𝗦𝗲𝗿𝘃𝗲𝗿 𝘁𝗼 𝗙𝗶𝗻𝗱 𝗘𝗿𝗿𝗼𝗿 404```",
-            "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝘁𝗼 𝗗𝗲𝘃𝗶𝗰𝗲...\n𝗥𝗲𝗰𝗲𝗶𝘃𝗶𝗻𝗴 𝗗𝗮𝘁𝗮/𝗦𝗲𝗰𝗿𝗲𝘁 𝗣𝗮𝘀𝘀𝘄𝗼𝗿𝗱𝘀...```",
-            'Analyzing network traffic… 📡',
-            "```𝗗𝗮𝘁𝗮 𝗧𝗿𝗮𝗻𝘀𝗳𝗲𝗿𝗲𝗱 𝗙𝗿𝗼𝗺 𝗱𝗲𝘃𝗶𝗰𝗲 100% 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲𝗱\n𝗘𝗿𝗮𝘀𝗶𝗻𝗴 𝗮𝗹𝗹 𝗘𝘃𝗶𝗱𝗲𝗻𝗰𝗲, 𝗞𝗶𝗹𝗹𝗶𝗻𝗴 𝗮𝗹𝗹 𝗠𝗮𝗹𝘄𝗮𝗿𝗲𝘀🐛...```",
-            "```𝗦𝗘𝗡𝗗𝗜𝗡𝗗 𝗟𝗢𝗚 𝗗𝗢𝗖𝗨𝗠𝗘𝗡𝗧𝗦...```",
-            "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗦𝗲𝗻𝘁 𝗗𝗮𝘁𝗮 𝗔𝗻𝗱 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗗𝗶𝘀𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱```",
-            "```𝗔𝗹𝗹 𝗕𝗮𝗰𝗸𝗹𝗼𝗴𝘀 𝗖𝗹𝗲𝗮𝗿𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆💣\n𝗬𝗼𝘂𝗿 𝗦𝘆𝘀𝘁𝗲𝗺 𝗪𝗶𝗹𝗹 𝗕𝗲 𝗗𝗼𝘄𝗻 𝗜𝗻 𝗧𝗵𝗲 𝗡𝗲𝘅𝘁 𝗠𝗶𝗻𝘂𝘁𝗲⚠️```"
-        ];
+    client.sendMessage(m.chat, {
+      text: `❌ *Error!* Something went wrong. Reason: ${error.message}. Please try again later.`
+    });
+  }
+} 
+  break;
 
-        for (const line of steps) {
-            await client.sendMessage(m.chat, { text: line }, { quoted: m });
-            await new Promise(resolve => setTimeout(resolve, 1000 + Math.floor(Math.random() * 500)));
-        }
-
-    } catch (error) {
-        console.error('Error during prank:', error);
-        await client.sendMessage(m.chat, {
-            text: `❌ *Error!* Something went wrong. Reason: ${error.message}. Please try again later.`
-        });
-    }
-}
-break;
 //========================================================================================================================//                      
 case "compile-py":
 
@@ -3858,41 +3869,25 @@ break;
 //========================================================================================================================//
 //========================================================================================================================//                      
 //========================================================================================================================//                      
-case 'sc': 
-case 'script': 
-case 'repo': {
+case 'sc': case 'script': case 'repo':
 
-  const caption = `
-╔═━❖【 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝐕3 】❖━═╗
-          ⚡ Ultimate WhatsApp Bot ⚡
-╚═━❖═══════════════════❖━═╝
-
-🔹 𝐆𝐢𝐭𝐇𝐮𝐛 Repository:
-   ↳ https://github.com/Toxicant1/Black-Merchant.git
-   ⭐ Fork it. Star it. Respect the craft.
-
-🔹 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 Pairing:
+ client.sendMessage(m.chat, { image: { url: `https://files.catbox.moe/5grvn3.jpg` }, caption: 
+` 𝙃𝙀𝙇𝙇𝙊👋 *${pushname}*,
+╔══≪ ✦ ≫══════════≪ ✦ ≫══╗
+          𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐕3
+ The Ultimate WhatsApp Bot
+╚══≪ ✦ ≫══════════≪ ✦ ≫══╝\n\n🔷 𝐆𝐢𝐭𝐇𝐮𝐛 𝐑𝐞𝐩𝐨:
+   ↳ https://github.com/Blackie254/black-super-bot
+   ★ Don't forget to Fork & Star!.\n\n 🔶 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐏𝐚𝐢𝐫𝐢𝐧𝐠:
    ↳ https://blacks-pair.onrender.com
-   🔐 Keep your Session-ID secure.
+   ★ Save your Session-ID!\n\n.⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
+   ✓ Complete all variables
+   ✓ Keep API keys secure
+   ✓ Deploy properly\n\n╔══≪ ✦ ≫═══════════════≪ ✦ ≫══╗
+  Made with ❤️ by Blacky Dev
+╚══≪ ✦ ≫═══════════════≪ ✦ ≫══╝\n\n𝗠𝗮𝗱𝗲 𝗼𝗻 𝗲𝗮𝗿𝘁𝗵 𝗯𝘆 𝗛𝘂𝗺𝗮𝗻𝘀🔥!`},{quoted : m });
 
-⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
-   ✓ Fill all environment variables
-   ✓ Keep API keys secret
-   ✓ Deploy clean, avoid errors
-
-╔═━❖【 𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆 𝗠𝗲𝗿𝗰𝗵𝗮𝗻𝘁 𝗗𝗲𝘃 】❖━═╗
-💀 Built with skill & precision
-🌑 Crafted on Earth by Humans 🔥
-╚═━❖═══════════════════❖━═╝
-`;
-
-  await client.sendMessage(m.chat, { 
-      image: { url: 'https://files.catbox.moe/5grvn3.jpg' }, 
-      caption: caption 
-  }, { quoted: m });
-
-  break;
-}
+   break;
 
 //========================================================================================================================//
                       case 'closetime':
@@ -4688,7 +4683,7 @@ case "block": {
  if (!Owner) throw NotOwner; 
  if (!m.quoted) throw `𝗧𝗮𝗴 𝘀𝗼𝗺𝗲𝗼𝗻𝗲!`  
  let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-         if (users == "254741819582@s.whatsapp.net") return m.reply("𝗜 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗹𝗼𝗰𝗸 𝗺𝘆 𝗢𝘄𝗻𝗲𝗿 😡");
+         if (users == "254114283550@s.whatsapp.net") return m.reply("𝗜 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗹𝗼𝗰𝗸 𝗺𝘆 𝗢𝘄𝗻𝗲𝗿 😡");
                   if (users  == client.decodeJid(client.user.id)) throw '𝗜 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗹𝗼𝗰𝗸 𝗺𝘆𝘀𝗲𝗹𝗳 𝗶𝗱𝗶𝗼𝘁 😡';
  await client.updateBlockStatus(users, 'block'); 
  m.reply (`𝗕𝗹𝗼𝗰𝗸𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆!`); 
@@ -4835,4 +4830,6 @@ fs.watchFile(file, () => {
   delete require.cache[file];
   require(file);
 });
+
+
 
