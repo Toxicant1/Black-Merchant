@@ -995,51 +995,7 @@ if (cmd) {
 //========================================================================================================================//                      
 //========================================================================================================================//                      
 //========================================================================================================================//
-case "video": {                      
-if (!text) {
-        return client.sendMessage(from, { text: 'Please provide a song name.' }, { quoted: m });
-    }
 
-try {
-     const search = await yts(text);
-     const video = search.videos[0];
-
-        if (!video) {
-          return client.sendMessage(from, {
-            text: 'No results found for your query.'
-          }, { quoted: m });
-        }
-
-m.reply("_Please wait your download is in progress_");
-
-        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, '');
-        const fileName = `${safeTitle}.mp4`;
-        const apiURL = `${BASE_URL}/dipto/ytDl3?link=${encodeURIComponent(video.videoId)}&format=mp4`;
-
-        const response = await axios.get(apiURL);
-        const data = response.data;
-
-        if (!data.downloadLink) {
-          return client.sendMessage(from, {
-            text: 'Failed to retrieve the MP4 download link.'
-          }, { quoted: m });
-        } 
-
-
-await client.sendMessage(from, {
-          video: { url: data.downloadLink },
-          mimetype: 'video/mp4', 
-          fileName
-        }, { quoted: m });
-
-      } catch (err) {
-        console.error('[PLAY] Error:', err);
-        await client.sendMessage(from, {
-          text: 'An error occurred while processing your request.'
-        }, { quoted: m });
-}
-      }
-  break;
 
 //========================================================================================================================//                      
 case "video": {                      
