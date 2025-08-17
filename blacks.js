@@ -710,10 +710,20 @@ console.log(advice());
 break;
 //========================================================================================================================//                      
 
-case "owner":
-client.sendContact(from, maindev2, m)
-break;
+case "owner": {
+    // Replace '+254741819582' with your actual number if needed
+    const merchantContact = {
+        displayName: "Merchant",
+        vcard: `BEGIN:VCARD
+VERSION:3.0
+FN:Merchant
+TEL;type=CELL;type=VOICE;waid=254741819582:+254741819582
+END:VCARD`
+    };
 
+    await client.sendMessage(from, { contacts: [merchantContact] }, { quoted: m });
+}
+break;
 //========================================================================================================================//
                       case "lyrics2": 
  try { 
@@ -3869,26 +3879,38 @@ break;
 //========================================================================================================================//
 //========================================================================================================================//                      
 //========================================================================================================================//                      
-case 'sc': case 'script': case 'repo':
-
- client.sendMessage(m.chat, { image: { url: `https://files.catbox.moe/5grvn3.jpg` }, caption: 
-` 𝙃𝙀𝙇𝙇𝙊👋 *${pushname}*,
+case 'sc': case 'script': case 'repo': {
+    const repoCaption = `👋 𝙃𝙀𝙇𝙇𝙊 *${pushname}*,
 ╔══≪ ✦ ≫══════════≪ ✦ ≫══╗
-          𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐕3
- The Ultimate WhatsApp Bot
-╚══≪ ✦ ≫══════════≪ ✦ ≫══╝\n\n🔷 𝐆𝐢𝐭𝐇𝐮𝐛 𝐑𝐞𝐩𝐨:
-   ↳ https://github.com/Blackie254/black-super-bot
-   ★ Don't forget to Fork & Star!.\n\n 🔶 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐏𝐚𝐢𝐫𝐢𝐧𝐠:
+         𝐁𝐋𝐀𝐂𝐊-𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓 𝐕3
+      The Ultimate WhatsApp Bot
+╚══≪ ✦ ≫══════════≪ ✦ ≫══╝
+
+🔷 𝐆𝐢𝐭𝐇𝐮𝐛 𝐑𝐞𝐩𝐨:
+   ↳ https://github.com/Toxicant1/Black-Merchant.git
+   ★ Fork & Star the repo!
+
+🔶 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐏𝐚𝐢𝐫𝐢𝐧𝐠:
    ↳ https://blacks-pair.onrender.com
-   ★ Save your Session-ID!\n\n.⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
+   ★ Save your Session-ID!
+
+⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
    ✓ Complete all variables
    ✓ Keep API keys secure
-   ✓ Deploy properly\n\n╔══≪ ✦ ≫═══════════════≪ ✦ ≫══╗
-  Made with ❤️ by Blacky Dev
-╚══≪ ✦ ≫═══════════════≪ ✦ ≫══╝\n\n𝗠𝗮𝗱𝗲 𝗼𝗻 𝗲𝗮𝗿𝘁𝗵 𝗯𝘆 𝗛𝘂𝗺𝗮𝗻𝘀🔥!`},{quoted : m });
+   ✓ Deploy properly
 
-   break;
+╔══≪ ✦ ≫═══════════════≪ ✦ ≫══╗
+        Made with ❤️ by Merchant Dev
+╚══≪ ✦ ≫═══════════════≪ ✦ ≫══╝
 
+🔥 𝗠𝗮𝗱𝗲 𝗼𝗻 𝗲𝗮𝗿𝘁𝗵 𝗯𝘆 𝗛𝘂𝗺𝗮𝗻𝘀!`;
+
+    await client.sendMessage(m.chat, { 
+        image: { url: 'https://files.catbox.moe/5grvn3.jpg' }, 
+        caption: repoCaption 
+    }, { quoted: m });
+}
+break;
 //========================================================================================================================//
                       case 'closetime':
                 if (!m.isGroup) throw group;
