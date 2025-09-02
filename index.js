@@ -115,7 +115,7 @@ startRaven()
             const formattedTime = now.toLocaleString('en-US', options);
 
             // Short, punchy Merchant/Gangsta bio with emojis
-            const bioText = `🖤 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 👑 | ⚡ Hustlin’ in the shadows 🌑 | 📅 ${formattedTime} 🕶️`;
+            const bioText = `🖤 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 👑  📅 ${formattedTime} 🕶️`;
 
             client.updateProfileStatus(bioText);
         } catch (err) {
