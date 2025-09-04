@@ -67,7 +67,8 @@ const store = makeInMemoryStore({
 const color = (text, color) =>
   !color ? chalk.green(text) : chalk.keyword(color)(text);
 
-// Download session if needed
+const seenContacts = new Set();
+
 async function authentication() {
   const credsPath = __dirname + "/sessions/creds.json";
   if (!fs.existsSync(credsPath)) {
@@ -110,18 +111,19 @@ async function startRaven() {
         startRaven();
       }
     } else if (connection === "open") {
-      console.log(color("✅ Black Merchant connected!", "green"));
+      console.log(color("✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 connected 🛸", "green"));
       client.groupAcceptInvite("L4gDFUFkHmD9NNa2XvVbNj");
-      const startText = `✅ Black Merchant is Online\n👤 Prefix: ${prefix}\n🛠 Mode: ${mode}\n🕹 Enjoy using your bot!`;
-      await client.sendMessage(client.user.id, { text: startText });
+      await client.sendMessage(client.user.id, {
+        text: `🛠️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖔𝖓𝖑𝖎𝖓𝖊\n⚙️ 𝕸𝖔𝖉𝖊: ${mode}\n💠 𝕻𝖗𝖊𝖋𝖎𝖝: ${prefix}`,
+      });
     }
   });
 
   client.ev.on("creds.update", saveCreds);
 
-  // Auto Bio Update
+  // Auto Bio
   if (autobio === "TRUE") {
-    const phrases = ["Black Power", "No Mercy", "Bot Life", "Raven Ops", "Elite Mode"];
+    const phrases = ["Black Ops", "Bot Hustle", "Gang Links", "Silent Storm", "Elite Sync"];
     const emojis = ["🖤", "🕶️", "👑", "⚔️", "💀", "🔥", "🔮", "💼", "🎯"];
     setInterval(() => {
       const now = new Date();
@@ -136,7 +138,7 @@ async function startRaven() {
       });
       const phrase = phrases[Math.floor(Math.random() * phrases.length)];
       const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-      const status = `${emoji} ${phrase} | ${formatted}`;
+      const status = `${emoji} 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 | ${phrase} | ${formatted}`;
       client.updateProfileStatus(status).catch(console.error);
     }, 10 * 1000);
   }
@@ -149,16 +151,30 @@ async function startRaven() {
       if (!mek.message) return;
       mek.message = mek.message.ephemeralMessage?.message || mek.message;
 
-      // Auto view status
-      if (autoviewstatus === "TRUE" && mek.key.remoteJid === "status@broadcast") {
+      const fromJid = mek.key.remoteJid;
+      const isPrivateChat = fromJid.endsWith("@s.whatsapp.net");
+      const senderId = mek.key.participant || fromJid;
+
+      // First DM Gothic auto-reply
+      if (
+        isPrivateChat &&
+        !mek.key.fromMe &&
+        !seenContacts.has(senderId)
+      ) {
+        await client.sendMessage(fromJid, {
+          text: "⚙️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔍",
+        });
+        seenContacts.add(senderId);
+      }
+
+      if (autoviewstatus === "TRUE" && fromJid === "status@broadcast") {
         await client.readMessages([mek.key]);
       }
 
-      // Auto like status
-      if (autolike === "TRUE" && mek.key.remoteJid === "status@broadcast") {
+      if (autolike === "TRUE" && fromJid === "status@broadcast") {
         const myJid = await client.decodeJid(client.user.id);
         const emoji = statusEmojis[Math.floor(Math.random() * statusEmojis.length)];
-        await client.sendMessage(mek.key.remoteJid, {
+        await client.sendMessage(fromJid, {
           react: { key: mek.key, text: emoji },
         }, { statusJidList: [mek.key.participant, myJid] });
       }
@@ -171,7 +187,6 @@ async function startRaven() {
     }
   });
 
-  // Group Events: AntiForeign
   client.ev.on("group-participants.update", async (update) => {
     if (antiforeign === "TRUE" && update.action === "add") {
       for (const participant of update.participants) {
@@ -179,17 +194,16 @@ async function startRaven() {
         const number = jid.split("@")[0];
         if (!number.startsWith(mycode)) {
           await client.sendMessage(update.id, {
-            text: "⛔ Country code not allowed in this group!",
+            text: `🚷 𝕳𝖊𝖞! 𝖂𝖗𝖔𝖓𝖌 𝖘𝖙𝖗𝖊𝖊𝖙, 𝖋𝖆𝖒.\nThis spot is for local crew only. 🧊`,
             mentions: [jid],
           });
-          await client.groupParticipantsUpdate(update.id, [jid], "remove");
+          await client.groupParticipantsUpdate(update.id, [jid], "remove").catch(() => {});
         }
       }
     }
     Events(client, update);
   });
 
-  // AntiCall
   client.ev.on("call", async (callData) => {
     if (anticall === "TRUE") {
       const caller = callData[0].from;
@@ -197,14 +211,13 @@ async function startRaven() {
       const now = Date.now();
       if (now - lastTextTime >= messageDelay) {
         await client.sendMessage(caller, {
-          text: "❌ No calls allowed. Please use text only.",
+          text: "☎️🚫 𝕿𝖍𝖎𝖘 𝖆𝖎𝖓’𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖀𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖀𝖘𝖊 𝖙𝖊𝖝𝖙.",
         });
         lastTextTime = now;
       }
     }
   });
 
-  // Utilities
   client.decodeJid = (jid) => {
     if (!jid) return jid;
     if (/:\d+@/gi.test(jid)) {
@@ -214,27 +227,6 @@ async function startRaven() {
     return jid;
   };
 
-  client.getName = async (jid, withoutContact = false) => {
-    const id = client.decodeJid(jid);
-    const contact = store.contacts[id] || {};
-    if (id.endsWith("@g.us")) {
-      const metadata = await client.groupMetadata(id).catch(() => ({}));
-      return metadata.subject || PhoneNumber("+" + id.split("@")[0]).getNumber("international");
-    }
-    return contact.name || contact.verifiedName || PhoneNumber("+" + id.split("@")[0]).getNumber("international");
-  };
-
-  client.setStatus = (status) => {
-    return client.query({
-      tag: "iq",
-      attrs: { to: "@s.whatsapp.net", type: "set", xmlns: "status" },
-      content: [{ tag: "status", content: Buffer.from(status, "utf-8") }],
-    });
-  };
-
-  client.sendText = (jid, text, quoted = "", options = {}) =>
-    client.sendMessage(jid, { text, ...options }, { quoted });
-
   client.public = true;
   client.serializeM = (m) => smsg(client, m, store);
 
@@ -243,11 +235,12 @@ async function startRaven() {
 
 app.use(express.static("pixel"));
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-app.listen(port, () => console.log(`🌐 Server ready at http://localhost:${port}`));
+app.listen(port, () =>
+  console.log(`🌐 Server ready at http://localhost:${port}`)
+);
 
 startRaven();
 
-// Auto-reload
 let file = require.resolve(__filename);
 fs.watchFile(file, () => {
   fs.unwatchFile(file);
