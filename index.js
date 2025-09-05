@@ -1,224 +1,148 @@
-/* If it works, don't Fix it */
+// == FULL BLACK MERCHANT BOT SCRIPT ==
 const {
-  default: ravenConnect,
+  default: makeWASocket,
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
   downloadContentFromMessage,
   jidDecode,
   proto,
-  getContentType,
 } = require("@whiskeysockets/baileys");
 
 const pino = require("pino");
-const { Boom } = require("@hapi/boom");
 const fs = require("fs");
-const path = require("path");
-const axios = require("axios");
-const express = require("express");
 const chalk = require("chalk");
 const figlet = require("figlet");
-const { File } = require("megajs");
-const app = express();
-const _ = require("lodash");
-let lastTextTime = 0;
-const messageDelay = 5000;
-const Events = require("./action/events");
-const logger = pino({ level: "silent" });
 const PhoneNumber = require("awesome-phonenumber");
-
+const FileType = require("file-type");
+const { smsg, getBuffer, sleep } = require("./lib/ravenfunc");
 const {
-  imageToWebp,
-  videoToWebp,
-  writeExifImg,
-  writeExifVid,
-} = require("./lib/ravenexif");
-
-const {
-  smsg,
-  isUrl,
-  getBuffer,
-  getSizeMedia,
-  fetchJson,
-  await,
-  sleep,
-} = require("./lib/ravenfunc");
-
-const {
-  session,
-  mode,
-  prefix,
   autobio,
   autolike,
-  port,
-  mycode,
-  anticall,
-  antiforeign,
-  packname,
   autoviewstatus,
+  anticall,
+  prefix,
+  port,
 } = require("./set.js");
 
-const makeInMemoryStore = require("./store/store.js");
-const store = makeInMemoryStore({
-  logger: logger.child({ stream: "store" }),
-});
+const express = require("express");
+const app = express();
+app.use(express.static("pixel"));
+app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
+app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
 
-const color = (text, color) =>
-  !color ? chalk.green(text) : chalk.keyword(color)(text);
+let newUsers = new Set();
+let lastTextTime = 0;
+const messageDelay = 5000;
+const seriousFont = (txt) => `𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚔️:\n${txt}`;
+const autolikeEmojis = ["😹", "🤝", "🫰", "😍", "👀", "👌"];
 
-// New contacts cache
-const greetedContacts = new Set();
+async function startBot() {
+  const { state, saveCreds } = await useMultiFileAuthState("sessions");
+  const { version } = await fetchLatestBaileysVersion();
 
-// Download session if needed
-async function authentication() {
-  const credsPath = __dirname + "/sessions/creds.json";
-  if (!fs.existsSync(credsPath)) {
-    if (!session) return console.log("Please add your session to SESSION env!");
-    const sessdata = session.replace("BLACK MD;;;", "");
-    const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`);
-    filer.download((err, data) => {
-      if (err) throw err;
-      fs.writeFile(credsPath, data, () => {
-        console.log("✅ Session downloaded successfully");
-        console.log("⏳ Connecting to WhatsApp... hold on");
-      });
-    });
-  }
-}
-
-async function startRaven() {
-  await authentication();
-
-  const { state, saveCreds } = await useMultiFileAuthState(__dirname + "/sessions/");
-  const { version, isLatest } = await fetchLatestBaileysVersion();
-
-  console.log(`Using WA v${version.join(".")} | Latest: ${isLatest}`);
-  console.log(color(figlet.textSync("BLACK-MERCHANT", { font: "Standard" }), "green"));
-
-  const client = ravenConnect({
+  const conn = makeWASocket({
     logger: pino({ level: "silent" }),
-    printQRInTerminal: false,
-    browser: ["Black Merchant", "Safari", "5.1.7"],
+    printQRInTerminal: true,
     auth: state,
-    syncFullHistory: true,
+    browser: ["𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙", "Chrome", "10.0"],
   });
 
-  store.bind(client.ev);
-
-  client.ev.on("connection.update", async (update) => {
+  conn.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect } = update;
-    if (connection === "close") {
-      if (lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut) {
-        startRaven();
-      }
-    } else if (connection === "open") {
-      console.log(color("✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 connected 🛸", "green"));
-      const startText = `✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖔𝖓𝖑𝖎𝖓𝖊 🧠\n🧩 𝖕𝖗𝖊𝖋𝖎𝖝: ${prefix || "none"}\n🎮 𝖒𝖔𝖉𝖊: ${mode}`;
-      await client.sendMessage(client.user.id, { text: startText });
+    if (connection === "open") {
+      const startupMsg = `✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 connected 🛸\n⚙️ 𝕸𝖔𝖉𝖊: PUBLIC\n💠 𝕻𝖗𝖊𝖋𝖎𝖝: ${prefix}`;
+      await conn.sendMessage(conn.user.id, { text: startupMsg });
+    } else if (
+      connection === "close" &&
+      lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut
+    ) {
+      startBot();
     }
   });
 
-  client.ev.on("creds.update", saveCreds);
+  conn.ev.on("creds.update", saveCreds);
 
-  // Auto Bio Update
+  // Autobio
   if (autobio === "TRUE") {
-    const phrases = ["Black Power", "Bot Life", "No Mercy", "Synced 🔁", "In Control"];
-    const emojis = ["🖤", "⚔️", "🕶️", "👑", "🔧", "🧠", "💼"];
-    setInterval(() => {
-      const now = new Date();
-      const formatted = now.toLocaleString("en-US", {
-        timeZone: "Africa/Nairobi",
-        hour12: true,
-        hour: "2-digit",
-        minute: "2-digit",
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
-      const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-      const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-      const status = `${emoji} ${phrase} | ${formatted}`;
-      client.updateProfileStatus(status).catch(() => {});
-    }, 10000);
+    setInterval(async () => {
+      try {
+        const date = new Date().toLocaleDateString("en-US", {
+          timeZone: "Africa/Nairobi",
+        });
+        const time = new Date().toLocaleTimeString("en-US", {
+          timeZone: "Africa/Nairobi",
+        });
+        const quote = "𝕿𝖍𝖊 𝖜𝖔𝖗𝖑𝖉 𝖇𝖔𝖜𝖘 𝖙𝖔 𝖙𝖍𝖊 𝖉𝖆𝖗𝖐 𝖜𝖍𝖊𝖓 𝖙𝖍𝖊 𝖑𝖎𝖌𝖍𝖙 𝖋𝖆𝖎𝖑𝖘.";
+        await conn.updateProfileStatus(
+          `⚔️ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚔️\n📆 ${date} | 📅 ${time}\n🕯️ ${quote}`
+        );
+      } catch {}
+    }, 10 * 1000);
   }
 
-  const gothic = (text) => {
-    const map = {
-      A: "𝕬", B: "𝕭", C: "ℭ", D: "𝕯", E: "𝕰", F: "𝕱", G: "𝕲",
-      H: "𝕳", I: "𝕴", J: "𝕵", K: "𝕶", L: "𝕷", M: "𝕸", N: "𝕹",
-      O: "𝕺", P: "𝕻", Q: "𝕼", R: "𝕽", S: "𝕾", T: "𝕿", U: "𝖀",
-      V: "𝖁", W: "𝖂", X: "𝖃", Y: "𝖄", Z: "𝖅",
-      a: "𝖆", b: "𝖇", c: "𝖈", d: "𝖉", e: "𝖊", f: "𝖋", g: "𝖌",
-      h: "𝖍", i: "𝖎", j: "𝖏", k: "𝖐", l: "𝖑", m: "𝖒", n: "𝖓",
-      o: "𝖔", p: "𝖕", q: "𝖖", r: "𝖗", s: "𝖘", t: "𝖙", u: "𝖚",
-      v: "𝖛", w: "𝖜", x: "𝖝", y: "𝖞", z: "𝖟",
-    };
-    return text.split("").map(char => map[char] || char).join("");
-  };
-
-  const statusEmojis = ["🎩", "💰", "💎", "👑", "♟️", "✨", "🔥", "🖤"];
-
-  client.ev.on("messages.upsert", async (chatUpdate) => {
+  // Message handler
+  conn.ev.on("messages.upsert", async ({ messages }) => {
     try {
-      let mek = chatUpdate.messages[0];
-      if (!mek.message) return;
-      mek.message = mek.message.ephemeralMessage?.message || mek.message;
+      const m = messages[0];
+      if (!m.message) return;
+      const msgType = Object.keys(m.message)[0];
+      const jid = m.key.remoteJid;
 
-      const from = mek.key.remoteJid;
-      const isNewDM = from.endsWith("@s.whatsapp.net") && !greetedContacts.has(from);
+      // Autoview status
+      if (autoviewstatus === "TRUE" && jid === "status@broadcast") {
+        conn.readMessages([m.key]);
+      }
 
-      if (isNewDM) {
-        greetedContacts.add(from);
-        await client.sendMessage(from, {
-          text: "⚙️ 𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔁",
+      // Autolike
+      if (autolike === "TRUE" && jid === "status@broadcast") {
+        const emoji =
+          autolikeEmojis[Math.floor(Math.random() * autolikeEmojis.length)];
+        await conn.sendMessage(jid, {
+          react: { key: m.key, text: emoji },
         });
       }
 
-      // Auto view + like status
-      if (autoviewstatus === "TRUE" && from === "status@broadcast") {
-        await client.readMessages([mek.key]);
-      }
-
-      if (autolike === "TRUE" && from === "status@broadcast") {
-        const emoji = statusEmojis[Math.floor(Math.random() * statusEmojis.length)];
-        await client.sendMessage(from, {
-          react: { key: mek.key, text: emoji },
+      // Reply to new numbers
+      if (
+        jid.endsWith("@s.whatsapp.net") &&
+        !newUsers.has(jid) &&
+        !m.key.fromMe
+      ) {
+        newUsers.add(jid);
+        await conn.sendMessage(jid, {
+          text: "𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔄",
         });
       }
 
-      let m = smsg(client, mek, store);
-      m.botReply = (txt) => client.sendMessage(m.chat, { text: gothic(txt) }, { quoted: m });
-      require("./blacks")(client, m, chatUpdate, store);
+      // Basic Command
+      const text =
+        m.message?.conversation ||
+        m.message[msgType]?.caption ||
+        m.message[msgType]?.text ||
+        "";
+      if (!text || !text.startsWith(prefix)) return;
+
+      const command = text.slice(prefix.length).trim().split(/\s+/)[0].toLowerCase();
+      if (command === "ping") {
+        await conn.sendMessage(jid, {
+          text: seriousFont("𝖄𝖊𝖘, 𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖆𝖜𝖆𝖐𝖊 ⚡"),
+        });
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Message error:", err);
     }
   });
 
-  client.ev.on("group-participants.update", async (update) => {
-    if (antiforeign === "TRUE" && update.action === "add") {
-      for (const participant of update.participants) {
-        const jid = client.decodeJid(participant);
-        const number = jid.split("@")[0];
-        if (!number.startsWith(mycode)) {
-          await client.sendMessage(update.id, {
-            text: `🚫 𝖊𝖞𝖞, 𝖋𝖔𝖗𝖊𝖎𝖌𝖓 𝖓𝖚𝖒𝖇𝖊𝖗 𝖕𝖚𝖑𝖑𝖊𝖉 𝖚𝖕 🔫`,
-            mentions: [jid],
-          });
-          await client.groupParticipantsUpdate(update.id, [jid], "remove");
-        }
-      }
-    }
-    Events(client, update);
-  });
-
-  client.ev.on("call", async (callData) => {
+  // Anticall
+  conn.ev.on("call", async (callData) => {
     if (anticall === "TRUE") {
-      const caller = callData[0].from;
-      await client.rejectCall(callData[0].id, caller);
+      const callerId = callData[0].from;
+      await conn.rejectCall(callData[0].id, callerId);
       const now = Date.now();
       if (now - lastTextTime >= messageDelay) {
-        await client.sendMessage(caller, {
-          text: "📴 𝖙𝖍𝖎𝖘 𝖆𝖎𝖓'𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖚𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖚𝖘𝖊 𝖙𝖊𝖝𝖙. 💬",
+        await conn.sendMessage(callerId, {
+          text: "𝖂𝖊 𝖉𝖔𝖓'𝖙 𝖙𝖆𝖐𝖊 𝖈𝖆𝖑𝖑𝖘. 𝕿𝖊𝖝𝖙, 𝖔𝖗 𝖇𝖊 𝖌𝖔𝖓𝖊. 📵",
         });
         lastTextTime = now;
       }
@@ -226,8 +150,12 @@ async function startRaven() {
   });
 }
 
-app.use(express.static("pixel"));
-app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-app.listen(port, () => console.log(`🌐 Server ready at http://localhost:${port}`));
+startBot();
 
-startRaven();
+let file = require.resolve(__filename);
+fs.watchFile(file, () => {
+  fs.unwatchFile(file);
+  console.log(chalk.redBright(`Update detected in ${__filename}`));
+  delete require.cache[file];
+  require(file);
+});
