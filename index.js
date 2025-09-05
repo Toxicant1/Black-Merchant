@@ -1,8 +1,4 @@
-// ⛔️ index.js code too large to paste in a single message
-// So I’ll send it in sequential chunks below (100% full and safe)
-
-// 🔁 Chunk 1 of 1
-/* If it works, don’t Fix it */
+/* If it works, don't Fix it */
 const {
   default: ravenConnect,
   useMultiFileAuthState,
@@ -21,14 +17,10 @@ const path = require("path");
 const axios = require("axios");
 const express = require("express");
 const chalk = require("chalk");
-const FileType = require("file-type");
 const figlet = require("figlet");
 const { File } = require("megajs");
 const app = express();
 const _ = require("lodash");
-const NodeCache = require("node-cache"); // 📦 Used to track new contacts
-const firstDMCache = new NodeCache();
-
 let lastTextTime = 0;
 const messageDelay = 5000;
 const Events = require("./action/events");
@@ -71,12 +63,13 @@ const store = makeInMemoryStore({
   logger: logger.child({ stream: "store" }),
 });
 
-const gothic = (txt) => `𝖘𝖞𝖓𝖈𝖎𝖓𝖌... ${txt}`;
-
 const color = (text, color) =>
   !color ? chalk.green(text) : chalk.keyword(color)(text);
 
-// 🔐 Session download from MEGA
+// New contacts cache
+const greetedContacts = new Set();
+
+// Download session if needed
 async function authentication() {
   const credsPath = __dirname + "/sessions/creds.json";
   if (!fs.existsSync(credsPath)) {
@@ -93,11 +86,9 @@ async function authentication() {
   }
 }
 
-// 📞 Custom Anticall Message
-const anticallMsg = "🚫 𝕿𝖍𝖎𝖘 𝖆𝖎𝖓’𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖀𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖀𝖘𝖊 𝖙𝖊𝖝𝖙. 📵";
-
 async function startRaven() {
   await authentication();
+
   const { state, saveCreds } = await useMultiFileAuthState(__dirname + "/sessions/");
   const { version, isLatest } = await fetchLatestBaileysVersion();
 
@@ -122,17 +113,17 @@ async function startRaven() {
       }
     } else if (connection === "open") {
       console.log(color("✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 connected 🛸", "green"));
-      const startText = `✅ 𝕭𝖔𝖙 𝖎𝖘 𝖔𝖓𝖑𝖎𝖓𝖊\n🎯 𝖒𝖔𝖉𝖊: ${mode}\n📍 𝖕𝖗𝖊𝖋𝖎𝖝: ${prefix}\n🛠️ 𝖋𝖚𝖑𝖑𝖞 𝖘𝖞𝖓𝖈𝖊𝖉.`;
+      const startText = `✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖔𝖓𝖑𝖎𝖓𝖊 🧠\n🧩 𝖕𝖗𝖊𝖋𝖎𝖝: ${prefix || "none"}\n🎮 𝖒𝖔𝖉𝖊: ${mode}`;
       await client.sendMessage(client.user.id, { text: startText });
     }
   });
 
   client.ev.on("creds.update", saveCreds);
 
-  // 🔄 Auto Bio
+  // Auto Bio Update
   if (autobio === "TRUE") {
-    const phrases = ["Black Power", "No Mercy", "Bot Life", "Raven Ops", "Elite Mode"];
-    const emojis = ["🖤", "🕶️", "👑", "⚔️", "💀", "🔥", "🔮", "💼", "🎯"];
+    const phrases = ["Black Power", "Bot Life", "No Mercy", "Synced 🔁", "In Control"];
+    const emojis = ["🖤", "⚔️", "🕶️", "👑", "🔧", "🧠", "💼"];
     setInterval(() => {
       const now = new Date();
       const formatted = now.toLocaleString("en-US", {
@@ -148,52 +139,61 @@ async function startRaven() {
       const emoji = emojis[Math.floor(Math.random() * emojis.length)];
       const status = `${emoji} ${phrase} | ${formatted}`;
       client.updateProfileStatus(status).catch(() => {});
-    }, 10 * 1000);
+    }, 10000);
   }
 
-  const statusEmojis = ["🎩", "💰", "💎", "👑", "♟️", "✨", "🔥", "😹", "🖤"];
+  const gothic = (text) => {
+    const map = {
+      A: "𝕬", B: "𝕭", C: "ℭ", D: "𝕯", E: "𝕰", F: "𝕱", G: "𝕲",
+      H: "𝕳", I: "𝕴", J: "𝕵", K: "𝕶", L: "𝕷", M: "𝕸", N: "𝕹",
+      O: "𝕺", P: "𝕻", Q: "𝕼", R: "𝕽", S: "𝕾", T: "𝕿", U: "𝖀",
+      V: "𝖁", W: "𝖂", X: "𝖃", Y: "𝖄", Z: "𝖅",
+      a: "𝖆", b: "𝖇", c: "𝖈", d: "𝖉", e: "𝖊", f: "𝖋", g: "𝖌",
+      h: "𝖍", i: "𝖎", j: "𝖏", k: "𝖐", l: "𝖑", m: "𝖒", n: "𝖓",
+      o: "𝖔", p: "𝖕", q: "𝖖", r: "𝖗", s: "𝖘", t: "𝖙", u: "𝖚",
+      v: "𝖛", w: "𝖜", x: "𝖝", y: "𝖞", z: "𝖟",
+    };
+    return text.split("").map(char => map[char] || char).join("");
+  };
 
-  // 🔁 Messages
+  const statusEmojis = ["🎩", "💰", "💎", "👑", "♟️", "✨", "🔥", "🖤"];
+
   client.ev.on("messages.upsert", async (chatUpdate) => {
     try {
       let mek = chatUpdate.messages[0];
       if (!mek.message) return;
       mek.message = mek.message.ephemeralMessage?.message || mek.message;
 
-      const sender = mek.key.remoteJid;
-      if (mek.key.fromMe || sender === "status@broadcast") return;
+      const from = mek.key.remoteJid;
+      const isNewDM = from.endsWith("@s.whatsapp.net") && !greetedContacts.has(from);
 
-      const senderID = mek.key.participant || mek.key.remoteJid;
-      const isFirstTime = !firstDMCache.has(senderID);
-      if (isFirstTime) {
-        firstDMCache.set(senderID, true);
-        await client.sendMessage(senderID, {
-          text: "⏳ 𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔁",
+      if (isNewDM) {
+        greetedContacts.add(from);
+        await client.sendMessage(from, {
+          text: "⚙️ 𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔁",
         });
       }
 
-      // 👁 Auto view
-      if (autoviewstatus === "TRUE" && sender === "status@broadcast") {
+      // Auto view + like status
+      if (autoviewstatus === "TRUE" && from === "status@broadcast") {
         await client.readMessages([mek.key]);
       }
 
-      // ❤️ React to status
-      if (autolike === "TRUE" && sender === "status@broadcast") {
+      if (autolike === "TRUE" && from === "status@broadcast") {
         const emoji = statusEmojis[Math.floor(Math.random() * statusEmojis.length)];
-        await client.sendMessage(sender, {
+        await client.sendMessage(from, {
           react: { key: mek.key, text: emoji },
         });
       }
 
-      if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
       let m = smsg(client, mek, store);
+      m.botReply = (txt) => client.sendMessage(m.chat, { text: gothic(txt) }, { quoted: m });
       require("./blacks")(client, m, chatUpdate, store);
     } catch (err) {
       console.error(err);
     }
   });
 
-  // 🛑 AntiForeign
   client.ev.on("group-participants.update", async (update) => {
     if (antiforeign === "TRUE" && update.action === "add") {
       for (const participant of update.participants) {
@@ -201,7 +201,7 @@ async function startRaven() {
         const number = jid.split("@")[0];
         if (!number.startsWith(mycode)) {
           await client.sendMessage(update.id, {
-            text: `🧾 𝕯𝖎𝖋𝖋𝖊𝖗𝖊𝖓𝖙 𝖈𝖔𝖉𝖊 𝖉𝖊𝖙𝖊𝖈𝖙𝖊𝖉... ⚠️\n𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖔𝖓 𝖘𝖊𝖈𝖚𝖗𝖎𝖙𝖞 𝖉𝖚𝖙𝖞.`,
+            text: `🚫 𝖊𝖞𝖞, 𝖋𝖔𝖗𝖊𝖎𝖌𝖓 𝖓𝖚𝖒𝖇𝖊𝖗 𝖕𝖚𝖑𝖑𝖊𝖉 𝖚𝖕 🔫`,
             mentions: [jid],
           });
           await client.groupParticipantsUpdate(update.id, [jid], "remove");
@@ -211,7 +211,6 @@ async function startRaven() {
     Events(client, update);
   });
 
-  // 📞 AntiCall
   client.ev.on("call", async (callData) => {
     if (anticall === "TRUE") {
       const caller = callData[0].from;
@@ -219,37 +218,16 @@ async function startRaven() {
       const now = Date.now();
       if (now - lastTextTime >= messageDelay) {
         await client.sendMessage(caller, {
-          text: anticallMsg,
+          text: "📴 𝖙𝖍𝖎𝖘 𝖆𝖎𝖓'𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖚𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖚𝖘𝖊 𝖙𝖊𝖝𝖙. 💬",
         });
         lastTextTime = now;
       }
     }
   });
-
-  client.decodeJid = (jid) => {
-    if (!jid) return jid;
-    if (/:\d+@/gi.test(jid)) {
-      let decode = jidDecode(jid) || {};
-      return (decode.user && decode.server && decode.user + "@" + decode.server) || jid;
-    }
-    return jid;
-  };
-
-  client.public = true;
-  client.serializeM = (m) => smsg(client, m, store);
-  return client;
 }
 
 app.use(express.static("pixel"));
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-app.listen(port, () => console.log(`🌐 Server running: http://localhost:${port}`));
+app.listen(port, () => console.log(`🌐 Server ready at http://localhost:${port}`));
 
 startRaven();
-
-let file = require.resolve(__filename);
-fs.watchFile(file, () => {
-  fs.unwatchFile(file);
-  console.log(chalk.redBright(`🔁 Reloading ${__filename}`));
-  delete require.cache[file];
-  require(file);
-});
