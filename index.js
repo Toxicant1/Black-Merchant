@@ -128,11 +128,27 @@ async function startRaven() {
       const isPrivate = fromJid.endsWith("@s.whatsapp.net");
       const senderId = mek.key.participant || fromJid;
 
-      if (isPrivate && !mek.key.fromMe && !seenContacts.has(senderId)) {
-        await client.sendMessage(fromJid, {
-          text: "⚙️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔄",
-        });
-        seenContacts.add(senderId);
+      const PhoneNumber = require("awesome-phonenumber");
+const seenContacts = new Set();
+
+async function handleFirstDM(client, mek) {
+  const fromJid = mek.key.remoteJid;
+  const isPrivate = fromJid.endsWith("@s.whatsapp.net");
+  const senderId = mek.key.participant || fromJid;
+
+  // EXTRACT NUMBER
+  const number = senderId.replace(/[^0-9]/g, "");
+
+  // CHECK IF SAVED CONTACT
+  const contact = client.contacts?.[senderId] || {};
+  const isSaved = !!(contact.name || contact.notify);
+
+  // Send only to unsaved new numbers
+  if (isPrivate && !mek.key.fromMe && !seenContacts.has(senderId) && !isSaved) {
+    await client.sendMessage(fromJid, {
+      text: "⚙️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔄",
+    });
+    seenContacts.add(senderId);
       }
 
       if (autoviewstatus === "TRUE" && fromJid === "status@broadcast") {
@@ -162,7 +178,7 @@ async function startRaven() {
       const now = Date.now();
       if (now - lastTextTime >= messageDelay) {
         await client.sendMessage(caller, {
-          text: "📵 𝖂𝖊 𝖉𝖔𝖓'𝖙 𝖙𝖆𝖐𝖊 𝖈𝖆𝖑𝖑𝖘. 𝕿𝖊𝖝𝖙, 𝖔𝖗 𝖇𝖊 𝖌𝖔𝖓𝖊. 📵",
+          text: "📵 𝖙𝖍𝖎𝖘 𝖆𝖎𝖓’𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖀𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖀𝖘𝖊 𝖙𝖊𝖝𝖙. 📵",
         });
         lastTextTime = now;
         await client.sendMessage(client.user.id, {
