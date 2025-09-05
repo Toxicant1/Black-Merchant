@@ -1,6 +1,4 @@
-/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Final index.js Script  
-    🛡️  
-*/
+/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Final index.js Script 🛡️ */
 
 const {
   default: ravenConnect,
@@ -35,7 +33,6 @@ const {
 const Events = require("./action/events");
 const makeInMemoryStore = require("./store/store.js");
 
-const seenContacts = new Set();
 let lastTextTime = 0;
 const messageDelay = 5000;
 
@@ -120,15 +117,6 @@ async function startRaven() {
       const senderId = mek.key.participant || fromJid;
 
       const contact = client.contacts?.[senderId] || {};
-      const isSaved = !!(contact.name || contact.notify);
-
-      // FIRST DM to new unsaved contact
-      if (isPrivate && !mek.key.fromMe && !seenContacts.has(senderId) && !isSaved) {
-        await client.sendMessage(fromJid, {
-          text: "⚙️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔄",
-        });
-        seenContacts.add(senderId);
-      }
 
       // View and react to status
       if (autoviewstatus === "TRUE" && fromJid === "status@broadcast") {
