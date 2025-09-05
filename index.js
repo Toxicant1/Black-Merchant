@@ -1,13 +1,5 @@
-/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Final index.js Script
-   Includes:
-   - Gothic Font Responses 🕸️
-   - Dynamic Gothic Autobio 🕯️
-   - Gothic Startup Message ⚙️
-   - First DM Reply (to every new contact) 🔍
-   - Autolike on status with Emojis 😹🤝🫰😍👀👌
-   - Anticall response: “𝖂𝖊 𝖉𝖔𝖓'𝖙 𝖙𝖆𝖐𝖊 𝖈𝖆𝖑𝖑𝖘. 𝕿𝖊𝖝𝖙, 𝖔𝖗 𝖇𝖊 𝖌𝖔𝖓𝖊. 📵”
-   - QR Terminal Disabled
-   - Safe error handling
+/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Final index.js Script  
+    🛡️  
 */
 
 const {
@@ -27,9 +19,8 @@ const figlet = require("figlet");
 const express = require("express");
 const { File } = require("megajs");
 const FileType = require("file-type");
-const PhoneNumber = require("awesome-phonenumber");
-
 const app = express();
+
 const { smsg, getBuffer } = require("./lib/ravenfunc");
 const {
   session,
@@ -101,7 +92,7 @@ async function startRaven() {
 
   client.ev.on("creds.update", saveCreds);
 
-  // Smart Autobio
+  // Autobio
   if (autobio === "TRUE") {
     const quotes = [
       "𝕿𝖍𝖊 𝕯𝖆𝖗𝖐 𝕸𝖆𝖗𝕶",
@@ -128,29 +119,18 @@ async function startRaven() {
       const isPrivate = fromJid.endsWith("@s.whatsapp.net");
       const senderId = mek.key.participant || fromJid;
 
-      const PhoneNumber = require("awesome-phonenumber");
-const seenContacts = new Set();
+      const contact = client.contacts?.[senderId] || {};
+      const isSaved = !!(contact.name || contact.notify);
 
-async function handleFirstDM(client, mek) {
-  const fromJid = mek.key.remoteJid;
-  const isPrivate = fromJid.endsWith("@s.whatsapp.net");
-  const senderId = mek.key.participant || fromJid;
-
-  // EXTRACT NUMBER
-  const number = senderId.replace(/[^0-9]/g, "");
-
-  // CHECK IF SAVED CONTACT
-  const contact = client.contacts?.[senderId] || {};
-  const isSaved = !!(contact.name || contact.notify);
-
-  // Send only to unsaved new numbers
-  if (isPrivate && !mek.key.fromMe && !seenContacts.has(senderId) && !isSaved) {
-    await client.sendMessage(fromJid, {
-      text: "⚙️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔄",
-    });
-    seenContacts.add(senderId);
+      // FIRST DM to new unsaved contact
+      if (isPrivate && !mek.key.fromMe && !seenContacts.has(senderId) && !isSaved) {
+        await client.sendMessage(fromJid, {
+          text: "⚙️ 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖎𝖘 𝖘𝖞𝖓𝖈𝖎𝖓𝖌... 🔄",
+        });
+        seenContacts.add(senderId);
       }
 
+      // View and react to status
       if (autoviewstatus === "TRUE" && fromJid === "status@broadcast") {
         await client.readMessages([mek.key]);
       }
@@ -171,6 +151,7 @@ async function handleFirstDM(client, mek) {
     }
   });
 
+  // Anticall
   client.ev.on("call", async (callData) => {
     if (anticall === "TRUE") {
       const caller = callData[0].from;
