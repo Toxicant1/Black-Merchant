@@ -1,6 +1,4 @@
-/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Updated index.js  
-   🛡️ "If it works, don't fix it" */
-
+/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Updated index.js  */
 const {
   default: ravenConnect,
   useMultiFileAuthState,
@@ -144,6 +142,12 @@ async function startRaven() {
     }
   });
 
+  // 🆕 New: Message Logging for Deletion Recovery
+  const deletedMessagePath = path.join(__dirname, 'deleted_messages.json');
+  if (!fs.existsSync(deletedMessagePath)) {
+    fs.writeFileSync(deletedMessagePath, '{}');
+  }
+
   // 📨 New Message Handler
   client.ev.on("messages.upsert", async (chatUpdate) => {
     try {
@@ -154,7 +158,18 @@ async function startRaven() {
         ? mek.message.ephemeralMessage.message
         : mek.message;
 
-      // Autoview & Autolike
+      // 💾 Save incoming message for potential recovery
+      const messageLog = JSON.parse(fs.readFileSync(deletedMessagePath, 'utf8'));
+      if (mek.key.remoteJid !== 'status@broadcast' && mek.key.id) {
+          messageLog[mek.key.id] = {
+              sender: mek.key.remoteJid,
+              text: mek.message?.conversation || mek.message?.extendedTextMessage?.text || '',
+              timestamp: Date.now()
+          };
+          fs.writeFileSync(deletedMessagePath, JSON.stringify(messageLog, null, 2));
+      }
+
+      // ✅ Fixed Autoview & Autolike
       if (autoviewstatus === 'TRUE' && mek.key?.remoteJid === "status@broadcast") {
         client.readMessages([mek.key]);
       }
@@ -174,6 +189,33 @@ async function startRaven() {
 
     } catch (err) {
       console.log(err);
+    }
+  });
+
+  // 🆕 New: Handle Deleted Messages
+  client.ev.on('messages.delete', async (chat) => {
+    try {
+      if (!chat || !chat.all) return;
+      const messageLog = JSON.parse(fs.readFileSync(deletedMessagePath, 'utf8'));
+      const deletedID = Object.keys(chat.all)[0];
+      const deletedMessage = messageLog[deletedID];
+
+      if (deletedMessage) {
+        // Send a new message with the recovered content
+        const sender = client.decodeJid(deletedMessage.sender);
+        const text = `⚠️ Message from @${sender.split('@')[0]} was deleted.\n\n_Originally sent at: ${new Date(deletedMessage.timestamp).toLocaleString()}_\n\n*Content:*\n${deletedMessage.text}`;
+        
+        await client.sendMessage(
+            chat.all[deletedID].remoteJid, 
+            { text: text, mentions: [sender] }
+        );
+        
+        // Remove the message from the log to prevent duplicates
+        delete messageLog[deletedID];
+        fs.writeFileSync(deletedMessagePath, JSON.stringify(messageLog, null, 2));
+      }
+    } catch (e) {
+      console.error('Error handling message deletion:', e);
     }
   });
 
