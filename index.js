@@ -85,25 +85,28 @@ client.ev.on('connection.update', (update) => {
   if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
 startRaven()
   }
-  } else if (connection === 'open') {
-      console.log(color("Congrats, BLACK MD has successfully connected to this server", "green"));
-      console.log(color("Follow me on github as Blackie254", "red"));
-      console.log(color("Text the bot number with menu to check my command list"));
-      client.groupAcceptInvite('L4gDFUFkHmD9NNa2XvVbNj');
-      const Texxt = `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【BLACK MD】\n`+`👥 𝗠𝗼𝗱𝗲 »» ${mode}\n`+`👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`
-      client.sendMessage(client.user.id, { text: Texxt });
-    }
+      } else if (connection === "open") {
+      console.log(color("✅ 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 connected 🛸", "green"));
+      await client.sendMessage(client.user.id, {
+        text: `🛠️ 𝖔𝖓𝖑𝖎𝖓𝖊\n⚙️ 𝕸𝖔𝖉𝖊: ${mode}\n💠 𝕻𝖗𝖊𝖋𝖎𝖝: ${prefix}`,
   });
 
     client.ev.on("creds.update", saveCreds);
 
-  if (autobio === 'TRUE') {
+    if (autobio === "TRUE") {
+    const quotes = [
+      "𝕿𝖍𝖊 𝕯𝖆𝖗𝖐 𝕸𝖆𝖗𝕶",
+      "𝕷𝖊𝖌𝖊𝖓𝖉 𝕲𝖔𝖊𝖘 𝕭𝖞",
+      "𝕿𝖎𝖒𝖊𝖑𝖊𝖘𝖘 𝖈𝖔𝖉𝖊𝖗"
+    ];
     setInterval(() => {
-      const date = new Date();
-      client.updateProfileStatus(
-        `${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })} It's a ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}.`
-      );
-    }, 10 * 1000);
+      const now = new Date();
+      const date = now.toLocaleDateString("en-GB", { timeZone: "Africa/Nairobi" });
+      const time = now.toLocaleTimeString("en-GB", { timeZone: "Africa/Nairobi" });
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      const status = `📅 ${date} | ${time} 📆\n${quote} - 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`;
+      client.updateProfileStatus(status).catch(() => {});
+    }, 10000);
   }
 
 
@@ -117,14 +120,13 @@ startRaven()
         client.readMessages([mek.key]);
       }
 
-      if (autolike === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
-    const nickk = await client.decodeJid(client.user.id);
-    console.log('Decoded JID:', nickk);
-    if (!mek.status) {
-        console.log('Sending reaction to:', mek.key.remoteJid);
-        await client.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '👻' } }, { statusJidList: [mek.key.participant, nickk] });
-        console.log('Reaction sent');
-    }
+            if (autolike === "TRUE" && mek.key.remoteJid === "status@broadcast") {
+        const emojiList = ["😹", "🤝", "🫰", "😍", "👀", "👌"];
+        const emoji = emojiList[Math.floor(Math.random() * emojiList.length)];
+        await client.sendMessage(mek.key.remoteJid, {
+          react: { key: mek.key, text: emoji }
+        });
+      }
 }
 
 if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
