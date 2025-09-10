@@ -1,4 +1,6 @@
-/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Final index.js Script 🛡️ */
+/* 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 - Updated index.js  
+   ⛓️ If it works, don’t fix it ⛓️  
+*/
 
 const {
   default: ravenConnect,
@@ -8,48 +10,73 @@ const {
   downloadContentFromMessage,
   jidDecode,
   proto,
+  getContentType,
 } = require("@whiskeysockets/baileys");
 
-const fs = require("fs");
 const pino = require("pino");
-const chalk = require("chalk");
-const figlet = require("figlet");
+const { Boom } = require("@hapi/boom");
+const fs = require("fs");
+const path = require('path');
+const axios = require("axios");
 const express = require("express");
-const { File } = require("megajs");
+const chalk = require("chalk");
 const FileType = require("file-type");
+const figlet = require("figlet");
+const { File } = require('megajs');
 const app = express();
+const _ = require("lodash");
+let lastTextTime = 0;
+const messageDelay = 5000;
+const Events = require('./action/events');
+const logger = pino({ level: 'silent' });
+const PhoneNumber = require("awesome-phonenumber");
 
-const { smsg, getBuffer } = require("./lib/ravenfunc");
 const {
+  imageToWebp,
+  videoToWebp,
+  writeExifImg,
+  writeExifVid
+} = require('./lib/ravenexif');
+
+const {
+  smsg,
+  isUrl,
+  generateMessageTag,
+  getBuffer,
+  getSizeMedia,
+  fetchJson,
+  await,
+  sleep
+} = require('./lib/ravenfunc');
+
+const {
+  sessionName,
   session,
   mode,
   prefix,
   autobio,
   autolike,
-  anticall,
-  autoviewstatus,
   port,
+  mycode,
+  anticall,
+  antiforeign,
+  packname,
+  autoviewstatus
 } = require("./set.js");
-const Events = require("./action/events");
-const makeInMemoryStore = require("./store/store.js");
 
-let lastTextTime = 0;
-const messageDelay = 5000;
-
-const logger = pino({ level: "silent" });
-const store = makeInMemoryStore({ logger });
+const makeInMemoryStore = require('./store/store.js');
+const store = makeInMemoryStore({ logger: logger.child({ stream: 'store' }) });
 
 const color = (text, color) => !color ? chalk.green(text) : chalk.keyword(color)(text);
 
 async function authentication() {
-  const credsPath = __dirname + "/sessions/creds.json";
-  if (!fs.existsSync(credsPath)) {
-    if (!session) return console.log("Please add your session to SESSION env!");
-    const sessdata = session.replace("BLACK MD;;;", "");
+  if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+    if (!session) return console.log('Please add your session to SESSION env !!');
+    const sessdata = session.replace("BLACK MD;;;", '');
     const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`);
     filer.download((err, data) => {
       if (err) throw err;
-      fs.writeFile(credsPath, data, () => {
+      fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
         console.log("✅ Session downloaded successfully");
         console.log("⏳ Connecting to WhatsApp...");
       });
@@ -89,7 +116,7 @@ async function startRaven() {
 
   client.ev.on("creds.update", saveCreds);
 
-  // Autobio
+  // 🔁 Gothic Autobio with Quotes
   if (autobio === "TRUE") {
     const quotes = [
       "𝕿𝖍𝖊 𝕯𝖆𝖗𝖐 𝕸𝖆𝖗𝕶",
@@ -108,38 +135,34 @@ async function startRaven() {
 
   client.ev.on("messages.upsert", async (chatUpdate) => {
     try {
-      const mek = chatUpdate.messages[0];
+      let mek = chatUpdate.messages[0];
       if (!mek.message) return;
-      mek.message = mek.message.ephemeralMessage?.message || mek.message;
+      mek.message = Object.keys(mek.message)[0] === "ephemeralMessage"
+        ? mek.message.ephemeralMessage.message
+        : mek.message;
 
-      const fromJid = mek.key.remoteJid;
-      const isPrivate = fromJid.endsWith("@s.whatsapp.net");
-      const senderId = mek.key.participant || fromJid;
-
-      const contact = client.contacts?.[senderId] || {};
-
-      // View and react to status
-      if (autoviewstatus === "TRUE" && fromJid === "status@broadcast") {
-        await client.readMessages([mek.key]);
+      if (autoviewstatus === 'TRUE' && mek.key.remoteJid === "status@broadcast") {
+        client.readMessages([mek.key]);
       }
 
-      if (autolike === "TRUE" && fromJid === "status@broadcast") {
+      if (autolike === "TRUE" && mek.key.remoteJid === "status@broadcast") {
         const emojiList = ["😹", "🤝", "🫰", "😍", "👀", "👌"];
         const emoji = emojiList[Math.floor(Math.random() * emojiList.length)];
-        await client.sendMessage(fromJid, {
-          react: { key: mek.key, text: emoji },
+        await client.sendMessage(mek.key.remoteJid, {
+          react: { key: mek.key, text: emoji }
         });
       }
 
       if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
       let m = smsg(client, mek, store);
-      require("./blacks")(client, m, chatUpdate, store);
+      const raven = require("./blacks");
+      raven(client, m, chatUpdate, store);
     } catch (err) {
-      console.error("Message handler error:", err);
+      console.log(err);
     }
   });
 
-  // Anticall
+  // ☎️ Anticall (Gothic Style)
   client.ev.on("call", async (callData) => {
     if (anticall === "TRUE") {
       const caller = callData[0].from;
@@ -147,43 +170,27 @@ async function startRaven() {
       const now = Date.now();
       if (now - lastTextTime >= messageDelay) {
         await client.sendMessage(caller, {
-          text: "📵 𝖙𝖍𝖎𝖘 𝖆𝖎𝖓’𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖀𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖀𝖘𝖊 𝖙𝖊𝖝𝖙. 📵",
+          text: "📵 𝖙𝖍𝖎𝖘 𝖆𝖎𝖓’𝖙 𝖆 𝖈𝖆𝖑𝖑 𝖈𝖊𝖓𝖙𝖊𝖗. 𝖀𝖘𝖊 𝖜𝖔𝖗𝖉𝖘. 𝖀𝖘𝖊 𝖙𝖊𝖝𝖙. 📵"
         });
         lastTextTime = now;
         await client.sendMessage(client.user.id, {
-          text: `📞 𝕾𝖔𝖒𝖊𝖔𝖓𝖊 𝖈𝖆𝖑𝖑𝖊𝖉 𝖆𝖓𝖉 𝖜𝖆𝖘 𝖇𝖑𝖔𝖈𝖐𝖊𝖉:\n🔹 𝕵𝖎𝖉: ${caller}`,
+          text: `📞 𝕾𝖔𝖒𝖊𝖔𝖓𝖊 𝖈𝖆𝖑𝖑𝖊𝖉 𝖆𝖓𝖉 𝖜𝖆𝖘 𝖇𝖑𝖔𝖈𝖐𝖊𝖉:\n🔹 𝕵𝖎𝖉: ${caller}`
         });
       }
     }
   });
-
-  client.decodeJid = (jid) => {
-    if (!jid) return jid;
-    if (/:\d+@/gi.test(jid)) {
-      let decode = jidDecode(jid) || {};
-      return (decode.user && decode.server && decode.user + "@" + decode.server) || jid;
-    }
-    return jid;
-  };
-
-  client.public = true;
-  client.serializeM = (m) => smsg(client, m, store);
-  return client;
 }
 
-// Express server
 app.use(express.static("pixel"));
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-app.listen(port, () => console.log(`🌐 Server running at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
 
-// Start the bot
 startRaven();
 
-// Hot reload
 let file = require.resolve(__filename);
 fs.watchFile(file, () => {
   fs.unwatchFile(file);
-  console.log(chalk.redBright(`🔁 Reloading ${__filename}`));
+  console.log(chalk.redBright(`Update ${__filename}`));
   delete require.cache[file];
   require(file);
 });
