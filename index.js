@@ -235,7 +235,7 @@ async function startRaven() {
       const currentTime = Date.now();
       if (currentTime - lastTextTime >= messageDelay) {
         await client.sendMessage(callerId, {
-  text: "This isn't a call center. Please send a message instead. Calls are not accepted."
+  text: "⚠️This isn't a call center⚠️. Please send a message instead. Calls are not accepted."
 });
         lastTextTime = currentTime;
       } else {
