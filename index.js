@@ -179,7 +179,7 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
                     // Extract phone number
                 if (!phoneNumber.startsWith(mycode)) {
                         await client.sendMessage(update.id, {
-                    text: "Your Country code is not allowed to join this group !",
+                    text: "",
                     mentions: [jid]
                 });
                     await client.groupParticipantsUpdate(update.id, [jid], "remove");
