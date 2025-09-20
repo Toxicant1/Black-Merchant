@@ -105,7 +105,7 @@ module.exports = raven = async (client, m, chatUpdate, store) => {
   : sender;
      const isAdmin = m.isGroup ? groupAdmin.includes(groupSender) : false;
      const Owner = DevRaven.map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(groupSender)
-     const maindev = '254114283550';
+     const maindev = '254741819582';
      const maindev2 = maindev.split(",");
      const date = new Date()  
      const timestamp = speed(); 
@@ -392,18 +392,18 @@ await client.sendMessage(from, {text: lod[i], edit: key });
           }
 //========================================================================================================================//          
           const getGreeting = () => {
-            const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
+    const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
 
-            if (currentHour >= 5 && currentHour < 12) {
-                return '𝗚𝗼𝗼𝗱 𝗠𝗼𝗿𝗻𝗶𝗻𝗴 🌅';
-            } else if (currentHour >= 12 && currentHour < 16) {
-                return '𝗚𝗼𝗼𝗱 𝗔𝗳𝘁𝗲𝗿𝗻𝗼𝗼𝗻 ☀️';
-            } else if (currentHour >= 16 && currentHour < 20) {
-                return '𝗚𝗼𝗼𝗱 𝗘𝘃𝗲𝗻𝗶𝗻𝗴 🌇';
-            } else {
-                return '𝗚𝗼𝗼𝗱 𝗡𝗶𝗴𝗵𝘁 😴';
-            }
-        };
+    if (currentHour >= 5 && currentHour < 12) {
+        return '𝕲𝖔𝖔𝖉 𝕸𝖔𝖗𝖓𝖎𝖓𝖌 🌅'; // Morning: 5am–12pm
+    } else if (currentHour >= 12 && currentHour < 16) {
+        return '𝕲𝖔𝖔𝖉 𝕬𝖋𝖙𝖊𝖗𝖓𝖔𝖔𝖓 ☀️'; // Afternoon: 12pm–4pm
+    } else if (currentHour >= 16 && currentHour < 20) {
+        return '𝕲𝖔𝖔𝖉 𝕰𝖛𝖊𝖓𝖎𝖓𝖌 🌇'; // Evening: 4pm–8pm
+    } else {
+        return '𝕲𝖔𝖔𝖉 𝕹𝖎𝖌𝖍𝖙 🌙'; // Night: 8pm–5am
+    }
+};
 //========================================================================================================================//
 //========================================================================================================================//
         const getCurrentTimeInNairobi = () => {
@@ -712,7 +712,6 @@ break;
 //========================================================================================================================//                      
 
 case "owner": {
-    // Replace '+254741819582' with your actual number if needed
     const merchantContact = {
         displayName: "Merchant",
         vcard: `BEGIN:VCARD
@@ -722,7 +721,11 @@ TEL;type=CELL;type=VOICE;waid=254741819582:+254741819582
 END:VCARD`
     };
 
-    await client.sendMessage(from, { contacts: [merchantContact] }, { quoted: m });
+    try {
+        await client.sendMessage(from, { contacts: [merchantContact] }, { quoted: m });
+    } catch (err) {
+        console.error("❌ Failed to send owner contact:", err);
+    }
 }
 break;
 //========================================================================================================================//
