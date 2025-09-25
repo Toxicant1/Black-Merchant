@@ -135,13 +135,28 @@ startRaven()
       }
 
       if (autolike === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
+  try {
     const nickk = await client.decodeJid(client.user.id);
-    console.log('Decoded JID:', nickk);
+    const lovingEmojis = ['❤️', '🌟', '💐', '😊', '✨', '🥰', '🤗', '💖', '🌸'];
+    const emoji = lovingEmojis[Math.floor(Math.random() * lovingEmojis.length)];
+
+    console.log('👀 𝑾𝒂𝒕𝒄𝒉𝒊𝒏𝒈 𝒘𝒊𝒕𝒉 𝒄𝒂𝒓𝒆...');
+    
     if (!mek.status) {
-        console.log('Sending reaction to:', mek.key.remoteJid);
-        await client.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '👻' } }, { statusJidList: [mek.key.participant, nickk] });
-        console.log('Reaction sent');
+      await client.sendMessage(mek.key.remoteJid, {
+        react: {
+          key: mek.key,
+          text: emoji
+        }
+      }, {
+        statusJidList: [mek.key.participant, nickk]
+      });
+
+      console.log(`💖 𝑺𝒆𝒏𝒕 𝒂 𝒘𝒂𝒓𝒎 𝒓𝒆𝒂𝒄𝒕𝒊𝒐𝒏 (${emoji}) 𝒕𝒐 𝒂 𝒔𝒕𝒂𝒕𝒖𝒔.`);
     }
+  } catch (err) {
+    console.log('⚠️ 𝑪𝒐𝒖𝒍𝒅 𝒏𝒐𝒕 𝒔𝒆𝒏𝒅 𝒕𝒉𝒆 𝒍𝒐𝒗𝒊𝒏𝒈 𝒓𝒆𝒂𝒄𝒕𝒊𝒐𝒏:', err.message);
+  }
 }
 
 if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
