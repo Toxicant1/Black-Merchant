@@ -94,34 +94,37 @@ startRaven()
     }
   });
 
-    client.ev.on("creds.update", saveCreds);
+    client.ev.on('connection.update', (update) => {
+  const { connection, lastDisconnect } = update;
 
-  if (autobio === 'TRUE') {
-  const quotes = [
-    "𝕿𝖍𝖊 𝕯𝖆𝖗𝖐 𝕸𝖆𝖗𝕶",
-    "𝕷𝖊𝖌𝖊𝖓𝖉 𝕲𝖔𝖊𝖘 𝕭𝖞",
-    "𝕿𝖎𝖒𝖊𝖑𝖊𝖘𝖘 𝖈𝖔𝖉𝖊𝖗",
-    "⏳ Patience builds empires.",
-    "⚔️ Loyalty is rare. Trust wisely.",
-    "📚 Silence speaks when words fail.",
-    "🖤 Code in shadows, rise in silence.",
-    "🔐 Keep it real. Fake fades fast.",
-    "🧱 Discipline over distractions.",
-    "🚪 Not all who leave were meant to stay.",
-  ];
+  if (connection === 'open') {
+    console.log(color("✅ 𝑩𝒍𝒂𝒄𝒌𝑩𝒐𝒕 𝒉𝒂𝒔 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚 𝒄𝒐𝒏𝒏𝒆𝒄𝒕𝒆𝒅", "green"));
 
-  setInterval(() => {
-    const now = new Date();
-    const date = now.toLocaleDateString("en-GB", { timeZone: "Africa/Nairobi" });
-    const time = now.toLocaleTimeString("en-GB", { timeZone: "Africa/Nairobi" });
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    const status = `📅 ${date} | ${time} 📆\n${quote} - 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`;
+    if (autobio === "TRUE") {
+      const quotes = [
+        "𝑾𝒂𝒕𝒄𝒉𝒊𝒏𝒈 𝒘𝒊𝒕𝒉 𝒄𝒂𝒓𝒆…",
+        "𝑻𝒉𝒆 𝑩𝒐𝒕 𝒅𝒐𝒆𝒔 𝒏𝒐𝒕 𝒔𝒍𝒆𝒆𝒑.",
+        "𝑻𝒉𝒐𝒖𝒈𝒉𝒕𝒔 𝒊𝒏 𝒕𝒉𝒆 𝒅𝒂𝒓𝒌.",
+        "𝑩𝒍𝒂𝒄𝒌𝑩𝒐𝒕 𝒊𝒔 𝒘𝒂𝒕𝒄𝒉𝒊𝒏𝒈. 👁️"
+      ];
 
-    client.updateProfileStatus(status).catch((err) => {
-      console.log("AutoBio error:", err.message);
-    });
-  }, 10000); // Update every 10 seconds
-}
+      setInterval(() => {
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-GB", { timeZone: "Africa/Nairobi" });
+        const date = now.toLocaleDateString("en-GB", { timeZone: "Africa/Nairobi" });
+        const quote = quotes[Math.floor(Math.random() * quotes.length)];
+        const status = `📅 ${date} | ${time} 📆\n${quote} – 𝑩𝒍𝒂𝒄𝒌𝑩𝒐𝒕`;
+
+        client.updateProfileStatus(status).then(() => {
+          console.log("✅ AutoBio updated.");
+        }).catch(err => {
+          console.error("AutoBio error:", err.message || err);
+        });
+
+      }, 10000); // 10 sec update
+    }
+  }
+});
 
 
   client.ev.on("messages.upsert", async (chatUpdate) => {
