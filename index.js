@@ -89,7 +89,7 @@ startRaven()
       console.log(color("Follow me on github as Blackie254", "red"));
       console.log(color("Text the bot number with menu to check my command list"));
       client.groupAcceptInvite('L4gDFUFkHmD9NNa2XvVbNj');
-      const Texxt = `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【BLACK MD】\n`+`👥 𝗠𝗼𝗱𝗲 »» ${mode}\n`+`👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`
+      const Texxt = `🔗 𝑪𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒐𝒏 𝑨𝒄𝒕𝒊𝒗𝒂𝒕𝒆𝒅.\n🤖 𝑩𝒍𝒂𝒄𝒌𝑩𝒐𝒕 𝒊𝒔 𝒍𝒊𝒗𝒆.\n⚙️ 𝑴𝒐𝒅𝒆 »» ${mode}\n✒️ 𝑷𝒓𝒆𝒇𝒊𝒙 »» ${prefix}`
       client.sendMessage(client.user.id, { text: Texxt });
     }
   });
