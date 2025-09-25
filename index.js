@@ -89,28 +89,39 @@ startRaven()
       console.log(color("Follow me on github as Blackie254", "red"));
       console.log(color("Text the bot number with menu to check my command list"));
       client.groupAcceptInvite('L4gDFUFkHmD9NNa2XvVbNj');
-      const Texxt = `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【𝙱𝙻𝙰𝙲𝙺 𝙼𝙴𝚁𝙲𝙷𝙰𝙽𝚃】\n`+`👥 𝗠𝗼𝗱𝗲 »» ${mode}\n`+`👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`
+      const Texxt = `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【BLACK MD】\n`+`👥 𝗠𝗼𝗱𝗲 »» ${mode}\n`+`👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`
       client.sendMessage(client.user.id, { text: Texxt });
     }
   });
 
     client.ev.on("creds.update", saveCreds);
 
-    if (autobio === "TRUE") {
-    const quotes = [
-      "𝕿𝖍𝖊 𝕯𝖆𝖗𝖐 𝕸𝖆𝖗𝕶",
-      "𝕷𝖊𝖌𝖊𝖓𝖉 𝕲𝖔𝖊𝖘 𝕭𝖞",
-      "𝕿𝖎𝖒𝖊𝖑𝖊𝖘𝖘 𝖈𝖔𝖉𝖊𝖗"
-    ];
-    setInterval(() => {
-      const now = new Date();
-      const date = now.toLocaleDateString("en-GB", { timeZone: "Africa/Nairobi" });
-      const time = now.toLocaleTimeString("en-GB", { timeZone: "Africa/Nairobi" });
-      const quote = quotes[Math.floor(Math.random() * quotes.length)];
-      const status = `📅 ${date} | ${time} 📆\n${quote} - 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`;
-      client.updateProfileStatus(status).catch(() => {});
-    }, 10000);
-  }
+  if (autobio === 'TRUE') {
+  const quotes = [
+    "𝕿𝖍𝖊 𝕯𝖆𝖗𝖐 𝕸𝖆𝖗𝕶",
+    "𝕷𝖊𝖌𝖊𝖓𝖉 𝕲𝖔𝖊𝖘 𝕭𝖞",
+    "𝕿𝖎𝖒𝖊𝖑𝖊𝖘𝖘 𝖈𝖔𝖉𝖊𝖗",
+    "⏳ Patience builds empires.",
+    "⚔️ Loyalty is rare. Trust wisely.",
+    "📚 Silence speaks when words fail.",
+    "🖤 Code in shadows, rise in silence.",
+    "🔐 Keep it real. Fake fades fast.",
+    "🧱 Discipline over distractions.",
+    "🚪 Not all who leave were meant to stay.",
+  ];
+
+  setInterval(() => {
+    const now = new Date();
+    const date = now.toLocaleDateString("en-GB", { timeZone: "Africa/Nairobi" });
+    const time = now.toLocaleTimeString("en-GB", { timeZone: "Africa/Nairobi" });
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    const status = `📅 ${date} | ${time} 📆\n${quote} - 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`;
+
+    client.updateProfileStatus(status).catch((err) => {
+      console.log("AutoBio error:", err.message);
+    });
+  }, 10000); // Update every 10 seconds
+}
 
 
   client.ev.on("messages.upsert", async (chatUpdate) => {
@@ -128,7 +139,7 @@ startRaven()
     console.log('Decoded JID:', nickk);
     if (!mek.status) {
         console.log('Sending reaction to:', mek.key.remoteJid);
-        await client.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '🙌' } }, { statusJidList: [mek.key.participant, nickk] });
+        await client.sendMessage(mek.key.remoteJid, { react: { key: mek.key, text: '👻' } }, { statusJidList: [mek.key.participant, nickk] });
         console.log('Reaction sent');
     }
 }
@@ -171,24 +182,50 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
     }
   });
 
-  
- client.ev.on('call', async (callData) => {
-    if (anticall === 'TRUE') {
-      const callId = callData[0].id;
-      const callerId = callData[0].from;
-
-      await client.rejectCall(callId, callerId);
-            const currentTime = Date.now();
-      if (currentTime - lastTextTime >= messageDelay) {
-        await client.sendMessage(callerId, {
-          text: "Anticall is active, ⚠️This isn't a call center⚠️. Please send a message instead. Calls are not accepted."
-        });
-        lastTextTime = currentTime;
-      } else {
-        console.log('Message skipped to prevent overflow');
-      }
-    }
+  client.ev.on("group-participants.update", async (update) => {
+        if (antiforeign === 'TRUE' && update.action === "add") {
+            for (let participant of update.participants) {
+                const jid = client.decodeJid(participant);
+                const phoneNumber = jid.split("@")[0];
+                    // Extract phone number
+                if (!phoneNumber.startsWith(mycode)) {
+                        await client.sendMessage(update.id, {
+                    text: "Your Country code is not allowed to join this group !",
+                    mentions: [jid]
+                });
+                    await client.groupParticipantsUpdate(update.id, [jid], "remove");
+                    console.log(`Removed ${jid} from group ${update.id} because they are not from ${mycode}`);
+                }
+            }
+        }
+        Events(client, update); // Call existing event handler
     });
+
+ client.ev.on('call', async (callData) => {
+  if (anticall === 'TRUE') {
+    const callId = callData[0].id;
+    const callerId = callData[0].from;
+
+    await client.rejectCall(callId, callerId).catch(() => {
+      console.warn("⚠️ Couldn’t reject the call, but continuing...");
+    });
+
+    const currentTime = Date.now();
+    if (currentTime - lastTextTime >= messageDelay) {
+      await client.sendMessage(callerId, {
+        text:
+          "📵 𝗨𝗺𝗲𝗽𝗶𝗴𝗮 𝘀𝗶𝗺𝘂? ❌\n" +
+          "𝗛𝘂𝗷𝘂𝗶 𝗸𝗮𝗺𝗮 𝗵𝗶𝗶 𝘀𝗶 𝗰𝗮𝗹𝗹 𝗰𝗲𝗻𝘁𝗲𝗿? 🧱\n" +
+          "𝗧𝘂𝗺𝗮 𝗨𝗷𝘂𝗺𝗯𝗲, 𝘀𝗶𝗼 𝗺𝗶𝗰𝗵𝗲𝘇𝗼. 💬\n\n" +
+          "𝗨𝗸𝗶𝗿𝘂𝗱𝗶𝗮 𝗵𝗶𝘁𝗼, 𝗯𝗲 𝗿𝗲𝗮𝗱𝘆 𝗳𝗼𝗿 𝗯𝗹𝗼𝗰𝗸. ⚠️"
+      });
+      lastTextTime = currentTime;
+      console.log(`📵 Call from ${callerId} rejected and warning sent.`);
+    } else {
+      console.log('⏳ Message skipped to prevent overflow');
+    }
+  }
+});
 
 
   client.getName = (jid, withoutContact = false) => {
