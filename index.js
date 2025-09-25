@@ -229,10 +229,10 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
     if (currentTime - lastTextTime >= messageDelay) {
       await client.sendMessage(callerId, {
         text:
-          "📵 𝗨𝗺𝗲𝗽𝗶𝗴𝗮 𝘀𝗶𝗺𝘂? ❌\n" +
-          "𝗛𝘂𝗷𝘂𝗶 𝗸𝗮𝗺𝗮 𝗵𝗶𝗶 𝘀𝗶 𝗰𝗮𝗹𝗹 𝗰𝗲𝗻𝘁𝗲𝗿? 🧱\n" +
-          "𝗧𝘂𝗺𝗮 𝗨𝗷𝘂𝗺𝗯𝗲, 𝘀𝗶𝗼 𝗺𝗶𝗰𝗵𝗲𝘇𝗼. 💬\n\n" +
-          "𝗨𝗸𝗶𝗿𝘂𝗱𝗶𝗮 𝗵𝗶𝘁𝗼, 𝗯𝗲 𝗿𝗲𝗮𝗱𝘆 𝗳𝗼𝗿 𝗯𝗹𝗼𝗰𝗸. ⚠️"
+  "⚠️ 𝑰𝒇 𝒚𝒐𝒖 𝒆𝒗𝒆𝒓 𝒏𝒆𝒆𝒅 𝒕𝒐 𝒄𝒂𝒍𝒍, 𝒕𝒆𝒍𝒍 𝒎𝒆 𝒇𝒊𝒓𝒔𝒕. 𝑵𝒐 𝒑𝒆𝒓𝒎𝒊𝒔𝒔𝒊𝒐𝒏, 𝒏𝒐 𝒄𝒂𝒍𝒍. 📲\n\n" +
+  "📵 𝒀𝒐𝒖 𝒄𝒂𝒍𝒍𝒆𝒅 𝒕𝒉𝒊𝒔 𝒏𝒖𝒎𝒃𝒆𝒓? ❌\n" +
+  "𝑻𝒉𝒊𝒔 𝒂𝒊𝒏’𝒕 𝒂 𝒄𝒂𝒍𝒍 𝒄𝒆𝒏𝒕𝒆𝒓. 𝑻𝒖𝒎𝒂 𝒖𝒋𝒖𝒎𝒃𝒆. 💬\n\n" +
+  "⛔ 𝑼𝒌𝒊𝒓𝒖𝒅𝒊𝒂, 𝒃𝒍𝒐𝒄𝒌 𝒊𝒏𝒂𝒌𝒖𝒋𝒂 𝒃𝒊𝒍𝒂 𝒉𝒖𝒓𝒖𝒎𝒂. 🚫"
       });
       lastTextTime = currentTime;
       console.log(`📵 Call from ${callerId} rejected and warning sent.`);
