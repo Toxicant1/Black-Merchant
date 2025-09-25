@@ -140,11 +140,11 @@ startRaven()
       if (autolike === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
   try {
     const nickk = await client.decodeJid(client.user.id);
-    const lovingEmojis = ['❤️', '🌟', '💐', '😊', '✨', '🥰', '🤗', '💖', '🌸'];
+    const lovingEmojis = ['❤️', '🌟', '🫶', '🥀', '😊', '🌹', '🥰', '💕', '✨'];
     const emoji = lovingEmojis[Math.floor(Math.random() * lovingEmojis.length)];
 
     console.log('👀 𝑾𝒂𝒕𝒄𝒉𝒊𝒏𝒈 𝒘𝒊𝒕𝒉 𝒄𝒂𝒓𝒆...');
-    
+
     if (!mek.status) {
       await client.sendMessage(mek.key.remoteJid, {
         react: {
@@ -152,13 +152,17 @@ startRaven()
           text: emoji
         }
       }, {
-        statusJidList: [mek.key.participant, nickk]
+        statusJidList: [
+          mek.key.participant || mek.key.remoteJid,
+          nickk || client.user.id
+        ]
       });
 
-      console.log(`💖 𝑺𝒆𝒏𝒕 𝒂 𝒘𝒂𝒓𝒎 𝒓𝒆𝒂𝒄𝒕𝒊𝒐𝒏 (${emoji}) 𝒕𝒐 𝒂 𝒔𝒕𝒂𝒕𝒖𝒔.`);
+      console.log(`💖 [ 𝒃𝒍𝒂𝒄𝒌𝒃𝒐𝒕 𝒔𝒆𝒏𝒕 ] ${emoji} reaction to status.`);
     }
+
   } catch (err) {
-    console.log('⚠️ 𝑪𝒐𝒖𝒍𝒅 𝒏𝒐𝒕 𝒔𝒆𝒏𝒅 𝒕𝒉𝒆 𝒍𝒐𝒗𝒊𝒏𝒈 𝒓𝒆𝒂𝒄𝒕𝒊𝒐𝒏:', err.message);
+    console.log("⚠️ 𝑪𝒐𝒖𝒍𝒅 𝒏𝒐𝒕 𝒔𝒆𝒏𝒅 𝒕𝒉𝒆 𝒍𝒐𝒗𝒊𝒏𝒈 𝒓𝒆𝒂𝒄𝒕𝒊𝒐𝒏:", err.message);
   }
 }
 
