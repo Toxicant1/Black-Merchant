@@ -6,7 +6,7 @@
  * 'BLACK MD;;;<ID>#<KEY>'
  */
 
-const FALLBACK_SESSION_RAW = 'BLACK MD;;;Nn8BiBaI#4sgKE5XhDiVSjjLIkv5iU6V8J2NYwud36kxexm-A_3c';
+const FALLBACK_SESSION_RAW = 'BLACK MD;;;gz8hQS5A#QKqvhVjy6c5tCG5ETa1qp-vxSKKQBCUVq-1GD_plBms';
 const rawFromEnv = (process.env.SESSION || process.env.SESSION_ID || '').trim();
 const rawInput = rawFromEnv || FALLBACK_SESSION_RAW || '';
 
