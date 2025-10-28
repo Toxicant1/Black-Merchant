@@ -9,6 +9,7 @@ const {
 } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const chalk = require("chalk");
 const figlet = require("figlet");
@@ -23,10 +24,14 @@ const color = (text, color) => (!color ? chalk.green(text) : chalk.keyword(color
 
 /* 🧠 Authentication logic */
 async function authentication() {
-  const sessionPath = __dirname + "/sessions/creds.json";
+  const sessionDir = path.join(__dirname, "sessions");
+  const sessionPath = path.join(sessionDir, "creds.json");
 
-  // If session already exists, skip downloading
-  if (fs.existsSync(sessionPath)) return;
+  // ensure folder exists
+  if (!fs.existsSync(sessionDir)) fs.mkdirSync(sessionDir);
+
+  // if creds file missing, create empty
+  if (!fs.existsSync(sessionPath)) fs.writeFileSync(sessionPath, "{}");
 
   if (!session) {
     console.log("❌ No SESSION provided in environment variables!");
@@ -52,7 +57,6 @@ async function authentication() {
     }
   } else if (cleanSession.includes("#")) {
     console.log("⚡ Session format detected: Using local ID/key pair.");
-    // Just store it locally as a creds backup for re-use
     fs.writeFileSync(sessionPath, cleanSession);
   } else {
     console.log("⚠️ Invalid session format — please provide a valid session string or Mega link.");
@@ -62,7 +66,7 @@ async function authentication() {
 /* 🚀 Start the bot */
 async function startRaven() {
   await authentication();
-  const { state, saveCreds } = await useMultiFileAuthState(__dirname + "/sessions/");
+  const { state, saveCreds } = await useMultiFileAuthState(path.join(__dirname, "sessions"));
   const { version, isLatest } = await fetchLatestBaileysVersion();
 
   console.log(`Using WA v${version.join(".")}, latest: ${isLatest}`);
