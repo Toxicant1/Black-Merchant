@@ -1,94 +1,73 @@
-/**
- * 🖤 set.js — Centralized Bot Configuration
- * 
- * Clean + Stable version for BELTAH / BLACK MERCHANT bot.
- * Supports Mega.nz or direct session formats.
- */
+/* FORCE CONNECTION CONFIG
+   This version removes weak fallbacks and forces the bot to stay online
+*/
 
-const FALLBACK_SESSION_RAW = 'BLACK MERCHANT;;;gz8hQS5A#QKqvhVjy6c5tCG5ETa1qp-vxSKKQBCUVq-1GD_plBms';
-const rawFromEnv = (process.env.SESSION || process.env.SESSION_ID || '').trim();
-const rawInput = rawFromEnv || FALLBACK_SESSION_RAW || '';
+const sessionName = 'session';
 
-/**
- * Normalize any session format to "BLACK MERCHANT;;;<ID>#<KEY>"
- */
-function normalizeSession(raw) {
-  if (!raw || typeof raw !== 'string') return '';
+// 🔐 FORCE SESSION (no empty fallback)
+const session = process.env.SESSION 
+  ? process.env.SESSION 
+  : 'BLACK MD;;;uwREGJ6S#73l__UQ0rLy1c5KrcsxZvbtQAwMbLLpfFHa2ZMw3Fp4';
+// 🚀 FORCE ENABLED FEATURES
+const autobio = 'TRUE';
+const autolike = 'TRUE';
+const autoviewstatus = 'TRUE';
+const welcomegoodbye = 'TRUE';
+const autoread = 'TRUE';
 
-  let s = raw.trim();
+// 🌍 FORCE PUBLIC MODE
+const mode = 'PRIVATE';
 
-  // Remove quotes if present
-  if ((s.startsWith("'") && s.endsWith("'")) || (s.startsWith('"') && s.endsWith('"'))) {
-    s = s.slice(1, -1).trim();
-  }
+// ☎️ FORCE ANTI-CALL
+const anticall = 'TRUE';
 
-  // Remove "session" prefix if typed
-  s = s.replace(/^session\s*/i, '').trim();
+// 🤖 BOT IDENTITY (LOCKED)
+const botname = process.env.BOTNAME || '𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐁𝐎𝐓';
+const author = process.env.STICKER_AUTHOR || '𝗕𝗢𝗧';
+const packname = process.env.STICKER_PACKNAME || '𝐁𝐋𝐀𝐂𝐊𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓';
 
-  // If full Mega link (https://mega.nz/file/XXXX#YYYY)
-  if (s.startsWith('https://mega.nz/file/')) {
-    const lastPart = s.split('/').pop();
-    if (lastPart.includes('#')) {
-      return 'BLACK MERCHANT;;;' + lastPart.trim();
-    }
-    return '';
-  }
-
-  // Already formatted correctly
-  if (s.startsWith('BLACK MERCHANT;;;')) return s.trim();
-
-  // If looks like ID#KEY
-  if (s.includes('#') && s.length > 5) return 'BLACK MERCHANT;;;' + s.trim();
-
-  return '';
-}
-
-const session = normalizeSession(rawInput);
-
-// 🌐 General Bot Settings
-const autobio = process.env.AUTOBIO || 'TRUE';
-const autolike = process.env.AUTOLIKE_STATUS || 'TRUE';
-const autoviewstatus = process.env.AUTOVIEW_STATUS || 'TRUE';
-const welcomegoodbye = process.env.WELCOMEGOODBYE || 'FALSE';
-const prefix = process.env.PREFIX || '';
-const appname = process.env.APP_NAME || 'BLACK MERCHANT';
-const gptdm = process.env.GPT_INBOX || 'FALSE';
-const mode = process.env.MODE || 'PUBLIC';
-const anticall = process.env.AUTOREJECT_CALL || 'TRUE';
-const antibot = process.env.ANTIBOT || 'FALSE';
-const antitag = process.env.ANTITAG || 'TRUE';
-const autoread = process.env.AUTOREAD || 'FALSE';
-const antidel = process.env.ANTIDELETE || 'TRUE';
-const antilink = process.env.ANTILINK || 'TRUE';
-const antilinkall = process.env.ANTILINK_ALL || 'TRUE';
-const antiforeign = process.env.ANTIFOREIGN || 'FALSE';
-const mycode = process.env.CODE || '254';
-const port = process.env.PORT || 10000;
-
-// 💬 Bot Info & Personality
-const botname = process.env.BOTNAME || '🖤 𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓';
-const author = process.env.STICKER_AUTHOR || '🖤 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓';
-const packname = process.env.STICKER_PACKNAME || '🖤 𝐁𝐋𝐀𝐂𝐊 𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓';
-const menulink = process.env.MENU_LINK || 'https://files.catbox.moe/jxxwms.jpeg';
-const menu = process.env.MENU_TYPE || 'IMAGE';
-const wapresence = process.env.WA_PRESENCE || 'online';
-
-// 👑 Ownership
-const dev = process.env.DEV || '254741819582';
+// 👑 OWNER (LOCKED)
+const dev = '254741819582';
 const DevRaven = dev.split(",");
-const herokuapi = process.env.HEROKU_API || '';
-const badwordkick = process.env.BAD_WORD_KICK || 'FALSE';
+
+// 🛡️ SECURITY (FORCED)
+const antibot = 'TRUE';
+const antitag = 'TRUE';
+const antilink = 'TRUE';
+const antilinkall = 'TRUE';
+const antiforeign = 'FALSE';
+const antidel = 'TRUE';
+
+// 🚫 BAD WORD CONTROL
+const badwordkick = 'TRUE';
 const bad = process.env.BAD_WORD || 'fuck';
 
-// 🚫 Restriction Messages
-const admin = process.env.ADMIN_MSG || '⚠️ Command reserved for *Admins only!*';
-const group = process.env.GROUP_ONLY_MSG || '⚠️ Command meant for *Groups only!*';
-const botAdmin = process.env.BOT_ADMIN_MSG || '⚠️ I need *Admin privileges!*';
-const NotOwner = process.env.NOT_OWNER_MSG || '⚠️ Only the *Bot Owner* can do this!';
+// 📌 UI / MENU
+const prefix = process.env.PREFIX || '.';
+const menu = 'IMAGE';
+const menulink = process.env.MENU_LINK || 'https://files.catbox.moe/jxxwms.jpeg';
 
-// 🧠 Export Everything
+// 📩 GPT DM (OPTIONAL BUT STABLE)
+const gptdm = 'FALSE';
+
+// 🟢 WA PRESENCE (PREVENTS SLEEP)
+const wapresence = 'typing';
+
+// 🌐 APP / SERVER
+const appname = process.env.APP_NAME || 'BLACK-MD';
+const herokuapi = process.env.HEROKU_API || '';
+const mycode = '254';
+const port = process.env.PORT || 10000;
+
+// ⚠️ SYSTEM MESSAGES
+const admin = '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗿𝗲𝘀𝗲𝗿𝘃𝗲𝗱 𝗳𝗼𝗿 𝗔𝗱𝗺𝗶𝗻𝘀!';
+const group = '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗺𝗲𝗮𝗻𝘁 𝗳𝗼𝗿 𝗚𝗿𝗼𝘂𝗽𝘀!';
+const botAdmin = '𝗜 𝗻𝗲𝗲𝗱 𝗔𝗱𝗺𝗶𝗻 𝗽𝗿𝗲𝘃𝗶𝗹𝗲𝗱𝗴𝗲𝘀!';
+const NotOwner = '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗺𝗲𝗮𝗻𝘁 𝗳𝗼𝗿 𝘁𝗵𝗲 𝗼𝘄𝗻𝗲𝗿!';
+
 module.exports = {
   session,
+  sessionName,
   autobio,
   author,
   packname,
@@ -120,6 +99,5 @@ module.exports = {
   gptdm,
   appname,
   autolike,
-  autoviewstatus,
-  menulink
+  autoviewstatus
 };
