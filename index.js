@@ -144,7 +144,6 @@ startRaven()
       } catch (err) {
         console.log(err);
     }
-}
 
 if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
       let m = smsg(client, mek, store);
