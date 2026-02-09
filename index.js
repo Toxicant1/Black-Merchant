@@ -161,7 +161,7 @@ async function startRaven() {
             await client.rejectCall(callId, callerId);
             const currentTime = Date.now();
             if (currentTime - lastTextTime >= messageDelay) {
-                await client.sendMessage(callerId, { text: "Anticall is active, Only texts are allowed" });
+                await client.sendMessage(callerId, { text: "𝕬𝖓𝖙𝖎𝖈𝖆𝖑𝖑 𝖎𝖘 𝖆𝖈𝖙𝖎𝖛𝖊, 𝕺𝖓𝖑𝖞 𝖙𝖊𝖝𝖙𝖘 𝖆𝖗𝖊 𝖆𝖑𝖑𝖔𝖜𝖊𝖉" });
                 lastTextTime = currentTime;
             }
         }
