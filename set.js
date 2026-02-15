@@ -1,69 +1,42 @@
-/* FORCE CONNECTION CONFIG
-   This version removes weak fallbacks and forces the bot to stay online
-*/
+/* If you're using a panel, carefully edit this part.
+There's no need to configure this if you're deploying via Heroku —
+just set them in the environment variables. */
 
 const sessionName = 'session';
-
-// 🔐 FORCE SESSION (no empty fallback)
-const session = process.env.SESSION 
-  ? process.env.SESSION 
-  : 'BLACK MD;;;uwREGJ6S#73l__UQ0rLy1c5KrcsxZvbtQAwMbLLpfFHa2ZMw3Fp4';
-// 🚀 FORCE ENABLED FEATURES
-const autobio = 'TRUE';
-const autolike = 'TRUE';
-const autoviewstatus = 'TRUE';
-const welcomegoodbye = 'TRUE';
-const autoread = 'TRUE';
-
-// 🌍 FORCE PUBLIC MODE
-const mode = 'PRIVATE';
-
-// ☎️ FORCE ANTI-CALL
-const anticall = 'TRUE';
-
-// 🤖 BOT IDENTITY (LOCKED)
+const session = process.env.SESSION || 'BLACK MD;;;uwREGJ6S#73l__UQ0rLy1c5KrcsxZvbtQAwMbLLpfFHa2ZMw3Fp4';
+const autobio = process.env.AUTOBIO || 'FALSE';
+const autolike = process.env.AUTOLIKE_STATUS || 'TRUE';
+const autoviewstatus = process.env.AUTOVIEW_STATUS || 'TRUE';
+const welcomegoodbye = process.env.WELCOMEGOODBYE || 'TRUE';
+const prefix = process.env.PREFIX || '';
+const appname = process.env.APP_NAME || '';
+const herokuapi = process.env.HEROKU_API || '';
+const gptdm = process.env.GPT_INBOX || 'FALSE';
+const mode = process.env.MODE || 'PUBLIC';
+const anticall = process.env.AUTOREJECT_CALL || 'TRUE';
 const botname = process.env.BOTNAME || '𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐁𝐎𝐓';
+const antibot = process.env.ANTIBOT || 'FALSE';
 const author = process.env.STICKER_AUTHOR || '𝗕𝗢𝗧';
 const packname = process.env.STICKER_PACKNAME || '𝐁𝐋𝐀𝐂𝐊𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓';
-
-// 👑 OWNER (LOCKED)
-const dev = '254741819582';
-const DevRaven = dev.split(",");
-
-// 🛡️ SECURITY (FORCED)
-const antibot = 'TRUE';
-const antitag = 'TRUE';
-const antilink = 'TRUE';
-const antilinkall = 'TRUE';
-const antiforeign = 'FALSE';
-const antidel = 'TRUE';
-
-// 🚫 BAD WORD CONTROL
-const badwordkick = 'TRUE';
-const bad = process.env.BAD_WORD || 'fuck';
-
-// 📌 UI / MENU
-const prefix = process.env.PREFIX || '.';
-const menu = 'IMAGE';
+const antitag = process.env.ANTITAG || 'TRUE';
+const dev = process.env.DEV || '254741819582';
 const menulink = process.env.MENU_LINK || 'https://files.catbox.moe/jxxwms.jpeg';
-
-// 📩 GPT DM (OPTIONAL BUT STABLE)
-const gptdm = 'FALSE';
-
-// 🟢 WA PRESENCE (PREVENTS SLEEP)
-const wapresence = 'typing';
-
-// 🌐 APP / SERVER
-const appname = process.env.APP_NAME || 'BLACK-MD';
-const herokuapi = process.env.HEROKU_API || '';
-const mycode = '254';
+const menu = process.env.MENU_TYPE || 'IMAGE';
+const DevRaven = dev.split(",");
+const badwordkick = process.env.BAD_WORD_KICK || 'FALSE';
+const bad = process.env.BAD_WORD || 'fuck';
+const autoread = process.env.AUTOREAD || 'FALSE';
+const antidel = process.env.ANTIDELETE || 'TRUE';
+const admin = process.env.ADMIN_MSG || '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗿𝗲𝘀𝗲𝗿𝘃𝗲𝗱 𝗳𝗼𝗿 𝗔𝗱𝗺𝗶𝗻𝘀!';
+const group = process.env.GROUP_ONLY_MSG || '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗺𝗲𝗮𝗻𝘁 𝗳𝗼𝗿 𝗚𝗿𝗼𝘂𝗽𝘀!';
+const botAdmin = process.env.BOT_ADMIN_MSG || '𝗜 𝗻𝗲𝗲𝗱 𝗔𝗱𝗺𝗶𝗻 𝗽𝗿𝗲𝘃𝗶𝗹𝗲𝗱𝗴𝗲𝘀!';
+const NotOwner = process.env.NOT_OWNER_MSG || '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗺𝗲𝗮𝗻𝘁 𝗳𝗼𝗿 𝘁𝗵𝗲 𝗼𝘄𝗻𝗲𝗿!';
+const wapresence = process.env.WA_PRESENCE || 'recording';
+const antilink = process.env.ANTILINK || 'TRUE';
+const mycode = process.env.CODE || '254';
+const antiforeign = process.env.ANTIFOREIGN || 'FALSE';
 const port = process.env.PORT || 10000;
-
-// ⚠️ SYSTEM MESSAGES
-const admin = '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗿𝗲𝘀𝗲𝗿𝘃𝗲𝗱 𝗳𝗼𝗿 𝗔𝗱𝗺𝗶𝗻𝘀!';
-const group = '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗺𝗲𝗮𝗻𝘁 𝗳𝗼𝗿 𝗚𝗿𝗼𝘂𝗽𝘀!';
-const botAdmin = '𝗜 𝗻𝗲𝗲𝗱 𝗔𝗱𝗺𝗶𝗻 𝗽𝗿𝗲𝘃𝗶𝗹𝗲𝗱𝗴𝗲𝘀!';
-const NotOwner = '𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗺𝗲𝗮𝗻𝘁 𝗳𝗼𝗿 𝘁𝗵𝗲 𝗼𝘄𝗻𝗲𝗿!';
+const antilinkall = process.env.ANTILINK_ALL || 'TRUE';
 
 module.exports = {
   session,
