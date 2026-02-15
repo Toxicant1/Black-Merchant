@@ -6,6 +6,7 @@ const util = require("util");
 const mumaker = require("mumaker");
 global.axios = require('axios').default
 const chalk = require("chalk");
+const fetch = require('node-fetch');
 const uploadToCatbox = require('./lib/catbox.js');
 const speed = require("performance-now");
 const Genius = require("genius-lyrics");
@@ -16,6 +17,8 @@ const { DateTime } = require('luxon');
 const uploadtoimgur = require('./lib/imgur');
 const advice = require("badadvice");
 const BASE_URL = 'https://noobs-api.top';
+const ytdownload = require("./lib/ytdl");
+const downloadVideo = require('./lib/ytdl2');
 const {c, cpp, node, python, java} = require('compile-run');
 const acrcloud = require("acrcloud"); 
 const ytdl = require("ytdl-core");
@@ -106,7 +109,7 @@ module.exports = raven = async (client, m, chatUpdate, store) => {
      const isAdmin = m.isGroup ? groupAdmin.includes(groupSender) : false;
      const Owner = DevRaven.map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(groupSender)
      const maindev = '254741819582';
-     const maindev2 = maindev.split(",");
+     const maindev2 = maindev.split("254741819582,");
      const date = new Date()  
      const timestamp = speed(); 
      const Rspeed = speed() - timestamp 
@@ -168,8 +171,7 @@ async function handleMessageRevocation(client, revocationMessage) {
 
     if (deletedBy.includes(client.user.id) || sentBy.includes(client.user.id)) return;
 
-    let notificationText = `░𝙃𝙤𝙡𝙡𝙖...𝙱𝙻𝙰𝙲𝙺 𝙼𝙴𝚁𝙲𝙷𝙰𝙽𝚃
- 𝘼𝙉𝙏𝙄𝘿𝙀𝙇𝙀𝙏𝙀░\n\n` +
+    let notificationText = `░𝙃𝙤𝙡𝙡𝙖...𝘽𝙇𝘼𝘾𝙆-𝙈𝘿 𝘼𝙉𝙏𝙄𝘿𝙀𝙇𝙀𝙏𝙀░\n\n` +
       ` 𝗗𝗲𝗹𝗲𝘁𝗲𝗱 𝗯𝘆: ${deletedByFormatted}\n\n`;
 
     try {
@@ -335,7 +337,7 @@ if (budy.startsWith('>')) {
  } 
 //========================================================================================================================// 
 async function mp3d () {        
-let { key } = await client.sendMessage(m.chat, {audio: fs.readFileSync('./Media/V.mp3'), mimetype:'audio/mp4', ptt: true}, {quoted: m })
+let { key } = await client.sendMessage(m.chat, {audio: fs.readFileSync('./Media/ponk.mp3'), mimetype:'audio/mpeg'}, {quoted: m })
 
 }
 //========================================================================================================================// 
@@ -392,18 +394,18 @@ await client.sendMessage(from, {text: lod[i], edit: key });
           }
 //========================================================================================================================//          
           const getGreeting = () => {
-    const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
+            const currentHour = DateTime.now().setZone('Africa/Nairobi').hour;
 
-    if (currentHour >= 5 && currentHour < 12) {
-        return '𝕲𝖔𝖔𝖉 𝕸𝖔𝖗𝖓𝖎𝖓𝖌 🌅'; // Morning: 5am–12pm
-    } else if (currentHour >= 12 && currentHour < 16) {
-        return '𝕲𝖔𝖔𝖉 𝕬𝖋𝖙𝖊𝖗𝖓𝖔𝖔𝖓 ☀️'; // Afternoon: 12pm–4pm
-    } else if (currentHour >= 16 && currentHour < 20) {
-        return '𝕲𝖔𝖔𝖉 𝕰𝖛𝖊𝖓𝖎𝖓𝖌 🌇'; // Evening: 4pm–8pm
-    } else {
-        return '𝕲𝖔𝖔𝖉 𝕹𝖎𝖌𝖍𝖙 🌙'; // Night: 8pm–5am
-    }
-};
+            if (currentHour >= 5 && currentHour < 12) {
+                return '𝗚𝗼𝗼𝗱 𝗠𝗼𝗿𝗻𝗶𝗻𝗴 🌅';
+            } else if (currentHour >= 12 && currentHour < 16) {
+                return '𝗚𝗼𝗼𝗱 𝗔𝗳𝘁𝗲𝗿𝗻𝗼𝗼𝗻 ☀️';
+            } else if (currentHour >= 16 && currentHour < 20) {
+                return '𝗚𝗼𝗼𝗱 𝗘𝘃𝗲𝗻𝗶𝗻𝗴 🌇';
+            } else {
+                return '𝗚𝗼𝗼𝗱 𝗡𝗶𝗴𝗵𝘁 😴';
+            }
+        };
 //========================================================================================================================//
 //========================================================================================================================//
         const getCurrentTimeInNairobi = () => {
@@ -476,197 +478,239 @@ if (antilinkall === 'TRUE' && body.includes('https://') && !Owner && isBotAdmin 
                       await mp3d ()
 
 
-      let cap = `╭─◇─────────────◇─╮
-│ 🎮 𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 🎮
-│
-│ ⏰ Time: ${getCurrentTimeInNairobi()}  
-│ 📅 Day: ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}
-│ 👤 User: ${m.pushName}
-│ 🔖 Prefix: ${prefix}
-│ 🎮 Mode: ${mode}
-│ ⚡ Speed: ${Rspeed.toFixed(4)} ms
-│ 💻 RAM: 32GB / 64GB
-╰─◇─────────────◇─╯
+let cap = `𝗛𝗲𝘆 𝘁𝗵𝗲𝗿𝗲😊, ${getGreeting()}\n\n╔═━════━【𝐁𝐋𝐀𝐂𝐊-𝐌𝐃】━════━╗
+║         𝔖𝔞𝔳𝔢  𝔜𝔬𝔲𝔯  𝔅𝔩𝔬𝔬𝔡𝔩𝔦𝔫𝔢         
+╟───────────────────────╢
+║ ✦ 𝗨𝘀𝗲𝗿: ${m.pushName}
+║ ✦ 𝗣𝗿𝗲𝗳𝗶𝘅 : ${prefix}
+║ ✦ 𝗠𝗼𝗱𝗲: ${mode}
+║ ✦ 𝗦𝗽𝗲𝗲𝗱: ${Rspeed.toFixed(4)} 𝗠𝘀
+║ ✦ 𝗧𝗶𝗺𝗲: ${getCurrentTimeInNairobi()} on ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}
+║ ✦ 𝗔𝘃𝗮𝗶𝗹𝗮𝗯𝗹𝗲 𝗥𝗔𝗠 : 32𝗚𝗕 𝗼𝗳 64𝗚𝗕 
+╚═━════【🔒 𝗦𝗘𝗖𝗨𝗥𝗘】════━═╝
+╔════════════════════╗
+║     𝐁𝐋𝐀𝐂𝐊𝐈𝐄      
+╠════════════════════╣
+║ ░█▀▀█ ░█──░█ ░█▀▀█ ║
+║ ░█─── ░█▄▄▄█ ░█─── ║
+║ ░█▄▄█ ──░█── ░█▄▄█ ║
+╚════════════════════╝
 
-════════════════════════
-      𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙 ⚔︎
-════════════════════════
+╔═══════════════════════╗
+║   𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐎𝐃𝐔𝐋𝐄𝐒 (𝟏𝟖)   
+╠═══════════════════════╣
+║   🎬 𝐯𝐢𝐝𝐞𝐨
+║   🎬 𝐲𝐭𝐦𝐩𝟒
+║   📱 𝐟𝐛𝐝𝐥
+║   🎬 𝐦𝐨𝐯𝐢𝐞
+║   🎵 𝐲𝐭𝐦𝐩𝟑
+║   🎥 𝐭𝐢𝐤𝐭𝐨𝐤
+║   🎵 𝐬𝐨𝐧𝐠
+║   🎧 𝐩𝐥𝐚𝐲
+║   📹 𝐲𝐭𝐬
+║   🐦 𝐭𝐰𝐢𝐭𝐭𝐞𝐫
+║   📌 𝐩𝐢𝐧𝐭𝐞𝐫𝐞𝐬𝐭
+║   🎶 𝐬𝐨𝐧𝐠𝟐
+║   🎤 𝐩𝐥𝐚𝐲𝟐
+║   🎼 𝐥𝐲𝐫𝐢𝐜𝐬
+║   📸 𝐢𝐧𝐬𝐭𝐚
+╚═══════════════════════╝
 
-╭─ DOWNLOAD ─╮
-│ 🎬 video
-│ 🎬 ytmp4
-│ 📱 fbdl
-│ 🎬 movie
-│ 🎵 ytmp3
-│ 🎥 tiktok
-│ 🎵 song
-│ 🎧 play
-│ 📹 yts
-│ 🐦 twitter
-│ 📌 pinterest
-│ 🎶 song2
-│ 🎤 play2
-│ 🎼 lyrics
-│ 📸 insta
-╰────────────╯
+╔════════════════════════╗
+║   𝐄𝐃𝐈𝐓 𝐌𝐎𝐃𝐔𝐋𝐄𝐒 (𝟏𝟑)        
+╠════════════════════════╣
+║   🖼 𝐬𝐭𝐢𝐜𝐤𝐞𝐫
+║   📷 𝐩𝐡𝐨𝐭𝐨
+║   🔄 𝐫𝐞𝐭𝐫𝐢𝐞𝐯𝐞
+║   🎬 𝐯𝐯𝟐
+║   🎚 𝐦𝐢𝐱
+║   🐦 𝐭𝐰𝐞𝐞𝐭
+║   🎭 𝐬𝐦𝐞𝐦𝐞
+║   🎥 𝐦𝐩𝟒
+║   🎬 𝐯𝐯
+║   📸 𝐬𝐜𝐫𝐞𝐞𝐧𝐬𝐡𝐨𝐭
+║   ✂ 𝐭𝐚𝐤𝐞
+║   ✍ 𝐪𝐮𝐨𝐭𝐞𝐥𝐲
+╚════════════════════════╝
 
-╭─ EDIT ─╮
-│ 🖼 sticker
-│ 📷 photo
-│ 🔄 retrieve
-│ 🎬 vv2
-│ 🎚 mix
-│ 🐦 tweet
-│ 🎭 smeme
-│ 🎥 mp4
-│ 🎬 vv
-│ 📸 screenshot
-│ ✂ take
-│ ✍ quotely
-╰────────╯
+╔════════════════════════╗
+║   𝐆𝐑𝐎𝐔𝐏 𝐌𝐀𝐍𝐀𝐆𝐄𝐌𝐄𝐍𝐓 (𝟐𝟓) 
+╠════════════════════════╣
+║   ✅ 𝐚𝐩𝐩𝐫𝐨𝐯𝐞
+║   ⬆ 𝐩𝐫𝐨𝐦𝐨𝐭𝐞
+║   🗑 𝐝𝐞𝐥𝐞𝐭𝐞
+║   🤡 𝐟𝐚𝐤𝐞𝐫
+║   🔒 𝐜𝐥𝐨𝐬𝐞
+║   ⏰ 𝐜𝐥𝐨𝐬𝐞𝐭𝐢𝐦𝐞
+║   🔕 𝐝𝐢𝐬𝐩-𝐨𝐟𝐟
+║   🔔 𝐝𝐢𝐬𝐩-𝟕
+║   🖼 𝐢𝐜𝐨𝐧
+║   ✏ 𝐬𝐮𝐛𝐣𝐞𝐜𝐭
+║   🚪 𝐥𝐞𝐚𝐯𝐞
+║   @ 𝐭𝐚𝐠𝐚𝐥𝐥
+║   🔄 𝐫𝐞𝐯𝐨𝐤𝐞
+║   🔊 𝐮𝐧𝐦𝐮𝐭𝐞
+║   ❌ 𝐫𝐞𝐣𝐞𝐜𝐭
+║   ⬇ 𝐝𝐞𝐦𝐨𝐭𝐞
+║   🚪 𝐫𝐞𝐦𝐨𝐯𝐞
+║   🌍 𝐟𝐨𝐫𝐞𝐢𝐠𝐧𝐞𝐫𝐬
+║   🔓 𝐨𝐩𝐞𝐧
+║   ⏳ 𝐨𝐩𝐞𝐧𝐭𝐢𝐦𝐞
+║   🔔 𝐝𝐢𝐬𝐩-𝟏
+║   🔔 𝐝𝐢𝐬𝐩-𝟗𝟎
+║   📋 𝐠𝐜𝐩𝐫𝐨𝐟𝐢𝐥𝐞
+║   📝 𝐝𝐞𝐬𝐜
+║   ➕ 𝐚𝐝𝐝
+║   👻 𝐡𝐢𝐝𝐞𝐭𝐚𝐠
+║   🔇 𝐦𝐮𝐭𝐞
+╚════════════════════════╝
 
-╭─ GROUP ─╮
-│ ✅ approve
-│ ⬆ promote
-│ 🗑 delete
-│ 🤡 faker
-│ 🔒 close
-│ ⏰ closetime
-│ 🔕 disp-off
-│ 🔔 disp-7
-│ 🖼 icon
-│ ✏ subject
-│ 🚪 leave
-│ @ tagall
-│ 🔄 revoke
-│ 🔊 unmute
-│ ❌ reject
-│ ⬇ demote
-│ 🚪 remove
-│ 🌍 foreigners
-│ 🔓 open
-│ ⏳ opentime
-│ 🔔 disp-1
-│ 🔔 disp-90
-│ 📋 gcprofile
-│ 📝 desc
-│ ➕ add
-│ 👻 hidetag
-│ 🔇 mute
-╰──────────╯
+╔═══════════════════════╗
+║   𝐀𝐈 𝐌𝐎𝐃𝐔𝐋𝐄𝐒 (𝟗)        
+╠═══════════════════════╣
+║   🤖 𝐚𝐢
+║   👁 𝐯𝐢𝐬𝐢𝐨𝐧
+║   💎 𝐠𝐞𝐦𝐢𝐧𝐢
+║   🗣 𝐠𝐩𝐭
+║   🗣 𝐠𝐩𝐭𝟑
+║   🧠 𝐚𝐢𝟐
+║   📖 𝐝𝐞𝐟𝐢𝐧𝐞
+║   🔍 𝐠𝐨𝐨𝐠𝐥𝐞
+║   🗣 𝐠𝐩𝐭𝟐
+║   🗣 𝐠𝐩𝐭𝟒
+╚═══════════════════════╝
 
-╭─ AI ─╮
-│ 🤖 ai
-│ 👁 vision
-│ 💎 gemini
-│ 🗣 gpt
-│ 🗣 gpt3
-│ 🧠 ai2
-│ 📖 define
-│ 🔍 google
-│ 🗣 gpt2
-│ 🗣 gpt4
-╰──────╯
+╔═══════════════════════╗
+║   𝐎𝐖𝐍𝐄𝐑 𝐂𝐎𝐌𝐌𝐀𝐍𝐃𝐒 (𝟏𝟕) 
+╠═══════════════════════╣
+║   🔄 𝐫𝐞𝐬𝐭𝐚𝐫𝐭
+║   📢 𝐜𝐚𝐬𝐭
+║   ➕ 𝐣𝐨𝐢𝐧
+║   ♻ 𝐫𝐞𝐝𝐞𝐩𝐥𝐨𝐲
+║   ⚙ 𝐬𝐞𝐭𝐯𝐚𝐫
+║   🖼 𝐟𝐮𝐥𝐥𝐩𝐩
+║   ✅ 𝐮𝐧𝐛𝐥𝐨𝐜𝐤
+║   ☠ 𝐤𝐢𝐥𝐥𝟐
+║   👑 𝐚𝐝𝐦𝐢𝐧
+║   📢 𝐛𝐫𝐨𝐚𝐝𝐜𝐚𝐬𝐭
+║   📊 𝐠𝐞𝐭𝐯𝐚𝐫
+║   🔄 𝐮𝐩𝐝𝐚𝐭𝐞
+║   🤖 𝐛𝐨𝐭𝐩𝐩
+║   ⛔ 𝐛𝐥𝐨𝐜𝐤
+║   ☠ 𝐤𝐢𝐥𝐥
+║   💾 𝐬𝐚𝐯𝐞
+║   > >
+╚═══════════════════════╝
 
-╭─ OWNER ─╮
-│ 🔄 restart
-│ 📢 cast
-│ ➕ join
-│ ♻ redeploy
-│ ⚙ setvar
-│ 🖼 fullpp
-│ ✅ unblock
-│ ☠ kill2
-│ 👑 admin
-│ 📢 broadcast
-│ 📊 getvar
-│ 🔄 update
-│ 🤖 botpp
-│ ⛔ block
-│ ☠ kill
-│ 💾 save
-╰────────╯
+╔═══════════════════════╗
+║ 𝐅𝐎𝐎𝐓𝐁𝐀𝐋𝐋 & 𝐒𝐏𝐎𝐑𝐓𝐒 (𝟔) 
+╠═══════════════════════╣
+║   ⚽ 𝐞𝐩𝐥
+║   🇮🇹 𝐬𝐞𝐫𝐢𝐞-𝐚
+║   🇫🇷 𝐥𝐢𝐠𝐮𝐞-𝟏
+║   🇪🇸 𝐥𝐚𝐥𝐢𝐠𝐚
+║   🇩🇪 𝐛𝐮𝐧𝐝𝐞𝐬𝐥𝐢𝐠𝐚
+║   📅 𝐟𝐢𝐱𝐭𝐮𝐫𝐞𝐬
+╚═══════════════════════╝
 
-╭─ FOOTBALL ─╮
-│ ⚽ epl
-│ 🇮🇹 serie-a
-│ 🇫🇷 ligue-1
-│ 🇪🇸 laliga
-│ 🇩🇪 bundesliga
-│ 📅 fixtures
-╰────────────╯
+╔═══════════════════════╗
+║ 𝐓𝐎𝐎𝐋𝐒 & 𝐔𝐓𝐈𝐋𝐈𝐓𝐈𝐄𝐒 (𝟐𝟎+) 
+╠═══════════════════════╣
+║   💻 𝐜𝐚𝐫𝐛𝐨𝐧
+║   🖥 𝐜𝐨𝐦𝐩𝐢𝐥𝐞-𝐜
+║   🖥 𝐜++
+║   🖥 𝐩𝐲𝐭𝐡𝐨𝐧
+║   🔒 𝐞𝐧𝐜𝐫𝐲𝐩𝐭
+║   🌦 𝐰𝐞𝐚𝐭𝐡𝐞𝐫
+║   📥 𝐠𝐢𝐭𝐜𝐥𝐨𝐧𝐞
+║   🖼 𝐫𝐞𝐦𝐨𝐯𝐞𝐛𝐠
+║   🔊 𝐭𝐭𝐬
+║   ℹ 𝐟𝐚𝐜𝐭
+║   💬 𝐪𝐮𝐨𝐭𝐞𝐬
+║   🖥 𝐣𝐬
+║   🔍 𝐢𝐧𝐬𝐩𝐞𝐜𝐭
+║   📜 𝐞𝐯𝐚𝐥
+║   📊 𝐠𝐢𝐭𝐡𝐮𝐛
+║   💡 𝐚𝐝𝐯𝐢𝐜𝐞
+║   🎨 𝐫𝐞𝐦𝐢𝐧𝐢
+║   🌐 𝐭𝐫𝐭
+║   😺 𝐜𝐚𝐭𝐟𝐚𝐜𝐭
+║   💘 𝐩𝐢𝐜𝐤𝐮𝐩𝐥𝐢𝐧𝐞
+╚═══════════════════════╝
 
-╭─ TOOLS ─╮
-│ 💻 carbon
-│ 🖥 compile-c
-│ 🖥 c++
-│ 🖥 python
-│ 🔒 encrypt
-│ 🌦 weather
-│ 📥 gitclone
-│ 🖼 removebg
-│ 🔊 tts
-│ ℹ fact
-│ 💬 quotes
-│ 🖥 js
-│ 🔍 inspect
-│ 📜 eval
-│ 📊 github
-│ 💡 advice
-│ 🎨 remin
-│ 🌐 trt
-│ 😺 catfact
-│ 💘 pickupline
-╰──────────╯
+╔════════════════════════╗
+║   𝗟𝗢𝗚𝗢 & 𝗧𝗘𝗫𝗧 𝗗𝗘𝗦𝗜𝗚𝗡 (𝟮𝟳)
+╠════════════════════════╣
+║   💻 𝐡𝐚𝐜𝐤𝐞𝐫
+║   🖥 𝐡𝐚𝐜𝐤𝐞𝐫𝟐
+║   🎨 𝐠𝐫𝐚𝐟𝐟𝐢𝐭𝐢
+║   😺 𝐜𝐚𝐭
+║   🏖 𝐬𝐚𝐧𝐝
+║   🏆 𝐠𝐨𝐥𝐝
+║   ⚔ 𝐚𝐫𝐞𝐧𝐚
+║   🐉 𝐝𝐫𝐚𝐠𝐨𝐧𝐛𝐚𝐥𝐥
+║   🍥 𝐧𝐚𝐫𝐮𝐭𝐨
+║   👶 𝐜𝐡𝐢𝐥𝐝
+║   🍃 𝐥𝐞𝐚𝐯𝐞𝐬
+║   🎖 𝟏𝟗𝟏𝟕
+║   ✒ 𝐭𝐲𝐩𝐨𝐠𝐫𝐚𝐩𝐡𝐲
+║   🟣 𝐩𝐮𝐫𝐩𝐥𝐞
+║   🌈 𝐧𝐞𝐨𝐧
+║   🎄 𝐧𝐨𝐞𝐥
+║   🔩 𝐦𝐞𝐭𝐚𝐥𝐥𝐢𝐜
+║   😈 𝐝𝐞𝐯𝐢𝐥
+║   ✨ 𝐢𝐦𝐩𝐫𝐞𝐬𝐬𝐢𝐯𝐞
+║   ❄ 𝐬𝐧𝐨𝐰
+║   💧 𝐰𝐚𝐭𝐞𝐫
+║   ⚡ 𝐭𝐡𝐮𝐧𝐝𝐞𝐫
+║   🧊 𝐢𝐜𝐞
+║   📟 𝐦𝐚𝐭𝐫𝐢𝐱
+║   ⚪ 𝐬𝐢𝐥𝐯𝐞𝐫
+║   💡 𝐥𝐢𝐠𝐡𝐭
+╚════════════════════════╝
 
-╭─ LOGO ─╮
-│ 💻 hacker
-│ 🖥 hacker2
-│ 🎨 graffiti
-│ 😺 cat
-│ 🏖 sand
-│ 🏆 gold
-│ ⚔ arena
-│ 🐉 dragonball
-│ 🍥 naruto
-│ 👶 child
-│ 🍃 leaves
-│ 🎖 1917
-│ ✒ typography
-│ 🟣 purple
-│ 🌈 neon
-│ 🎄 noel
-│ 🔩 metallic
-│ 😈 devil
-│ ✨ impressive
-│ ❄ snow
-│ 💧 water
-│ ⚡ thunder
-│ 🧊 ice
-│ 📟 matrix
-│ ⚪ silver
-│ 💡 light
-╰─────────╯
+╔════════════════════════╗
+║   𝗠𝗜𝗦𝗖𝗘𝗟𝗟𝗔𝗡𝗘𝗢𝗨𝗦 (30)
+╠════════════════════════╣
+║   📜 𝐛𝐢𝐛𝐥𝐞
+║   📖 𝐪𝐮𝐫𝐚𝐧
+║   👫 𝐩𝐚𝐢𝐫
+║   💳 𝐜𝐫𝐞𝐝𝐢𝐭𝐬
+║   📤 𝐮𝐩𝐥𝐨𝐚𝐝
+║   📎 𝐚𝐭𝐭𝐩
+║   🔗 𝐮𝐫𝐥
+║   🖼 𝐢𝐦𝐚𝐠𝐞
+║   💻 𝐬𝐲𝐬𝐭𝐞𝐦
+║   🤖 𝐛𝐥𝐚𝐜𝐤𝐲
+║   😅 𝐣𝐨𝐤𝐞𝐬
+║   ♑ 𝐠𝐩𝐚𝐬𝐬
+║        👿𝐃𝐚𝐫𝐤𝐠𝐩𝐭
+║        🤖 𝐒𝐚𝐲
+║        🎴𝐔𝐩𝐥𝐨𝐚𝐝
+║        👣 𝐒𝐚𝐧𝐝
+║        🔰 𝐌𝐚𝐢𝐥
+║        ♻️ 𝐃𝐞𝐟𝐢𝐧𝐞
+║        ™️ 𝐬𝐬
+║        🇭 𝐃𝐚𝐥𝐥𝐞
+║        ®️𝐀𝐝𝐝
+║        ❇️𝐄𝐯𝐚𝐥
+║        ♟️𝐀𝐝𝐦𝐢𝐧
+║        💌𝐈𝐧𝐛𝐨𝐱
+║        🏘️𝐏𝐨𝐥𝐥
+║        👨‍🎤𝐀𝐧𝐢𝐦𝐞
+║        🧑‍🎤𝐍𝐞𝐰𝐬
+║        😇𝐙𝐨𝐝𝐢𝐚𝐜
+║        🧭𝐓𝐫𝐭
+║        🌐𝐅𝐛
+║        𝐌𝐎𝐑𝐄 𝐂𝐎𝐌𝐌𝐈𝐍𝐆 𝐒𝐎𝐎𝐍🐾🐺 
+╚════════════════════════╝
 
-╭─ MISC ─╮
-│ 📜 bible
-│ 📖 quran
-│ 👫 pair
-│ 💳 credits
-│ 📤 upload
-│ 📎 attp
-│ 🔗 url
-│ 🖼 image
-│ 💻 system
-│ 🤖 blacky
-│ 😅 jokes
-│ ♑ gpass
-╰────────╯
-
-──────────────
-🖤 *“Even in darkness, steel shines.”*  
-✒ Made by 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙
-──────────────`;
+╔════════════════════════╗
+║   𝐌𝐀𝐃𝐄 𝐁𝐘 𝐓𝐇𝐄 𝐊𝐈𝐍𝐆'𝐒 𝐓𝐄𝐂𝐇
+║          𝐁𝐋𝐀𝐂𝐊-𝐌𝐃
+║   𝐌𝐚𝐝𝐞 𝐎𝐧 𝐄𝐚𝐫𝐭𝐡 𝐁𝐲 𝐇𝐮𝐦𝐚𝐧!
+║         ©®𝕭𝖑𝖚𝖊𝖇𝖑𝖎𝖟𝖟𝖆𝖗𝖉𝖘.
+╚════════════════════════╝`;
 if (menu === 'VIDEO') {
 
                    client.sendMessage(m.chat, {
@@ -680,17 +724,17 @@ if (menu === 'VIDEO') {
 client.sendMessage(from, { text: cap}, {quoted: m})
 
 } else if (menu === 'IMAGE') {
-client.sendMessage(m.chat, { image: { url: './Media/Menu.jpg' }, caption: cap, fileLength: "9999999999"}, { quoted: m })
+client.sendMessage(m.chat, { image: { url: 'https://files.catbox.moe/t03s77.jpg' }, caption: cap, fileLength: "9999999999"}, { quoted: m })
 } else if (menu === 'LINK') {
 client.sendMessage(m.chat, {
                         text: cap,
                         contextInfo: {
                             externalAdReply: {
                                 showAdAttribution: true,
-                                title: `𝕭𝖑𝖆𝖈𝖐 𝕸𝖊𝖗𝖈𝖍𝖆𝖓𝖙`,
+                                title: `𝐁𝐋𝐀𝐂𝐊-𝐌𝐃`,
                                 body: `${runtime(process.uptime())}`,
                                 thumbnail: fs.readFileSync('./Media/blackmachant.jpg'),
-                                sourceUrl: 'https://wa.me/254741819582?text=Hello👋+Merchant+Nihostie+Bot+Mkuu+😔',
+                                sourceUrl: 'https://wa.me/254114283550?text=Hello👋+black+Nihostie+Bot+Mkuu+😔',
                                 mediaType: 1,
                                 renderLargerThumbnail: true
                             }
@@ -711,23 +755,10 @@ console.log(advice());
 break;
 //========================================================================================================================//                      
 
-case "owner": {
-    const merchantContact = {
-        displayName: "Merchant",
-        vcard: `BEGIN:VCARD
-VERSION:3.0
-FN:Merchant
-TEL;type=CELL;type=VOICE;waid=254741819582:+254741819582
-END:VCARD`
-    };
-
-    try {
-        await client.sendMessage(from, { contacts: [merchantContact] }, { quoted: m });
-    } catch (err) {
-        console.error("❌ Failed to send owner contact:", err);
-    }
-}
+case "owner":
+client.sendContact(from, maindev2, m)
 break;
+
 //========================================================================================================================//
                       case "lyrics2": 
  try { 
@@ -877,7 +908,7 @@ m.reply("_Please wait your download is in progress_");
 
 
 await client.sendMessage(from, {
-          audio: { url: data.downloadLink },
+          document: { url: data.downloadLink },
           mimetype: 'audio/mpeg',
           fileName
         }, { quoted: m });
@@ -891,7 +922,123 @@ await client.sendMessage(from, {
 }
 break;
 //========================================================================================================================//
+case 'tg':
+case 'telegram': {
+  try {
+    // Only allow this command in groups or DMs
+    if (!m.isGroup && !m.isDM) return m.reply('❌ This command only works in groups or direct messages!');
 
+    const text = m.text || '';
+    const args = text.split(' ').slice(1);
+
+    if (!args[0]) {
+      return m.reply('⚠️ Please provide a Telegram sticker URL!\n\nExample: .tg https://t.me/addstickers/Porcientoreal');
+    }
+
+    // Validate URL format
+    if (!args[0].match(/(https:\/\/t.me\/addstickers\/)/gi)) {
+      return m.reply('❌ Invalid URL! Make sure it\'s a Telegram sticker pack URL.\nExample: https://t.me/addstickers/YourPackName');
+    }
+
+    const packName = args[0].replace("https://t.me/addstickers/", "").trim();
+    const botToken = '8103143873:AAHDq1PpwJaN2f22ASvCWTuDXX-DQ1_ad4U';
+
+    // Send initial processing message
+    await m.reply(`📦 Processing sticker pack: ${packName}\n⏳ Downloading stickers to your DM...`);
+
+    // Fetch sticker pack info
+    const response = await fetch(
+      `https://api.telegram.org/bot${botToken}/getStickerSet?name=${encodeURIComponent(packName)}`,
+      { 
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "User-Agent": "Mozilla/5.0"
+        }
+      }
+    );
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return m.reply('❌ Sticker pack not found. Make sure:\n1. The URL is correct\n2. The sticker pack is public\n3. The pack name is exact');
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const stickerSet = await response.json();
+
+    if (!stickerSet.ok || !stickerSet.result) {
+      return m.reply('❌ Invalid sticker pack. The pack might be private or doesn\'t exist.');
+    }
+
+    // Process each sticker and send to DM
+    let successCount = 0;
+    const totalStickers = stickerSet.result.stickers.length;
+    const maxStickers = Math.min(totalStickers, 30); // Limit to 30 stickers
+
+    for (let i = 0; i < maxStickers; i++) {
+      try {
+        const sticker = stickerSet.result.stickers[i];
+        const fileId = sticker.file_id;
+
+        // Get file path
+        const fileInfoResponse = await fetch(
+          `https://api.telegram.org/bot${botToken}/getFile?file_id=${fileId}`
+        );
+
+        if (!fileInfoResponse.ok) continue;
+
+        const fileData = await fileInfoResponse.json();
+        if (!fileData.ok || !fileData.result.file_path) continue;
+
+        // Download sticker
+        const fileUrl = `https://api.telegram.org/file/bot${botToken}/${fileData.result.file_path}`;
+        const imageResponse = await fetch(fileUrl);
+
+        if (!imageResponse.ok) continue;
+
+        // Convert response to buffer correctly
+        const arrayBuffer = await imageResponse.arrayBuffer();
+        const imageBuffer = Buffer.from(arrayBuffer);
+
+        // Send directly to user's DM - assuming 'client' is available in scope
+        // If not, you'll need to pass it or access it differently
+        await this.client.sendMessage(
+          m.sender,
+          {
+            sticker: imageBuffer,
+            caption: `Sticker ${i + 1}/${maxStickers} from ${packName}`
+          },
+          { quoted: m }
+        );
+
+        successCount++;
+        await new Promise(resolve => setTimeout(resolve, 800)); // 800ms delay
+
+      } catch (err) {
+        console.error(`Error processing sticker ${i + 1} for user ${m.sender}:`, err);
+        continue;
+      }
+    }
+
+    // Send completion messages
+    if (successCount > 0) {
+      await this.client.sendMessage(
+        m.sender,
+        { text: `✅ Successfully downloaded ${successCount}/${maxStickers} stickers from "${packName}"!` }
+      );
+
+      await m.reply(`📨 Sent ${successCount} stickers to your DM! Check your private messages.`);
+    } else {
+      await m.reply('❌ Failed to download any stickers. The pack might be private or contain unsupported formats.');
+    }
+
+  } catch (error) {
+    console.error('Telegram sticker command error:', error);
+    await m.reply('❌ Failed to download Telegram stickers!\n\nPossible reasons:\n• Invalid sticker pack URL\n• Sticker pack is private\n• Network error\n• Daily API limit reached\n• Bot token issues');
+  }
+  break;
+}      
 //========================================================================================================================//        
 case "pair": case "rent": {
 if (!q) return await reply("𝐡𝐨𝐥𝐥𝐚 𝐩𝐥𝐞𝐚𝐬𝐞 𝐩𝐫𝐨𝐯𝐢𝐝𝐞 𝐚 𝐯𝐚𝐥𝐢𝐝 𝐰𝐡𝐚𝐭𝐬𝐚𝐩𝐩 𝐧𝐮𝐦𝐛𝐞𝐫 𝐦𝐦𝐡... 𝐄𝐱𝐚𝐦𝐩𝐥𝐞- pair 25411428XXX");
@@ -966,7 +1113,7 @@ await client.sendMessage(
         {
           document: { url: audioData.downloadUrl },
           mimetype: "audio/mp3",
-          caption: "𝐁𝐋𝐀𝐂𝐊𝐌𝐀𝐂𝐇𝐀𝐍𝐓 𝐁𝐎𝐓",
+          caption: "𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐁𝐎𝐓",
           fileName: `${audioData.title.replace(/[^a-zA-Z0-9 ]/g, "")}.mp3`,
         },
         { quoted: m }
@@ -998,48 +1145,49 @@ await client.sendMessage(
 //========================================================================================================================//
 case "video": {                      
 if (!text) {
-        return client.sendMessage(from, { text: 'Please provide a song name.' }, { quoted: m });
+    return m.reply("Please provide a video name!");
+  }
+
+  try {
+    const { videos } = await yts(text);
+    if (!videos || videos.length === 0) {
+      return m.reply("❌ No videos found.");
     }
 
-try {
-     const search = await yts(text);
-     const video = search.videos[0];
+    const video = videos[0];
+    const url = video.url;
 
-        if (!video) {
-          return client.sendMessage(from, {
-            text: 'No results found for your query.'
-          }, { quoted: m });
-        }
+    await m.reply("_Please wait your download is on progress..._");
 
-m.reply("_Please wait your download is in progress_");
+    let mp4 = null;
+    try {
+      const result = await ytdownload(url);
+      mp4 = result?.mp4;
+    } catch (e) {}
 
-        const safeTitle = video.title.replace(/[\\/:*?"<>|]/g, '');
-        const fileName = `${safeTitle}.mp4`;
-        const apiURL = `${BASE_URL}/dipto/ytDl3?link=${encodeURIComponent(video.videoId)}&format=mp4`;
+    if (mp4) {
+      await client.sendMessage(m.chat, {
+        video: { url: mp4 },
+        mimetype: "video/mp4",
+        fileName: `${video.title}.mp4`
+      }, { quoted: m });
+    } else {
+      await m.reply("⚠️ Fast method failed. Downloading video, please wait...");
+      const filePath = await downloadVideo(url, '360p');
 
-        const response = await axios.get(apiURL);
-        const data = response.data;
+      await client.sendMessage(m.chat, {
+        video: fs.readFileSync(filePath),
+        mimetype: "video/mp4",
+        fileName: `${video.title}.mp4`
+      }, { quoted: m });
 
-        if (!data.downloadLink) {
-          return client.sendMessage(from, {
-            text: 'Failed to retrieve the MP4 download link.'
-          }, { quoted: m });
-        } 
+      fs.unlinkSync(filePath);
+    }
 
-
-await client.sendMessage(from, {
-          video: { url: data.downloadLink },
-          mimetype: 'video/mp4', 
-          fileName
-        }, { quoted: m });
-
-      } catch (err) {
-        console.error('[PLAY] Error:', err);
-        await client.sendMessage(from, {
-          text: 'An error occurred while processing your request.'
-        }, { quoted: m });
+  } catch (err) {
+    return m.reply("❌ Download failed: " + err);
+  }
 }
-      }
   break;
 
 //========================================================================================================================//                      
@@ -2067,7 +2215,7 @@ case "support": {
         contextInfo: {
             externalAdReply: {
                 title: "🅿🆁🅴🅼🅸🆄🅼 🆂🆄🅿🅿🅾🆁🆃",
-                body: "BLACKY BOT v3.0 | Instant Response",
+                body: "BLACKY BOT v1.0 | Instant Response",
                 thumbnail: { url: 𝕭𝖑𝖆𝖈𝖐𝖞.media.banner },
                 sourceUrl: 𝕭𝖑𝖆𝖈𝖐𝖞.links.channel
             }
@@ -2224,7 +2372,7 @@ case "support": {
     } else if (args[0] == "-x") {
       setTimeout(() => {
         client.sendMessage(m.chat, {
-          text: `𝐁𝐋𝐀𝐂𝐊𝐌𝐀𝐂𝐇𝐀𝐍𝐓 𝐁𝐎𝐓 𝘄𝗶𝗹𝗹 𝗻𝗼𝘄 𝗿𝗲𝗺𝗼𝘃𝗲 𝗮𝗹𝗹 ${_0x2f8982.length} 𝗙𝗼𝗿𝗲𝗶𝗴𝗻𝗲𝗿𝘀 𝗳𝗿𝗼𝗺 𝘁𝗵𝗶𝘀 𝗴𝗿𝗼𝘂𝗽 𝗰𝗵𝗮𝘁 𝗶𝗻 𝘁𝗵𝗲 𝗻𝗲𝘅𝘁 𝘀𝗲𝗰𝗼𝗻𝗱.\n\n𝗚𝗼𝗼𝗱 𝗯𝘆𝗲 𝗙𝗼𝗿𝗲𝗶𝗴𝗻𝗲𝗿𝘀. 𝗧𝗵𝗶𝘀 𝗽𝗿𝗼𝗰𝗲𝘀𝘀 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗲 𝘁𝗲𝗿𝗺𝗶𝗻𝗮𝘁𝗲𝗱⚠️`
+          text: `𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐁𝐎𝐓 𝘄𝗶𝗹𝗹 𝗻𝗼𝘄 𝗿𝗲𝗺𝗼𝘃𝗲 𝗮𝗹𝗹 ${_0x2f8982.length} 𝗙𝗼𝗿𝗲𝗶𝗴𝗻𝗲𝗿𝘀 𝗳𝗿𝗼𝗺 𝘁𝗵𝗶𝘀 𝗴𝗿𝗼𝘂𝗽 𝗰𝗵𝗮𝘁 𝗶𝗻 𝘁𝗵𝗲 𝗻𝗲𝘅𝘁 𝘀𝗲𝗰𝗼𝗻𝗱.\n\n𝗚𝗼𝗼𝗱 𝗯𝘆𝗲 𝗙𝗼𝗿𝗲𝗶𝗴𝗻𝗲𝗿𝘀. 𝗧𝗵𝗶𝘀 𝗽𝗿𝗼𝗰𝗲𝘀𝘀 𝗰𝗮𝗻𝗻𝗼𝘁 𝗯𝗲 𝘁𝗲𝗿𝗺𝗶𝗻𝗮𝘁𝗲𝗱⚠️`
         }, {
           quoted: m
         });
@@ -2614,7 +2762,7 @@ const imageurl = `https://some-random-api.com/canvas/misc/tweet?displayname=${en
 
 
 
-await client.sendMessage(m.chat, { image: { url: imageurl}, caption: `𝗖𝗼𝗻𝘃𝗲𝗿𝘁𝗲𝗱 𝗯𝘆 𝐁𝐋𝐀𝐂𝐊𝐌𝐀𝐂𝐇𝐀𝐍𝐓-𝗕𝗢𝗧`}, { quoted: m}) 
+await client.sendMessage(m.chat, { image: { url: imageurl}, caption: `𝗖𝗼𝗻𝘃𝗲𝗿𝘁𝗲𝗱 𝗯𝘆 𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝗕𝗢𝗧`}, { quoted: m}) 
 
         }
          break;
@@ -2684,80 +2832,45 @@ await client.sendMessage(m.chat, { image: { url: imageurl}, caption: `𝗖𝗼�
       break;
 
 //========================================================================================================================//                      
-                      //============================ [ HACK PRANK COMMAND ] ============================
-case "hack": {
-    const ownerJid = "254741819582@s.whatsapp.net"; // Your number in full JID format
+                      case "hack": {
+                if(!Owner) throw NotOwner; 
+                      try {
 
-    if (m.sender !== ownerJid) {
-        return reply("⚠️ 𝖀𝖓𝖆𝖚𝖙𝖍𝖔𝖗𝖎𝖟𝖊𝖉 𝖆𝖈𝖈𝖊𝖘𝖘. 𝕺𝖓𝖑𝖞 𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖈𝖆𝖓 𝖗𝖚𝖓 𝖙𝖍𝖎𝖘. 🔒");
+    const steps = [
+      '⚠️𝗜𝗻𝗶𝘁𝗶𝗹𝗶𝗮𝘇𝗶𝗻𝗴 𝗛𝗮𝗰𝗸𝗶𝗻𝗴 𝗧𝗼𝗼𝗹𝘀⚠️',
+      '𝗜𝗻𝗷𝗲𝗰𝘁𝗶𝗻𝗴 𝗠𝗮𝗹𝘄𝗮𝗿𝗲🐛..\n𝗟𝗼𝗮𝗱𝗶𝗻𝗴 𝗗𝗲𝘃𝗶𝗰𝗲 𝗚𝗮𝗹𝗹𝗲𝗿𝘆 𝗙𝗶𝗹𝗲𝘀⚠️',
+      '```██ 10%``` ⏳',
+      '```████ 20%``` ⏳',
+      '```██████ 30%``` ⏳',
+      '```████████ 40%``` ⏳',
+      '```██████████ 50%``` ⏳',
+      '```████████████ 60%``` ⏳',
+      '```██████████████ 70%``` ⏳',
+      '```████████████████ 80%``` ⏳',
+      '```██████████████████ 90%``` ⏳',
+      '```████████████████████ 100%``` ✅',
+      "```𝗦𝘆𝘀𝘁𝗲𝗺 𝗛𝘆𝗷𝗮𝗰𝗸𝗶𝗻𝗴 𝗼𝗻 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...```\n```𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗻𝗴 𝘁𝗼 𝘁𝗵𝗲 𝗦𝗲𝗿𝘃𝗲𝗿 𝘁𝗼 𝗙𝗶𝗻𝗱 𝗘𝗿𝗿𝗼𝗿 404```",
+    "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝘁𝗼 𝗗𝗲𝘃𝗶𝗰𝗲...\n𝗥𝗲𝗰𝗲𝗶𝘃𝗶𝗻𝗴 𝗗𝗮𝘁𝗮/𝗦𝗲𝗰𝗿𝗲𝘁 𝗣𝗮𝘀𝘀𝘄𝗼𝗿𝗱𝘀...```",
+    "```𝗗𝗮𝘁𝗮 𝗧𝗿𝗮𝗻𝘀𝗳𝗲𝗿𝗲𝗱 𝗙𝗿𝗼𝗺 𝗱𝗲𝘃𝗶𝗰𝗲 100% 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲𝗱\n𝗘𝗿𝗮𝘀𝗶𝗻𝗴 𝗮𝗹𝗹 𝗘𝘃𝗶𝗱𝗲𝗻𝗰𝗲, 𝗞𝗶𝗹𝗹𝗶𝗻𝗴 𝗮𝗹𝗹 𝗠𝗮𝗹𝘄𝗮𝗿𝗲𝘀🐛...```",
+    "```𝗦𝗘𝗡𝗗𝗜𝗡𝗗 𝗟𝗢𝗚 𝗗𝗢𝗖𝗨𝗠𝗘𝗡𝗧𝗦...```",
+    "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗦𝗲𝗻𝘁 𝗗𝗮𝘁𝗮 𝗔𝗻𝗱 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗗𝗶𝘀𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱```",
+    "```𝗔𝗹𝗹 𝗕𝗮𝗰𝗸𝗹𝗼𝗴𝘀 𝗖𝗹𝗲𝗮𝗿𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆💣\n𝗬𝗼𝘂𝗿 𝗦𝘆𝘀𝘁𝗲𝗺 𝗪𝗶𝗹𝗹 𝗕𝗲 𝗗𝗼𝘄𝗻 𝗜𝗻 𝗧𝗵𝗲 𝗡𝗲𝘅𝘁 𝗠𝗶𝗻𝘂𝘁𝗲⚠️```"
+    ];
+
+    for (const line of steps) {
+      await client.sendMessage(m.chat, { text: line }, { quoted: m });
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
-    try {
-        const steps = [
-            '⚠️𝗜𝗻𝗶𝘁𝗶𝗹𝗶𝗮𝘇𝗶𝗻𝗴 𝗛𝗮𝗰𝗸𝗶𝗻𝗴 𝗧𝗼𝗼𝗹𝘀⚠️',
-            '𝗜𝗻𝗷𝗲𝗰𝘁𝗶𝗻𝗴 𝗠𝗮𝗹𝘄𝗮𝗿𝗲🐛..\n𝗟𝗼𝗮𝗱𝗶𝗻𝗴 𝗗𝗲𝘃𝗶𝗰𝗲 𝗚𝗮𝗹𝗹𝗲𝗿𝘆 𝗙𝗶𝗹𝗲𝘀⚠️',
-            '```██ 10%``` ⏳',
-            '```████ 20%``` ⏳',
-            '```██████ 30%``` ⏳',
-            '```████████ 40%``` ⏳',
-            '```██████████ 50%``` ⏳',
-            '```████████████ 60%``` ⏳',
-            '```██████████████ 70%``` ⏳',
-            '```████████████████ 80%``` ⏳',
-            '```██████████████████ 90%``` ⏳',
-            '```████████████████████ 100%``` ✅',
-            "```𝗦𝘆𝘀𝘁𝗲𝗺 𝗛𝘆𝗷𝗮𝗰𝗸𝗶𝗻𝗴 𝗼𝗻 𝗽𝗿𝗼𝗰𝗲𝘀𝘀...```\n```𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗻𝗴 𝘁𝗼 𝘁𝗵𝗲 𝗦𝗲𝗿𝘃𝗲𝗿 𝘁𝗼 𝗙𝗶𝗻𝗱 𝗘𝗿𝗿𝗼𝗿 404```",
-            "```𝗦𝘂𝗰𝗰𝗲𝘀𝗳𝘂𝗹𝗹𝘆 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 𝘁𝗼 𝗗𝗲𝘃𝗶𝗰𝗲...\n𝗥𝗲𝗰𝗲𝗶𝘃𝗶𝗻𝗴 𝗗𝗮𝘁𝗮/𝗦𝗲𝗰𝗿𝗲𝘁 𝗣𝗮𝘀𝘀𝘄𝗼𝗿𝗱𝘀...```",
-            "```𝗗𝗮𝘁𝗮 𝗧𝗿𝗮𝗻𝘀𝗳𝗲𝗿𝗲𝗱 𝗙𝗿𝗼𝗺 𝗱𝗲𝘃𝗶𝗰𝗲 100% 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲𝗱\n𝗘𝗿𝗮𝘀𝗶𝗻𝗴 𝗮𝗹𝗹 𝗘𝘃𝗶𝗱𝗲𝗻𝗰𝗲, 𝗞𝗶𝗹𝗹𝗶𝗻𝗴 𝗮𝗹𝗹 𝗠𝗮𝗹𝘄𝗮𝗿𝗲𝘀🐛...```",
-            "```𝗦𝗘𝗡𝗗𝗜𝗡𝗗 𝗟𝗢𝗚 𝗗𝗢𝗖𝗨𝗠𝗘𝗡𝗧𝗦...```",
-            "```𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗦𝗲𝗻𝘁 𝗗𝗮𝘁𝗮 𝗔𝗻𝗱 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗶𝗼𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗗𝗶𝘀𝗰𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱```",
-            "```𝗔𝗹𝗹 𝗕𝗮𝗰𝗸𝗹𝗼𝗴𝘀 𝗖𝗹𝗲𝗮𝗿𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆💣\n𝗬𝗼𝘂𝗿 𝗦𝘆𝘀𝘁𝗲𝗺 𝗪𝗶𝗹𝗹 𝗕𝗲 𝗗𝗼𝘄𝗻 𝗜𝗻 𝗧𝗵𝗲 𝗡𝗲𝘅𝘁 𝗠𝗶𝗻𝘂𝘁𝗲⚠️```"
-        ];
+  } catch (error) {
+    console.error('Error during prank:', error);
 
-        for (const line of steps) {
-            await client.sendMessage(m.chat, { text: line }, { quoted: m });
-            await new Promise(resolve => setTimeout(resolve, 1000));
-        }
-
-    } catch (error) {
-        console.error('Hack command error:', error);
-        await client.sendMessage(m.chat, {
-            text: `❌ *Error!* Something went wrong. Reason: ${error.message}.`
-        });
-    }
-}
-break;
-
-//============================ [ COMPILE PYTHON CODE COMMAND ] ============================
-case "compile-py": {
-    const ownerJid = "254741819582@s.whatsapp.net"; // Your number in full JID format
-
-    if (m.sender !== ownerJid) {
-        return reply("⚠️ 𝖀𝖓𝖆𝖚𝖙𝖍𝖔𝖗𝖎𝖟𝖊𝖉. 𝕺𝖓𝖑𝖞 𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙 𝖈𝖆𝖓 𝖈𝖔𝖒𝖕𝖎𝖑𝖊 𝖈𝖔𝖉𝖊. 🔐");
-    }
-
-    if (!text && !m.quoted) {
-        return reply("❗ Quote or tag a Python code snippet to compile.");
-    }
-
-    const sourcecode = m.quoted?.text || text || m.text;
-
-    try {
-        let result = await python.runSource(sourcecode);
-
-        if (result.stdout) {
-            reply("✅ *Output:*\n```" + result.stdout + "```");
-        }
-
-        if (result.stderr) {
-            reply("⚠️ *Error:*\n```" + result.stderr + "```");
-        }
-    } catch (err) {
-        console.error("Python compile error:", err);
-        reply("❌ *Compile Error:*\n```" + err.message + "```");
-    }
-}
-break;
+    client.sendMessage(m.chat, {
+      text: `❌ *Error!* Something went wrong. Reason: ${error.message}. Please try again later.`
+    });
+  }
+} 
+  break;
 
 //========================================================================================================================//                      
 case "compile-py":
@@ -3676,7 +3789,7 @@ if (!text) {
             m.chat,
             {
                 video: { url: fbvid },
-                caption: "𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗 𝗕𝗬 𝐁𝐋𝐀𝐂𝐊𝐌𝐀𝐂𝐇𝐀𝐍𝐓 𝐁𝐎𝐓",
+                caption: "𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗗 𝗕𝗬 𝐁𝐋𝐀𝐂𝐊 𝐁𝐎𝐓",
                 gifPlayback: false,
             },
             { quoted: m }
@@ -3918,38 +4031,26 @@ break;
 //========================================================================================================================//
 //========================================================================================================================//                      
 //========================================================================================================================//                      
-case 'sc': case 'script': case 'repo': {
-    const repoCaption = `👋 𝙃𝙀𝙇𝙇𝙊 *${pushname}*,
+case 'sc': case 'script': case 'repo':
+
+ client.sendMessage(m.chat, { image: { url: `https://files.catbox.moe/pevpi2.jpg` }, caption: 
+` 𝙃𝙀𝙇𝙇𝙊👋 *${pushname}*,
 ╔══≪ ✦ ≫══════════≪ ✦ ≫══╗
-         𝐁𝐋𝐀𝐂𝐊-𝐌𝐄𝐑𝐂𝐇𝐀𝐍𝐓 𝐕3
-      The Ultimate WhatsApp Bot
-╚══≪ ✦ ≫══════════≪ ✦ ≫══╝
-
-🔷 𝐆𝐢𝐭𝐇𝐮𝐛 𝐑𝐞𝐩𝐨:
-   ↳ https://github.com/Toxicant1/Black-Merchant.git
-   ★ Fork & Star the repo!
-
-🔶 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐏𝐚𝐢𝐫𝐢𝐧𝐠:
+          𝐁𝐋𝐀𝐂𝐊-𝐌𝐃 𝐕3
+ The Ultimate WhatsApp Bot
+╚══≪ ✦ ≫══════════≪ ✦ ≫══╝\n\n🔷 𝐆𝐢𝐭𝐇𝐮𝐛 𝐑𝐞𝐩𝐨:
+   ↳ https://github.com/Toxicant1/Black-merchant 
+   ★ Don't forget to Fork & Star!.\n\n 🔶 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐏𝐚𝐢𝐫𝐢𝐧𝐠:
    ↳ https://blacks-pair.onrender.com
-   ★ Save your Session-ID!
-
-⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
+   ★ Save your Session-ID!\n\n.⚙️ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬:
    ✓ Complete all variables
    ✓ Keep API keys secure
-   ✓ Deploy properly
+   ✓ Deploy properly\n\n╔══≪ ✦ ≫═══════════════≪ ✦ ≫══╗
+  Made with ❤️ by Blacky Dev
+╚══≪ ✦ ≫═══════════════≪ ✦ ≫══╝\n\n𝗠𝗮𝗱𝗲 𝗼𝗻 𝗲𝗮𝗿𝘁𝗵 𝗯𝘆 𝗛𝘂𝗺𝗮𝗻𝘀🔥!`},{quoted : m });
 
-╔══≪ ✦ ≫═══════════════≪ ✦ ≫══╗
-        Made with ❤️ by Merchant Dev
-╚══≪ ✦ ≫═══════════════≪ ✦ ≫══╝
+   break;
 
-🔥 𝗠𝗮𝗱𝗲 𝗼𝗻 𝗲𝗮𝗿𝘁𝗵 𝗯𝘆 𝗛𝘂𝗺𝗮𝗻𝘀!`;
-
-    await client.sendMessage(m.chat, { 
-        image: { url: 'https://files.catbox.moe/5grvn3.jpg' }, 
-        caption: repoCaption 
-    }, { quoted: m });
-}
-break;
 //========================================================================================================================//
                       case 'closetime':
                 if (!m.isGroup) throw group;
