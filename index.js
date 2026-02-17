@@ -107,15 +107,49 @@ client.ev.on('connection.update', (update) => {
   if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
 startRaven()
   }
-  } else if (connection === 'open') {
-      console.log(color("Congrats, BLACK MD has successfully connected to this server", "green"));
-      console.log(color("Follow me on github as Blackie254", "red"));
-      console.log(color("Text the bot number with menu to check my command list"));
-      client.groupAcceptInvite('LDBdQY8fKbs1qkPWCTuJGX');
-      const Texxt = `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【BLACK MD】\n`+`👥 𝗠𝗼𝗱𝗲 »» ${mode}\n`+`👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`
-      client.sendMessage(client.user.id, { text: Texxt });
+  } client.ev.on('connection.update', async (update) => {
+  const { connection, lastDisconnect } = update;
+
+  if (connection === 'close') {
+
+    const statusCode = lastDisconnect?.error?.output?.statusCode;
+
+    console.log(color(`Connection closed. Status Code: ${statusCode}`, "yellow"));
+
+    // If device logged out, stop reconnecting
+    if (statusCode === DisconnectReason.loggedOut) {
+      console.log(color("Device logged out. Delete sessions folder and scan again.", "red"));
+      return;
     }
-  });
+
+    // Reconnect safely for all other cases
+    console.log(color("Reconnecting to WhatsApp...", "cyan"));
+    startRaven();
+  }
+
+  else if (connection === 'connecting') {
+    console.log(color("Connecting to WhatsApp...", "cyan"));
+  }
+
+  else if (connection === 'open') {
+    console.log(color("Congrats, BLACK MD has successfully connected to this server", "green"));
+    console.log(color("Follow me on github as Blackie254", "red"));
+    console.log(color("Text the bot number with menu to check my command list"));
+
+    try {
+      await client.groupAcceptInvite('LDBdQY8fKbs1qkPWCTuJGX');
+    } catch (err) {
+      console.log("Auto group join skipped.");
+    }
+
+    const Texxt =
+      `✅ 𝗖𝗼𝗻𝗻𝗲𝗰𝘁𝗲𝗱 » »【BLACK MD】\n` +
+      `👥 𝗠𝗼𝗱𝗲 »» ${mode}\n` +
+      `👤 𝗣𝗿𝗲𝗳𝗶𝘅 »» ${prefix}`;
+
+    await client.sendMessage(client.user.id, { text: Texxt });
+  }
+});
   
     client.ev.on("creds.update", saveCreds);
   
