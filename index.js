@@ -38,31 +38,17 @@ const color = (text, color) => {
   return !color ? chalk.green(text) : chalk.keyword(color)(text);
 };
 
-const fs = require('fs').promises; // Use the promise-based fs
-
 async function authentication() {
-  const credsPath = __dirname + '/sessions/creds.json';
-
-  if (!require('fs').existsSync(credsPath)) {
-    if (!session) return console.log('Please add your session to SESSION env !!');
-    
-    const sessdata = session.replace("BLACK MD;;;", '');
-    const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`);
-
-    console.log("Downloading session...");
-
-    // Wrap the callback-based download in a Promise
-    await new Promise((resolve, reject) => {
-      filer.download((err, data) => {
-        if (err) return reject(err);
-        require('fs').writeFileSync(credsPath, data); // Write it synchronously to be safe
-        resolve();
-      });
-    });
-
-    console.log("Session downloaded successfully✅️");
-    console.log("Connecting to WhatsApp ⏳️");
-  }
+  if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+    if(!session) return console.log('Please add your session to SESSION env !!')
+const sessdata = session.replace("BLACK MD;;;", '');
+const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`)
+filer.download((err, data) => {
+if(err) throw err
+fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+console.log("Session downloaded successfully✅️")
+console.log("Connecting to WhatsApp ⏳️, Hold on for 3 minutes⌚️")
+})})}
 }
 
 async function startRaven() {
@@ -92,7 +78,7 @@ async function startRaven() {
   });
 
 store.bind(client.ev);
-
+  
 client.ev.on('connection.update', (update) => {
     const { connection, lastDisconnect } = update
   if (connection === 'close') {
@@ -108,9 +94,9 @@ startRaven()
       client.sendMessage(client.user.id, { text: Texxt });
     }
   });
-
+  
     client.ev.on("creds.update", saveCreds);
-
+  
   if (autobio === 'TRUE') {
     setInterval(() => {
       const date = new Date();
@@ -126,11 +112,11 @@ startRaven()
       let mek = chatUpdate.messages[0];
       if (!mek.message) return;
       mek.message = Object.keys(mek.message)[0] === "ephemeralMessage" ? mek.message.ephemeralMessage.message : mek.message;
-
+            
       if (autoviewstatus === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
         client.readMessages([mek.key]);
       }
-
+            
       if (autolike === 'TRUE' && mek.key && mek.key.remoteJid === "status@broadcast") {
     const nickk = await client.decodeJid(client.user.id);
     console.log('Decoded JID:', nickk);
@@ -140,7 +126,7 @@ startRaven()
         console.log('Reaction sent');
     }
 }
-
+            
 if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
       let m = smsg(client, mek, store);
       const raven = require("./blacks");
@@ -216,7 +202,7 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
     }
     });
 
-
+        
   client.getName = (jid, withoutContact = false) => {
     let id = client.decodeJid(jid);
     withoutContact = client.withoutContact || withoutContact;
@@ -261,7 +247,7 @@ if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
 
   client.public = true;
   client.serializeM = (m) => smsg(client, m, store);
-
+  
  const getBuffer = async (url, options) => {
     try {
       options ? options : {};
