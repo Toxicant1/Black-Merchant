@@ -38,17 +38,31 @@ const color = (text, color) => {
   return !color ? chalk.green(text) : chalk.keyword(color)(text);
 };
 
+const fs = require('fs').promises; // Use the promise-based fs
+
 async function authentication() {
-  if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
-    if(!session) return console.log('Please add your session to SESSION env !!')
-const sessdata = session.replace("BLACK MD;;;", '');
-const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`)
-filer.download((err, data) => {
-if(err) throw err
-fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
-console.log("Session downloaded successfully✅️")
-console.log("Connecting to WhatsApp ⏳️, Hold on for 3 minutes⌚️")
-})})}
+  const credsPath = __dirname + '/sessions/creds.json';
+
+  if (!require('fs').existsSync(credsPath)) {
+    if (!session) return console.log('Please add your session to SESSION env !!');
+    
+    const sessdata = session.replace("BLACK MD;;;", '');
+    const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`);
+
+    console.log("Downloading session...");
+
+    // Wrap the callback-based download in a Promise
+    await new Promise((resolve, reject) => {
+      filer.download((err, data) => {
+        if (err) return reject(err);
+        require('fs').writeFileSync(credsPath, data); // Write it synchronously to be safe
+        resolve();
+      });
+    });
+
+    console.log("Session downloaded successfully✅️");
+    console.log("Connecting to WhatsApp ⏳️");
+  }
 }
 
 async function startRaven() {
