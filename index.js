@@ -39,17 +39,39 @@ const color = (text, color) => {
 };
 
 async function authentication() {
-  if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
-    if(!session) return console.log('Please add your session to SESSION env !!')
-const sessdata = session.replace("BLACK MD;;;", '');
-const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`)
-filer.download((err, data) => {
-if(err) throw err
-fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
-console.log("Session downloaded successfully✅️")
-console.log("Connecting to WhatsApp ⏳️, Hold on for 3 minutes⌚️")
-})})}
+  const sessionsDir = path.join(__dirname, 'sessions');
+  const credsPath = path.join(sessionsDir, 'creds.json');
+
+  if (!fs.existsSync(sessionsDir)) {
+    fs.mkdirSync(sessionsDir, { recursive: true });
+  }
+
+  if (!fs.existsSync(credsPath)) {
+    if (!session) return console.log(chalk.red('Please add your session to SESSION env !!'));
+    
+    const sessdata = session.replace("BLACK MD;;;", '');
+    console.log(color("Downloading session from Mega... ⏳️", "yellow"));
+
+    try {
+      const filer = await File.fromURL(`https://mega.nz/file/${sessdata}`);
+      
+      // FIX: This Promise ensures the bot waits for the download to finish
+      await new Promise((resolve, reject) => {
+        filer.download((err, data) => {
+          if (err) return reject(err);
+          fs.writeFileSync(credsPath, data); // Write synchronously
+          resolve();
+        });
+      });
+
+      console.log(color("Session downloaded successfully ✅️", "green"));
+      console.log(color("Connecting to WhatsApp... Hold on ⌚️", "cyan"));
+    } catch (e) {
+      console.log(chalk.red("Download failed: " + e.message));
+    }
+  }
 }
+
 
 async function startRaven() {
        await authentication();  
